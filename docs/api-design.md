@@ -12,10 +12,14 @@
 * Response shape (JSON):
     ```json
     {
+      "wines": [
+        {
         "wine_name": string,
         "winery": string,
         "image_url": string,
         "likes": integer,
+        }
+      ]
     }
     ```
 
