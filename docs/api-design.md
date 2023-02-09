@@ -301,7 +301,7 @@
     ```json
     {
       "user_id": integer,
-      "wine_id": integer
+      "wine_id": integer,
     }
     ```
 * Response: Confirms successful comment creation
