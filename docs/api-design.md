@@ -279,6 +279,26 @@
     }
     ```
 
+## Displays user info
+
+* Endpoint path: /token
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Displays user data
+* Response shape (JSON):
+    ```json
+    {
+        "account": {
+        "username": string,
+        "password": string
+      },
+      "token": string
+    }
+    ```
+
 ### Log out
 
 * Endpoint path: /token
