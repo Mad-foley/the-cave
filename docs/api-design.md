@@ -200,7 +200,8 @@
 * Response shape (JSON):
     ```json
     {
-        "user": object,
+        "user_id": integer,
+        "wine_id": integer,
         "content": string,
         "date_posted": string
     }
@@ -217,16 +218,15 @@
 * Request shape (JSON):
     ```json
     {
-        "user": object,
         "content": string,
-        "date_posted": string,
     }
     ```
 * Response: Confirms successful comment creation
 * Response shape (JSON):
     ```json
     {
-        "user": object,
+        "user_id": integer,
+        "wine_id": integer,
         "content": string,
         "date_posted": string,
     }
@@ -243,22 +243,78 @@
 * Request shape (JSON):
     ```json
     {
-        "user": object,
         "content": string,
-        "date_posted": string,
     }
     ```
 * Response: Confirms successful comment edit
 * Response shape (JSON):
     ```json
     {
-        "user": object,
+        "user_id": integer,
+        "wine_id": integer,
         "content": string,
         "date_posted": string,
     }
     ```
 
 ### Deletes a comment
+
+* Endpoint path: /comments/<int:id>/
+* Endpoint method: DELETE
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Confirms successful comment delete
+* Response shape (JSON):
+    ```json
+    {
+        "deleted": boolean
+    }
+    ```
+
+### Get a list of likes
+
+* Endpoint path: /comments
+* Endpoint method: GET
+
+* Response: A list of comments
+* Response shape (JSON):
+    ```json
+    {
+        "user_id": integer,
+        "wine_id": integer,
+        "id": integer,
+        "date_posted": string
+    }
+    ```
+
+### Creates a like
+
+* Endpoint path: /comments
+* Endpoint method: POST
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request shape (JSON):
+    ```json
+    {
+
+    }
+    ```
+* Response: Confirms successful comment creation
+* Response shape (JSON):
+    ```json
+    {
+        "user_id": integer,
+        "wine_id": integer,
+        "id": integer,
+        "date_posted": string,
+    }
+    ```
+
+### Deletes a like
 
 * Endpoint path: /comments/<int:id>/
 * Endpoint method: DELETE
