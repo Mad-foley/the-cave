@@ -291,7 +291,7 @@
 * Response shape (JSON):
     ```json
     {
-        "account": {
+      "account": {
         "username": string,
         "password": string
       },
