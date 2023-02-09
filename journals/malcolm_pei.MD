@@ -11,3 +11,4 @@
 ###### February 9th, 2023
 - Started brainstorming on the layout of our tables for the database to better visualize how our features will work
 - Added token API end points into the API design markdown
+- Added like table to api design markdown

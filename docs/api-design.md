@@ -54,7 +54,8 @@
         "vintage": integer,
         "varietal": string,
         "appelation": string,
-        "image_url": string
+        "image_url": string,
+        "likes": integer
     }
     ```
 
@@ -75,7 +76,6 @@
         "appelation": string,
         "winery": string,
         "image_url": string,
-        "likes": integer,
     }
     ```
 * Response: A list of wines
@@ -275,10 +275,13 @@
 
 ### Get a list of likes
 
-* Endpoint path: /comments
+* Endpoint path: /wines/likes
 * Endpoint method: GET
 
-* Response: A list of comments
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of likes
 * Response shape (JSON):
     ```json
     {
@@ -291,7 +294,7 @@
 
 ### Creates a like
 
-* Endpoint path: /comments
+* Endpoint path: /wines/likes
 * Endpoint method: POST
 
 * Headers:
@@ -304,7 +307,7 @@
       "wine_id": integer,
     }
     ```
-* Response: Confirms successful comment creation
+* Response: Confirms successful like creation
 * Response shape (JSON):
     ```json
     {
@@ -317,17 +320,36 @@
 
 ### Deletes a like
 
-* Endpoint path: /comments/<int:id>/
+* Endpoint path: /wines/<int:id>/likes
 * Endpoint method: DELETE
 
 * Headers:
   * Authorization: Bearer token
 
-* Response: Confirms successful comment delete
+* Response: Confirms successful like delete
 * Response shape (JSON):
     ```json
     {
         "deleted": boolean
+    }
+    ```
+
+### Get a list of users likes
+
+* Endpoint path: /wines/likes
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of likes filtered by user id
+* Response shape (JSON):
+    ```json
+    {
+        "user_id": integer,
+        "wine_id": integer,
+        "id": integer,
+        "date_posted": string
     }
     ```
 
