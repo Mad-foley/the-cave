@@ -54,7 +54,8 @@
         "vintage": integer,
         "varietal": string,
         "appelation": string,
-        "image_url": string
+        "image_url": string,
+        "likes": integer
     }
     ```
 
@@ -75,7 +76,6 @@
         "appelation": string,
         "winery": string,
         "image_url": string,
-        "likes": integer,
     }
     ```
 * Response: A list of wines
@@ -277,6 +277,9 @@
 
 * Endpoint path: /comments
 * Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
 
 * Response: A list of comments
 * Response shape (JSON):
