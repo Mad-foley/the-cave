@@ -15,6 +15,9 @@
       "wines": [
         {
         "wine_name": string,
+        "vintage": integer,
+        "varietal": string,
+        "appelation": string,
         "winery": string,
         "image_url": string,
         "likes": integer,
@@ -36,8 +39,10 @@
     {
         "wine_name": string,
         "winery": string,
-        "image_url": string,
-        "likes": integer,
+        "vintage": integer,
+        "varietal": string,
+        "appelation": string,
+        "image_url": string
     }
     ```
 * Response: A list of wines
@@ -46,8 +51,10 @@
     {
         "wine_name": string,
         "winery": string,
-        "image_url": string,
-        "likes": integer,
+        "vintage": integer,
+        "varietal": string,
+        "appelation": string,
+        "image_url": string
     }
     ```
 
@@ -63,6 +70,9 @@
      ```json
     {
         "wine_name": string,
+        "vintage": integer,
+        "varietal": string,
+        "appelation": string,
         "winery": string,
         "image_url": string,
         "likes": integer,
@@ -73,6 +83,9 @@
     ```json
     {
         "wine_name": string,
+        "vintage": integer,
+        "varietal": string,
+        "appelation": string,
         "winery": string,
         "image_url": string,
         "likes": integer,
@@ -110,9 +123,7 @@
         "profile_pic": string,
         "username": string,
         "password": string,
-        "birthday": string,
-        "date_created": date,
-        "href": url
+        "birthday": string
     }
     ```
 * Response: Confirms successful user creation
@@ -124,7 +135,8 @@
         "profile_pic": string,
         "username": string,
         "password": string,
-        "birthday": string
+        "birthday": string,
+        "date_created": date
     }
     ```
 
@@ -188,7 +200,7 @@
 * Response shape (JSON):
     ```json
     {
-        "username": string,
+        "user": object,
         "content": string,
         "date_posted": string
     }
@@ -205,16 +217,16 @@
 * Request shape (JSON):
     ```json
     {
-        "username": string,
+        "user": object,
         "content": string,
         "date_posted": string,
     }
     ```
-* Response: Confirms successful user creation
+* Response: Confirms successful comment creation
 * Response shape (JSON):
     ```json
     {
-        "username": string,
+        "user": object,
         "content": string,
         "date_posted": string,
     }
@@ -231,7 +243,7 @@
 * Request shape (JSON):
     ```json
     {
-        "username": string,
+        "user": object,
         "content": string,
         "date_posted": string,
     }
@@ -240,7 +252,7 @@
 * Response shape (JSON):
     ```json
     {
-        "username": string,
+        "user": object,
         "content": string,
         "date_posted": string,
     }
@@ -314,5 +326,7 @@
 * Response: Always true
 * Response shape (JSON):
     ```json
-    true
+    {
+      "message": true
+    }
     ```
