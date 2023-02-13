@@ -1,7 +1,6 @@
 from psycopg_pool import ConnectionPool
 import os
 
-
 pool = ConnectionPool(conninfo=os.environ.get('DATABASE_URL'))
 
 class UserQueries:
@@ -40,16 +39,18 @@ class UserQueries:
     def create_user(self, user):
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                cur.execute(
+                result = cur.execute(
                     """
                     INSERT INTO users
                         (name, username, password, birthday, picture_url, email)
                     VALUES
-                        (%s, %s, %s, %s, %s);
+                        (%s, %s, %s, %s, %s, %s)
+                    RETURNING id, name, username, password, birthday, picture_url, email;
                     """,
                     [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
                 )
-                result = cur.fetchone()
-                if result is None:
-                    return None
-                return result
+                row = cur.fetchone()
+                output = {}
+                for i, column in enumerate(cur.description):
+                    output[column.name] = row[i]
+                return output
