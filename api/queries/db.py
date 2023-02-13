@@ -2,7 +2,6 @@ from psycopg_pool import ConnectionPool
 import os
 from pydantic import BaseModel
 
-
 pool = ConnectionPool(conninfo=os.environ.get('DATABASE_URL'))
 
 class UserIn(BaseModel):
@@ -61,11 +60,13 @@ class UserQueries:
                     INSERT INTO users
                         (name, username, password, birthday, picture_url, email)
                     VALUES
-                        (%s, %s, %s, %s, %s);
-                    RETURNING id;
+                        (%s, %s, %s, %s, %s, %s)
+                    RETURNING id, name, username, password, birthday, picture_url, email;
                     """,
                     [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
                 )
-                id = result.fetchone()[0]
-                old_data = result.dict()
-                return UserOut(id=id, **old_data)
+                row = cur.fetchone()
+                output = {}
+                for i, column in enumerate(cur.description):
+                    output[column.name] = row[i]
+                return output
