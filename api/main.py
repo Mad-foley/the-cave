@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.users import UserIn, UserOut
+from routers import users
 import os
 
 app = FastAPI()
-
+app.include_router(users.router, tags=["Users"])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -28,5 +29,3 @@ def launch_details():
             "tz:": "PST"
         }
     }
-
-@app.include_routes()
