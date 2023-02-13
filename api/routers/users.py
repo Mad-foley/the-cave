@@ -17,13 +17,17 @@ class UserOut(UserIn):
     id: int
 
 
+<<<<<<< HEAD
 @router.get('/usersapi/users', response_model=UserOut)
+=======
+@router.get('/api/users')
+>>>>>>> d12a81f58a141aa413ac5a82609c35c94b4d2a77
 def get_all_users(
     repo: UserQueries = Depends()
 ):
     return repo.get_all_users()
 
-@router.post('/api/users', response_model=UserOut)
+@router.post('/api/users')
 def create_user(
     user: UserIn,
     repo: UserQueries = Depends()
