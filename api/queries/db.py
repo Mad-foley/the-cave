@@ -36,3 +36,20 @@ class UserQueries:
                 user = {}
                 for i, column in enumerate(cur.description):
                     user[column.name] = row[i]
+                return user
+    def create_user(self, user):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO users
+                        (name, username, password, birthday, picture_url, email)
+                    VALUES
+                        (%s, %s, %s, %s, %s);
+                    """,
+                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
+                )
+                result = cur.fetchone()
+                if result is None:
+                    return None
+                return result
