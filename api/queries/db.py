@@ -6,7 +6,6 @@ pool = ConnectionPool(conninfo=os.environ.get('DATABASE_URL'))
 
 class UserQueries:
     def get_all_users(self):
-        print(pool)
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -46,7 +45,7 @@ class UserQueries:
                     INSERT INTO users
                         (name, username, password, birthday, picture_url, email)
                     VALUES
-                        (%s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s);
                     """,
                     [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
                 )
