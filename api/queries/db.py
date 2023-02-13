@@ -1,14 +1,19 @@
 from psycopg_pool import ConnectionPool
 import os
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+from datetime import date
+from typing import Optional
+
 
 class UserIn(BaseModel):
     name: str
     username: str
     password: str
-    picture_url: str
-    email: str
-    birthday: str
+    picture_url: Optional[str]
+    email: Optional[EmailStr]
+    birthday: Optional[date]
+    created_on: Optional[date]
+    last_login: Optional[date]
 
 class UserOut(UserIn):
     id: int
@@ -22,7 +27,7 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT name, username, password, picture_url, email, birthday, id
+                    SELECT name, username, password, picture_url, email, birthday, created_on, last_login, id
                     FROM users;
                     """
                 )
@@ -40,7 +45,7 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT name, username, password, picture_url, email, birthday, id
+                    SELECT name, username, password, picture_url, email, birthday, created_on, last_login, id
                     FROM users
                     WHERE id = %s;
                     """,
@@ -56,15 +61,15 @@ class UserQueries:
     def create_user(self, user):
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                result = cur.execute(
+                cur.execute(
                     """
                     INSERT INTO users
-                        (name, username, password, birthday, picture_url, email)
+                        (name, username, password, birthday, picture_url, email, created_on, last_login)
                     VALUES
-                        (%s, %s, %s, %s, %s, %s)
-                    RETURNING name, username, password, picture_url, email, birthday, id;
+                        (%s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING name, username, password, picture_url, email, birthday, created_on, last_login, id;
                     """,
-                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
+                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email, user.created_on, user.last_login]
                 )
                 row = cur.fetchone()
                 output = {}
@@ -93,13 +98,12 @@ class UserQueries:
                 cur.execute(
                     """
                     UPDATE users
-                    SET name=%s, username=%s, password=%s, birthday=%s, picture_url=%s, email=%s
+                    SET name=%s, username=%s, password=%s, birthday=%s, picture_url=%s, email=%s, created_on=%s, last_login=%s
                     WHERE id = %s
-                    RETURNING name, username, password;
                     """,
-                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email, user_id]
+                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email, user.created_on, user.last_login, user_id]
                 )
-                return self.user_in_and_out(user, user_id=user_id)
+                return self.user_in_and_out(user, user_id)
 
 
     def user_in_and_out(self, user: UserIn, user_id: int):
