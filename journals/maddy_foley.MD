@@ -5,3 +5,6 @@ We collaborated togther to create our repository, finish our wire-framing and de
 
 ## Feb 13, 2023:
 
+Today we pairprogrammed as a group of 4 bouncing ideas off of eachother. Malcolm shared his screen and wrote code while we worked collbartively to develop and debug the CRUD user Apis.
+
+I had a minor bug with docker failing to connect to postgresql, which according to stack overflow is a common bug for Mac's with an M1 chip. I was able to find a line of code from stackoverflow I have to run before building images.
