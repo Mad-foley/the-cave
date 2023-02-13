@@ -28,5 +28,4 @@ def create_user(
     user: UserIn,
     repo: UserQueries = Depends()
 ):
-    repo.create_user(user)
-    return user
+    return repo.create_user(user)
