@@ -1,34 +1,23 @@
 from psycopg_pool import ConnectionPool
 import os
 from pydantic import BaseModel
-<<<<<<< HEAD
-=======
 
-class UserIn(BaseModel):
-    name: str
-    username: str
-    password: str
-    picture_url: str
-    email: str
-    birthday: str
-
-class UserOut(UserIn):
-    id: int
-
->>>>>>> df8903ca2562b96b1378954816166b86474f3000
 
 pool = ConnectionPool(conninfo=os.environ.get('DATABASE_URL'))
 
+
 class UserIn(BaseModel):
     name: str
     username: str
     password: str
-    birthday: str
-    email: str
     picture_url: str
+    email: str
+    birthday: str
+
 
 class UserOut(UserIn):
     id: int
+
 
 class UserQueries:
     def get_all_users(self):
@@ -36,11 +25,7 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-<<<<<<< HEAD
-                    SELECT id, name, username, password, picture_url
-=======
                     SELECT name, username, password, picture_url, email, birthday, id
->>>>>>> df8903ca2562b96b1378954816166b86474f3000
                     FROM users;
                     """
                 )
@@ -82,7 +67,14 @@ class UserQueries:
                         (%s, %s, %s, %s, %s, %s)
                     RETURNING name, username, password, picture_url, email, birthday, id;
                     """,
-                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email]
+                    [
+                        user.name,
+                        user.username,
+                        user.password,
+                        user.birthday,
+                        user.picture_url,
+                        user.email
+                    ]
                 )
                 row = cur.fetchone()
                 output = {}
@@ -115,7 +107,15 @@ class UserQueries:
                     WHERE id = %s
                     RETURNING name, username, password;
                     """,
-                    [user.name, user.username, user.password, user.birthday, user.picture_url, user.email, user_id]
+                    [
+                        user.name,
+                        user.username,
+                        user.password,
+                        user.birthday,
+                        user.picture_url,
+                        user.email,
+                        user_id
+                    ]
                 )
                 return self.user_in_and_out(user, user_id=user_id)
 

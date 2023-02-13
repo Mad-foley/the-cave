@@ -1,20 +1,10 @@
 from fastapi import APIRouter, Depends
-<<<<<<< HEAD
-from queries.db import UserQueries, UserIn, UserOut
-=======
->>>>>>> df8903ca2562b96b1378954816166b86474f3000
-
 from queries.db import UserQueries, UserIn, UserOut
 from typing import List
 
 router = APIRouter()
 
-<<<<<<< HEAD
-
-@router.get('/api/users')
-=======
 @router.get('/api/users', response_model=List[UserOut])
->>>>>>> df8903ca2562b96b1378954816166b86474f3000
 def get_all_users(
     repo: UserQueries = Depends()
 ):
