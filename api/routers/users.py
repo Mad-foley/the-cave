@@ -19,7 +19,7 @@ class UserOut(UserIn):
     id: int
 
 
-@router.get('/', response_model=UserOut)
+@router.get('/users', response_model=UserOut)
 def list_all_users():
     users = UserQueries
     return users.get_all_users()

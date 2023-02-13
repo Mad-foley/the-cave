@@ -29,4 +29,3 @@ def launch_details():
         }
     }
 
-@app.include_routes()

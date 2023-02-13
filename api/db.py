@@ -21,6 +21,8 @@ class UserQueries:
                         user[column.name] = row[i]
                     results.append(user)
                 return results
+
+
     def get_user_by_id(self, user_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -29,11 +31,11 @@ class UserQueries:
                     SELECT id, name, username, password, picture_url
                     FROM users
                     WHERE id = %s;
-                    """
+                    """,
                     [user_id]
                 )
                 row = cur.fetchone()
                 user = {}
                 for i, column in enumerate(cur.description):
                     user[column.name] = row[i]
-                
+                return user
