@@ -29,7 +29,7 @@ class UserQueries:
                     SELECT id, name, username, password, picture_url
                     FROM users
                     WHERE id = %s;
-                    """,
+                    """
                     [user_id]
                 )
                 row = cur.fetchone()
