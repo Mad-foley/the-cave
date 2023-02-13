@@ -1,9 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
+from routers import users
 from fastapi.middleware.cors import CORSMiddleware
-from routers.users import UserIn, UserOut
 import os
 
 app = FastAPI()
+router = APIRouter()
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,4 +30,4 @@ def launch_details():
         }
     }
 
-@app.include_routes()
+app.include_router(users.router)

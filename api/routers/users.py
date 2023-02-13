@@ -1,11 +1,9 @@
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from fastapi import APIRouter
-from db import UserQueries
+from queries.db import UserQueries
 
-router = APIRouter(
-    prefix='/api/users',
-    responses={404: {"message": "user not found"}}
-)
+
+router = APIRouter()
 
 class UserIn(BaseModel):
     name: str
@@ -19,7 +17,16 @@ class UserOut(UserIn):
     id: int
 
 
-@router.get('/', response_model=UserOut)
-def list_all_users():
-    users = UserQueries
-    return users.get_all_users()
+@router.get('/api/users', response_model=UserOut)
+def get_all_users(
+    repo: UserQueries = Depends()
+):
+    return repo.get_all_users()
+
+@router.post('/api/users', response_model=UserOut)
+def create_user(
+    user: UserIn,
+    repo: UserQueries = Depends()
+):
+    repo.create_user(user)
+    return user
