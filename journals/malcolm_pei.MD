@@ -12,3 +12,6 @@
 - Started brainstorming on the layout of our tables for the database to better visualize how our features will work
 - Added token API end points into the API design markdown
 - Added like table to api design markdown
+###### February 10th, 2023
+- Took the day to study the material about Fast API, PostgreSQL, and MongoDB
+- Looked over the authenticator documentation to prepare to begin the project

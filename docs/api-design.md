@@ -336,7 +336,7 @@
 
 ### Get a list of users likes
 
-* Endpoint path: /wines/likes
+* Endpoint path: /wines/likes/me
 * Endpoint method: GET
 
 * Headers:
