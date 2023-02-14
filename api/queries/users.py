@@ -34,6 +34,11 @@ class HttpError(BaseModel):
 class DuplicateUserError(ValueError):
     pass
 
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserOutWithPassword
+
 class UserQueries:
     def get_all_users(self):
         try:
@@ -145,12 +150,12 @@ class UserQueries:
                         """,
                         [
                             user.name,
-                            user.password,
+                            user.username,
                             hashed_password,
                             user_id
                         ]
                     )
-                    return self.user_in_and_out(user, user_id)
+                    return self.user_in_and_out(user, user_id, hashed_password)
         except Exception as e:
             print(e)
             return {"message": "Could not update users"}
