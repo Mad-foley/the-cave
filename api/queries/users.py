@@ -2,6 +2,8 @@ from pydantic import BaseModel, EmailStr
 from datetime import date
 from typing import Optional
 from queries.db import pool
+from jwtdown_fastapi.authentication import Token
+
 
 class Error(BaseModel):
     message: str
@@ -10,16 +12,27 @@ class UserIn(BaseModel):
     name: str
     username: str
     password: str
-    picture_url: Optional[str]
-    email: Optional[EmailStr]
-    birthday: Optional[date]
-    created_on: Optional[date]
-    last_login: Optional[date]
 
-
-class UserOut(UserIn):
+class UserOut(BaseModel):
     id: int
+    name: str
+    username: str
 
+class UserOutWithPassword(UserOut):
+    hashed_password: str
+
+class UserForm(BaseModel):
+    username: str
+    password: str
+
+class UserToken(Token):
+    user: UserOutWithPassword
+
+class HttpError(BaseModel):
+    detail: str
+
+class DuplicateUserError(ValueError):
+    pass
 
 class UserQueries:
     def get_all_users(self):
@@ -28,7 +41,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, picture_url, email, birthday, created_on, last_login, id
+                        SELECT name, username, password, id
                         FROM users;
                         """
                     )
@@ -46,7 +59,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, picture_url, email, birthday, created_on, last_login, id
+                        SELECT name, username, password, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -60,31 +73,46 @@ class UserQueries:
             print(e)
             return {"message": "Could not get user"}
 
-    def create_user(self, user):
+    def get_user_by_username(self, username: str):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT name, username, password, id
+                        FROM users
+                        WHERE username = %s;
+                        """,
+                        [username]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_user_out(record)
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get user"}
+    def create_user(self, user, hashed_password):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday, picture_url, email, created_on, last_login)
+                            (name, username, password)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             user.name,
                             user.username,
-                            user.password,
-                            user.birthday,
-                            user.picture_url,
-                            user.email,
-                            user.created_on,
-                            user.last_login
+                            hashed_password
                         ]
                     )
                     id = result.fetchone()[0]
-                    return self.user_in_and_out(user, id)
+                    return self.user_in_and_out(user, id, hashed_password)
         except Exception as e:
             print(e)
             return {"message": "Could not create user"}
@@ -105,26 +133,20 @@ class UserQueries:
             print(e)
             return {"message": "Could not delete user"}
 
-    def update_user(self, user, user_id):
+    def update_user(self, user, user_id, hashed_password):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s, birthday=%s, picture_url=%s, email=%s, created_on=%s, last_login=%s
+                        SET name=%s, username=%s, password=%s
                         WHERE id = %s
                         """,
                         [
                             user.name,
-                            user.username,
+                            hashed_password,
                             user.password,
-                            user.birthday,
-                            user.picture_url,
-                            user.email,
-                            user.created_on,
-                            user.last_login,
-                            user_id
                         ]
                     )
                     return self.user_in_and_out(user, user_id)
@@ -132,20 +154,19 @@ class UserQueries:
             print(e)
             return {"message": "Could not update users"}
 
-    def user_in_and_out(self, user: UserIn, user_id: int):
+    def user_in_and_out(self, user: UserIn, user_id: int, hashed_password):
         data = user.dict()
-        return UserOut(id=user_id, **data)
+        return UserOutWithPassword(
+            id=user_id,
+            hashed_password=hashed_password,
+            **data
+            )
 
 
     def record_to_user_out(self, record):
-        return UserOut(
+        return UserOutWithPassword(
             name=record[0],
             username=record[1],
-            password=record[2],
-            picture_url=record[3],
-            email=record[4],
-            birthday=record[5],
-            created_on=record[6],
-            last_login=record[7],
-            id=record[8]
+            hashed_password=record[2],
+            id=record[3]
         )
