@@ -9,7 +9,6 @@ class Error(BaseModel):
 class UserIn(BaseModel):
     name: str
     username: str
-    password: str
     picture_url: Optional[str]
     email: Optional[EmailStr]
     birthday: Optional[date]
@@ -19,6 +18,9 @@ class UserIn(BaseModel):
 
 class UserOut(UserIn):
     id: int
+
+class UserOutWithPass(UserOut):
+    hashed_password: str
 
 
 class UserQueries:
@@ -60,14 +62,14 @@ class UserQueries:
             print(e)
             return {"message": "Could not get user"}
 
-    def create_user(self, user):
+    def create_user(self, user: UserIn, hash_password) -> UserOutWithPass:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday, picture_url, email, created_on, last_login)
+                            (name, username, hash_password, birthday, picture_url, email, created_on, last_login)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
@@ -75,12 +77,12 @@ class UserQueries:
                         [
                             user.name,
                             user.username,
-                            user.password,
+                            hash_password,
                             user.birthday,
                             user.picture_url,
                             user.email,
                             user.created_on,
-                            user.last_login
+                            user.last_login,
                         ]
                     )
                     id = result.fetchone()[0]
@@ -134,7 +136,7 @@ class UserQueries:
 
     def user_in_and_out(self, user: UserIn, user_id: int):
         data = user.dict()
-        return UserOut(id=user_id, **data)
+        return UserOutWithPass(id=user_id, **data)
 
 
     def record_to_user_out(self, record):
