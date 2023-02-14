@@ -61,6 +61,7 @@ class UserQueries:
             return {"message": "Could not get user"}
 
     def create_user(self, user):
+        hashed_password = Authenticator.hash_password(user.password)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -75,7 +76,7 @@ class UserQueries:
                         [
                             user.name,
                             user.username,
-                            user.password,
+                            hashed_password
                             user.birthday,
                             user.picture_url,
                             user.email,
