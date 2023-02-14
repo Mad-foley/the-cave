@@ -14,7 +14,8 @@ from queries.users import (
     UserToken,
     UserForm,
     UserOutWithPassword,
-    DuplicateUserError
+    DuplicateUserError,
+    TokenResponse
 )
 from typing import List, Union
 from authenticator import authenticator
@@ -28,7 +29,7 @@ def get_all_users(
 ):
     return repo.get_all_users()
 
-@router.post('/api/users')
+@router.post('/api/users', response_model=TokenResponse)
 async def create_user(
     user: UserIn,
     request: Request,
@@ -61,22 +62,22 @@ def delete_user(
 ):
     return repo.delete_user(user_id)
 
-# @router.put('/api/users/{user_id}', response_model=Union[UserOut, Error])
-# async def update_user(
-#     user_id: int,
-#     user: UserIn,
-#     request: Request,
-#     response: Response,
-#     repo: UserQueries = Depends()
-# ):
-#     hashed_password = authenticator.hash_password(user.password)
-#     try:
-#         result = repo.update_user(user, user_id, hashed_password=hashed_password)
-#     except DuplicateUserError:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot update account with these credentials"
-#         )
-#     form = UserForm(username=user.username, password=user.password)
-#     token = await authenticator.login(response, request, form, repo)
-#     return UserToken(user=result, **token.dict())
+@router.put('/api/users/{user_id}')
+async def update_user(
+    user_id: int,
+    user: UserIn,
+    request: Request,
+    response: Response,
+    repo: UserQueries = Depends()
+):
+    hashed_password = authenticator.hash_password(user.password)
+    try:
+        result = repo.update_user(user, user_id, hashed_password=hashed_password)
+    except DuplicateUserError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot update account with these credentials"
+        )
+    form = UserForm(username=user.username, password=user.password)
+    token = await authenticator.login(response, request, form, repo)
+    return UserToken(user=result, **token.dict())

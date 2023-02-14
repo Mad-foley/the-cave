@@ -18,6 +18,7 @@ class WineOut(WineIn):
 
 
 class WineQueries:
+    
     def get_all_wines(self):
         try:
             with pool.connection() as conn:
@@ -32,6 +33,7 @@ class WineQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to find wines"}
+
     def create_wine(self, wine):
         try:
             with pool.connection() as conn:
