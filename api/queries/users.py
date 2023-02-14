@@ -145,8 +145,9 @@ class UserQueries:
                         """,
                         [
                             user.name,
-                            hashed_password,
                             user.password,
+                            hashed_password,
+                            user_id
                         ]
                     )
                     return self.user_in_and_out(user, user_id)
