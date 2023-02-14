@@ -2,7 +2,7 @@ volumes:
   wine-data:
     external: true
 services:
-  api:
+  fastapi:
     build:
       context: ./api
       dockerfile: Dockerfile.dev

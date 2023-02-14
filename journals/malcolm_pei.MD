@@ -15,3 +15,6 @@
 ###### February 10th, 2023
 - Took the day to study the material about Fast API, PostgreSQL, and MongoDB
 - Looked over the authenticator documentation to prepare to begin the project
+###### February 13th, 2023
+- Finished the User FastAPI CRUD with the team
+
