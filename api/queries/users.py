@@ -3,6 +3,8 @@ from datetime import date
 from typing import Optional
 from queries.db import pool
 
+
+
 class Error(BaseModel):
     message: str
 
@@ -19,6 +21,9 @@ class UserIn(BaseModel):
 
 class UserOut(UserIn):
     id: int
+
+class UserOutWithPassword(UserOut):
+    hashed_password: str
 
 
 class UserQueries:
@@ -61,7 +66,6 @@ class UserQueries:
             return {"message": "Could not get user"}
 
     def create_user(self, user):
-        hashed_password = Authenticator.hash_password(user.password)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -76,7 +80,7 @@ class UserQueries:
                         [
                             user.name,
                             user.username,
-                            hashed_password
+                            user.password,
                             user.birthday,
                             user.picture_url,
                             user.email,
