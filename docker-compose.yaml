@@ -2,7 +2,7 @@ volumes:
   wine-data:
     external: true
 services:
-  fastapi:
+  api:
     build:
       context: ./api
       dockerfile: Dockerfile.dev
@@ -11,6 +11,7 @@ services:
     volumes:
       - ./api:/app
     environment:
+      SIGNING_KEY: 9745929A1A9BE1BC97C58788B6FCF
       DATABASE_URL: postgresql://wines_user:wines@db/wines
       WAIT_HOST: db:5432
       PORT: 8000

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, APIRouter
 from routers import users, wines
 from fastapi.middleware.cors import CORSMiddleware
+from api import authenticator
 import os
 
 app = FastAPI()
