@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter
-from routers import users
+from routers import users, wines
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
@@ -7,15 +7,15 @@ import os
 app = FastAPI()
 router = APIRouter()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000")
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=[
+#         os.environ.get("CORS_HOST", "http://localhost:3000")
+#     ],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 
 @app.get("/api/launch-details")
@@ -32,4 +32,5 @@ def launch_details():
     }
 
 app.include_router(users.router, tags=['Users'])
-app.include_router(authenticator.router, tags=['Tokens'])
+app.include_router(wines.router, tags=['Wines'])
+app.include_router(authenticator.router, tags=['Accounts'])
