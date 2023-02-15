@@ -18,7 +18,7 @@ def get_likes_by_wine(
     else:
        return Error(message = "Your aren't logged in")
 
-@router.get('/api/wines/{wine_id}/likes')
+@router.get('/api/user/{user_id}/likes')
 def get_likes_by_user(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: LikeQueries = Depends()
