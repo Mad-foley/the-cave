@@ -8,13 +8,15 @@ router = APIRouter()
 
 @router.get('/api/wines', response_model=Union[List[WineOut], Error])
 def get_all_wines(
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data), #get user id from account data
     repo: WineQueries = Depends()
 ):
     if account_data:
+        print("****************************** account data")
+        print(account_data['id'])
         return repo.get_all_wines()
     else:
-       return Error(message = "Your aren't logged in")
+       return Error(message = "You aren't logged in")
 
 @router.post('/api/wines', response_model=Union[WineOut, Error])
 def create_wine(
@@ -25,4 +27,60 @@ def create_wine(
     if account_data:
         return repo.create_wine(wine)
     else:
-       return Error(message = "Your aren't logged in")
+       return Error(message = "You aren't logged in")
+
+@router.put('/api/wines/{wine_id}', response_model=Union[WineOut, Error])
+def update_wine(
+    wine_id: int,
+    wine: WineIn,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: WineQueries = Depends()
+):
+    if account_data:
+        return repo.update_wine(wine_id, wine)
+    else:
+       return Error(message = "You aren't logged in")
+
+@router.get('/api/wines/{wine_id}', response_model=Union[WineOut, Error])
+def get_wine_by_id(
+    wine_id: int,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: WineQueries = Depends()
+):
+    if account_data:
+        return repo.get_wine_by_id(wine_id)
+    else:
+       return Error(message = "You aren't logged in")
+
+@router.delete('/api/wines/{wine_id}')
+def delete_wine(
+    wine_id: int,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: WineQueries = Depends()
+):
+    if account_data:
+        return repo.delete_wine(wine_id)
+    else:
+       return Error(message = "You aren't logged in")
+
+@router.get('/api/users/{user_id}/wines', response_model=Union[List[WineOut], Error])
+def get_wine_by_user(
+    user_id:int,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: WineQueries = Depends()
+):
+    if account_data:
+        return repo.get_wine_by_user(user_id)
+    else:
+        return Error(message="You aren't logged in")
+
+@router.get('/api/wines/filter/{query}')
+def filter_by(
+    query: str,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: WineQueries = Depends()
+):
+    if account_data:
+        return repo.filter_by(query)
+    else:
+        return Error(message="You aren't logged in")

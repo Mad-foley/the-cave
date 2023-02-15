@@ -21,44 +21,16 @@ app.add_middleware(
 )
 
 
-@app.get("/api/launch-details")
-def launch_details():
-    return {
-        "launch_details": {
-            "year": 2022,
-            "month": 12,
-            "day": "9",
-            "hour": 19,
-            "min": 0,
-            "tz:": "PST"
-        }
-    }
-
+app.include_router(authenticator.router, tags=['Login / Logout'])
 app.include_router(users.router, tags=['Users'])
 app.include_router(wines.router, tags=['Wines'])
-app.include_router(authenticator.router, tags=['Accounts'])
 app.include_router(likes.router, tags=['Likes'])
 app.include_router(comments.router, tags=['Comments'])
 
 
-@app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error)
+@app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error, tags=['Public APIs'])
 def get_port_wine(
-        type: str = Query(
-    description="reds, whites, sparkling, dessert, port"
-    ),
+        type: str = Query(description="reds, whites, sparkling, dessert, port"),
         repo: SampleApiWineQueries = Depends()
 ):
-    if type == 'port':
-        return repo.get_port_wines()
-    elif type == 'reds':
-        return repo.get_red_wines()
-    elif type == 'whites':
-        return repo.get_white_wines()
-    elif type == 'dessert':
-        return repo.get_dessert_wines()
-    elif type == 'sparkling':
-        return repo.get_sparkling_wines()
-    else:
-        return Error(
-            message="Could not get wines from Sample API Wines"
-        )
+    return repo.get_wines(type)
