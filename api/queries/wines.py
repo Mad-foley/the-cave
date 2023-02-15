@@ -6,7 +6,7 @@ from queries.db import pool
 class WineIn(BaseModel):
     name: str
     location: Optional[str]
-    varietal: str
+    varietal: Optional[str]
     winery: Optional[str]
     image_url: Optional[str]
     vintage: Optional[str]
