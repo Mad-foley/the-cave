@@ -12,11 +12,15 @@ class UserIn(BaseModel):
     name: str
     username: str
     password: str
+    birthday: Optional[str]
+
 
 class UserOut(BaseModel):
     id: int
     name: str
     username: str
+    birthday: Optional[str]
+
 
 class UserOutWithPassword(UserOut):
     hashed_password: str
@@ -46,7 +50,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, id
+                        SELECT name, username, password, birthday, id
                         FROM users;
                         """
                     )
@@ -64,7 +68,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, id
+                        SELECT name, username, password, birthday, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -84,7 +88,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, id
+                        SELECT name, username, password, birthday, id
                         FROM users
                         WHERE username = %s;
                         """,
@@ -105,15 +109,16 @@ class UserQueries:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password)
+                            (name, username, password, birthday)
                         VALUES
-                            (%s, %s, %s)
+                            (%s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             user.name,
                             user.username,
-                            hashed_password
+                            hashed_password,
+                            user.birthday
                         ]
                     )
                     id = result.fetchone()[0]
@@ -145,14 +150,15 @@ class UserQueries:
                     cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s
+                        SET name=%s, username=%s, password=%s, birthday=%s
                         WHERE id = %s
                         """,
                         [
                             user.name,
                             user.username,
                             hashed_password,
-                            user_id
+                            user.birthday,
+                            user.id
                         ]
                     )
                     return self.user_in_and_out(user, user_id, hashed_password)
@@ -165,7 +171,7 @@ class UserQueries:
         return UserOutWithPassword(
             id=user_id,
             hashed_password=hashed_password,
-            **data
+            **data,
             )
 
 
@@ -174,5 +180,6 @@ class UserQueries:
             name=record[0],
             username=record[1],
             hashed_password=record[2],
-            id=record[3]
+            birthday = record[3],
+            id=record[4]
         )
