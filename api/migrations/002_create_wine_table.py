@@ -4,12 +4,12 @@ steps = [
         """
         CREATE TABLE wines (
             id SERIAL PRIMARY KEY NOT NULL,
-            name VARCHAR(50) NOT NULL,
-            location VARCHAR(50),
-            varietal VARCHAR(50),
-            winery VARCHAR(50),
+            name VARCHAR(100) NOT NULL,
+            location VARCHAR(1000),
+            varietal VARCHAR(1000),
+            winery VARCHAR(1000),
             image_url VARCHAR(1000),
-            vintage VARCHAR(50),
+            vintage VARCHAR(1000),
             created_on TIMESTAMP,
             modified_on TIMESTAMP
         );
