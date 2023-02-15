@@ -1,9 +1,9 @@
 from pydantic import BaseModel, EmailStr
-from datetime import date
+from datetime import datetime, date
 from typing import Optional
 from queries.db import pool
 from jwtdown_fastapi.authentication import Token
-
+from fastapi.encoders import jsonable_encoder
 
 class Error(BaseModel):
     message: str
@@ -12,7 +12,8 @@ class UserIn(BaseModel):
     name: str
     username: str
     password: str
-    birthday: Optional[str]
+    birthday: Optional[datetime] = None
+    image_url: Optional[str] = None
 
 
 class UserOut(BaseModel):
@@ -20,9 +21,14 @@ class UserOut(BaseModel):
     name: str
     username: str
     birthday: Optional[str]
+    image_url: Optional[str]
 
-
-class UserOutWithPassword(UserOut):
+class UserOutWithPassword(BaseModel):
+    id: int
+    name: str
+    username: str
+    birthday: Optional[str | datetime | date]
+    image_url: Optional[str]
     hashed_password: str
 
 class UserForm(BaseModel):
@@ -50,12 +56,12 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, id
+                        SELECT name, username, password, birthday, image_url,  id
                         FROM users;
                         """
                     )
                     return [
-                        self.record_to_user_out(record)
+                        self.record_to_user_out(jsonable_encoder(record))
                         for record in result
                     ]
         except Exception as e:
@@ -88,7 +94,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, id
+                        SELECT name, username, password, id
                         FROM users
                         WHERE username = %s;
                         """,
@@ -97,28 +103,36 @@ class UserQueries:
                     record = result.fetchone()
                     if record is None:
                         return None
-                    return self.record_to_user_out(record)
+                    return UserOutWithPassword(
+                        name=record[0],
+                        username=record[1],
+                        hashed_password=record[2],
+                        id=record[3]
+                    )
 
         except Exception as e:
             print(e)
             return {"message": "Could not get user"}
     def create_user(self, user, hashed_password):
+        print("**************************************************** user in")
+        print(user)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday)
+                            (name, username, password, birthday, image_url)
                         VALUES
-                            (%s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             user.name,
                             user.username,
                             hashed_password,
-                            user.birthday
+                            jsonable_encoder(user.birthday),
+                            user.image_url
                         ]
                     )
                     id = result.fetchone()[0]
@@ -150,7 +164,7 @@ class UserQueries:
                     cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s, birthday=%s
+                        SET name=%s, username=%s, password=%s, birthday=%s, image_url=%s
                         WHERE id = %s
                         """,
                         [
@@ -158,6 +172,7 @@ class UserQueries:
                             user.username,
                             hashed_password,
                             user.birthday,
+                            user.image_url,
                             user_id
                         ]
                     )
@@ -166,20 +181,25 @@ class UserQueries:
             print(e)
             return {"message": "Could not update users"}
 
-    def user_in_and_out(self, user: UserIn, user_id: int, hashed_password):
+    def user_in_and_out(self, user:UserIn, user_id: int, hashed_password):
+        print("******************************* user in and out data")
         data = user.dict()
+        print(data)
         return UserOutWithPassword(
             id=user_id,
             hashed_password=hashed_password,
-            **data,
+            **data
             )
 
 
     def record_to_user_out(self, record):
+        print("****************************** record out")
+        print(record)
         return UserOutWithPassword(
             name=record[0],
             username=record[1],
             hashed_password=record[2],
             birthday = record[3],
-            id=record[4]
+            image_url=record[4],
+            id=record[5]
         )
