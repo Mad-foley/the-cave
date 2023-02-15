@@ -5,7 +5,7 @@ from datetime import date
 class LikeIn(BaseModel):
     wine_id: int
     user_id: int
-    created_on: date
+    created_on: date | None
 
 class LikeOut(LikeIn):
     id: int
@@ -47,6 +47,22 @@ class LikeQueries:
             print(e)
             return {"message":"Failed to find likes"}
 
+    def create_like(self, wine_id):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        INSERT INTO likes (wine_id, user_id)
+                        VALUES (%s, %s);
+                        """,
+                        [wine_id, 1]
+                    )
+            return "sucess"
+
+        except Exception as e:
+            print(e)
+            return {"message":"Failed to like"}
 
     def record_to_like_out(self, record):
         return LikeOut(

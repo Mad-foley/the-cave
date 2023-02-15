@@ -12,3 +12,10 @@ def get_likes_by_wine(
     repo: LikeQueries = Depends()
 ):
     return repo.get_likes_by_wine(wine_id)
+
+@router.post('/api/wines/{wine_id}/likes')
+def create_like(
+    wine_id: int,
+    repo: LikeQueries = Depends()
+):
+    return repo.create_like(wine_id)
