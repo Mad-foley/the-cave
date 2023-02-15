@@ -61,7 +61,6 @@ class WineQueries:
             print(e)
             return {"message":"Failed to create wine"}
 
-
     def record_to_wine_out(self, record):
         return WineOut(
             name=record[0],
