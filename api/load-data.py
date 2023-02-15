@@ -21,5 +21,6 @@ with open('data/winebid-data.json') as json_data:
             vintage = wine["vintage"][:4],
             created_on = currentDT,
             modified_on = currentDT,
-            ) for wine in data ]
-    print(output[0])
+            )
+            for wine in data
+        ]
