@@ -11,7 +11,8 @@ steps = [
             image_url VARCHAR(1000),
             vintage VARCHAR(1000),
             created_on TIMESTAMP,
-            modified_on TIMESTAMP
+            modified_on TIMESTAMP,
+            created_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
         );
         """,
         # "Down" SQL statement

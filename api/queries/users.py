@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from datetime import datetime, date
 from typing import Optional
 from queries.db import pool
@@ -74,7 +74,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, id
+                        SELECT name, username, password, birthday, iamge_url, id
                         FROM users
                         WHERE id = %s;
                         """,
