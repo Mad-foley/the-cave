@@ -3,7 +3,6 @@ from queries.wines import WineIn, WineOut, WineQueries
 from queries.users import Error
 from typing import List, Union, Optional
 from authenticator import authenticator
-
 router = APIRouter()
 
 
