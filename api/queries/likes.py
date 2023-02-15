@@ -47,7 +47,7 @@ class LikeQueries:
             print(e)
             return {"message":"Failed to find likes"}
 
-    def create_like(self, wine_id):
+    def create_like(self, wine_id, user_id):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -56,13 +56,29 @@ class LikeQueries:
                         INSERT INTO likes (wine_id, user_id)
                         VALUES (%s, %s);
                         """,
-                        [wine_id, 1]
+                        [wine_id, user_id]
                     )
             return "sucess"
 
         except Exception as e:
             print(e)
             return {"message":"Failed to like"}
+
+    def delete_like(self,wine_id, user_id):
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as cur:
+                        result = cur.execute(
+                            """
+                            DELETE FROM likes
+                            WHERE user_id = %s AND wine_id = %s;
+                            """,
+                            [user_id, wine_id]
+                        )
+                        return True
+            except Exception as e:
+                print(e)
+                return {"message": "Failed to delete like"}
 
     def record_to_like_out(self, record):
         return LikeOut(
