@@ -23,7 +23,8 @@ def create_wine(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends()
 ):
+    result = repo.create_wine(wine)
     if account_data:
-        return repo.create_wine(wine)
+        return result
     else:
        return Error(message = "Your aren't logged in")

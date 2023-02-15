@@ -159,7 +159,7 @@ class UserQueries:
                             user.username,
                             hashed_password,
                             user.birthday,
-                            user.id
+                            user_id
                         ]
                     )
                     return self.user_in_and_out(user, user_id, hashed_password)

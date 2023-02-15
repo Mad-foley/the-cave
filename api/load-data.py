@@ -20,9 +20,6 @@ with open('data/winebid-data.json') as json_data:
             "modifed_on": currentDT,
         }
         output.append(new_data)
-    print(output[0])
-    for wine in output:
-        WineQueries.create_wine(wine)
     #     with pool.connection() as conn:
     #         with conn.cursor() as cur:
     #             cur.execute(
