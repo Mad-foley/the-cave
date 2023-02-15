@@ -12,4 +12,8 @@ In the afternoon we pairprogrammed as a group of 4 bouncing ideas off of eachoth
 
 I had a minor bug with docker failing to connect to postgresql, which according to stack overflow is a common bug for Mac's with an M1 chip. I was able to find a line of code from stackoverflow I have to run before building images.
 
-In the Evening I shared screens so we all pairprogrammd together to fix some merge conflicts and refactor code.
+In the Evening I shared screens so we all pairprogrammed together to fix some merge conflicts and refactor code.
+
+## Feb 14, 2023:
+
+Today we worked together to get the authentication done and editing our CRUD apps as a group. We mostly spent time debugging today.
