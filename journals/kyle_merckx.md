@@ -1,3 +1,7 @@
+## 2/15/23
+
+
+
 ## 2/14/23
 
 Today we worked on the authentication. After a while of running into issues with the implemention we got evrything working. Part of the issues related to integrating the authentication into our already built user classes and queries. We got the bare bones authentication working then attemted to integrate parameters from our original user class back into the tables and models. Though we did run into troulbe when trying to use time and datetime data types for the parameters. We weren't quite sure why they weren't working in in this specific situation. But we did get the authentication working and implemented the the authentication check on our wine object queries.
