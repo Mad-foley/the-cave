@@ -17,4 +17,6 @@
 - Looked over the authenticator documentation to prepare to begin the project
 ###### February 13th, 2023
 - Finished the User FastAPI CRUD with the team
-
+###### February 14th, 2023
+- Started creating tables for the application
+- Added authentication with JWTO

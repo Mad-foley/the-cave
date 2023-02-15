@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter
-from routers import users, wines
+from routers import users, wines, likes, comments
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
@@ -34,3 +34,5 @@ def launch_details():
 app.include_router(users.router, tags=['Users'])
 app.include_router(wines.router, tags=['Wines'])
 app.include_router(authenticator.router, tags=['Accounts'])
+app.include_router(likes.router, tags=['Likes'])
+app.include_router(comments.router, tags=['Comments'])

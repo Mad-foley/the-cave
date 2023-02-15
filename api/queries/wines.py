@@ -6,7 +6,7 @@ from queries.db import pool
 class WineIn(BaseModel):
     name: str
     location: Optional[str]
-    varietal: str
+    varietal: Optional[str]
     winery: Optional[str]
     image_url: Optional[str]
     vintage: Optional[str]
@@ -60,7 +60,6 @@ class WineQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to create wine"}
-
 
     def record_to_wine_out(self, record):
         return WineOut(
