@@ -29,7 +29,7 @@ def get_all_users(
 ):
     return repo.get_all_users()
 
-@router.post('/api/users', response_model=TokenResponse)
+@router.post('/api/users', response_model=Union[TokenResponse, Error])
 async def create_user(
     user: UserIn,
     request: Request,
@@ -44,8 +44,12 @@ async def create_user(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials"
         )
+    print("************************************* user created results")
+    print(result)
     form = UserForm(username=user.username, password=user.password)
     token = await authenticator.login(response, request, form, repo)
+    print("**************************************** getting user token")
+    print(token)
     return UserToken(user=result, **token.dict())
 
 @router.get('/api/users/{user_id}', response_model=Union[UserOut, Error])

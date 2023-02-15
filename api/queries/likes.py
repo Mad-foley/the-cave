@@ -23,6 +23,8 @@ class LikeQueries:
                         """,
                         [wine_id]
                     )
+                    print("*********************************** result from database execute")
+                    print(result)
                     return [self.record_to_like_out(record) for record in result]
         except Exception as e:
             print(e)

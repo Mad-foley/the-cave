@@ -1,14 +1,10 @@
-from pydantic import BaseModel
-from datetime import date
-from typing import Optional
 import json
 import datetime
 from queries.db import pool
-from queries.wines import WineIn, WineQueries
+from queries.wines import WineIn
 currentDT = datetime.datetime.now()
 
-
-repo = WineQueries
+# Get json data from wine bid
 with open('data/winebid-data.json') as json_data:
     data = json.load(json_data)
     output = [
@@ -22,7 +18,7 @@ with open('data/winebid-data.json') as json_data:
             created_on = currentDT,
             modified_on = currentDT,
             ) for wine in data ]
-    print(output[0])
+    # Save json data into a WineIn object with new values into a list "output"
 
 for wine in output:
     with pool.connection() as conn:
@@ -45,5 +41,5 @@ for wine in output:
                     wine.created_on,
                     wine.modified_on
                 ]
-                )
+            )
             print("successfully added wine data")
