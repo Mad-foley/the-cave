@@ -1,6 +1,6 @@
 ## 2/15/23
 
-
+We got a lot done today. Today we paired off with Malcolm and I working on the wines and comments and Maddy and Scott working on the users and likes. We completed all the necessary API endpoints for the comments and wines. The wines now 
 
 ## 2/14/23
 
