@@ -12,7 +12,6 @@ def get_likes_by_wine(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: LikeQueries = Depends()
 ):
-    print(account_data)
     if account_data:
         return repo.get_likes_by_wine(wine_id)
     else:
