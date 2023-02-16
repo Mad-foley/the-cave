@@ -1,1 +1,0 @@
-FOOD_API_KEY= '741|bWA4puvyfVY3JmRH65jH9hca1WkjH5Z3ijQPl5qh'
