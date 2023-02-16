@@ -2,6 +2,7 @@ from fastapi import FastAPI, APIRouter, Depends, Query
 from routers import users, wines, likes, comments
 from queries.sampleapis import SampleApiWineQueries, SampleWineOut
 from queries.users import Error
+from queries.foodapis import WinePairingOut, WinePairingQueries
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
@@ -34,3 +35,10 @@ def get_port_wine(
         repo: SampleApiWineQueries = Depends()
 ):
     return repo.get_wines(type)
+
+@app.get('/api/foodapis', tags=['Food'])
+def get_wine_pairing(
+    food: str,
+    repo: WinePairingQueries = Depends()
+):
+    return repo.get_wine_pairing(food)
