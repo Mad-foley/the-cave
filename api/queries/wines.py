@@ -116,8 +116,6 @@ class WineQueries:
                         [wine_id]
                     )
                     record = result.fetchone()
-                    print("************************ record of wine id")
-                    print(record)
                     return self.record_to_wine_out(record)
         except Exception as e:
             print(e)

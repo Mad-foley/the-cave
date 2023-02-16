@@ -4,30 +4,37 @@ from typing import Optional
 from queries.db import pool
 from jwtdown_fastapi.authentication import Token
 from fastapi.encoders import jsonable_encoder
+default_img = 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'
+defaults = {
+    'name': 'Joe Smith',
+    'username': 'joesmith',
+    'password': 'supersecretpassword',
+    'birthday': date(1999,12,25),
+    'image_url': default_img
+    }
 
 class Error(BaseModel):
     message: str
 
 class UserIn(BaseModel):
-    name: str
-    username: str
-    password: str
-    birthday: Optional[datetime] = None
-    image_url: Optional[str] = None
-
+    name: str = defaults['name']
+    username: str = defaults['username']
+    password: str = defaults['password']
+    birthday: Optional[date] = defaults['birthday']
+    image_url: Optional[str] = defaults['image_url']
 
 class UserOut(BaseModel):
     id: int
-    name: str
-    username: str
-    birthday: Optional[str]
-    image_url: Optional[str]
+    name: str = defaults['name']
+    username: str = defaults['username']
+    birthday: Optional[date] = defaults['birthday']
+    image_url: Optional[str] = defaults['image_url']
 
 class UserOutWithPassword(BaseModel):
     id: int
     name: str
     username: str
-    birthday: Optional[str | datetime | date]
+    birthday: Optional[date]
     image_url: Optional[str]
     hashed_password: str
 
@@ -61,12 +68,12 @@ class UserQueries:
                         """
                     )
                     return [
-                        self.record_to_user_out(jsonable_encoder(record))
+                        self.record_to_user_out(record)
                         for record in result
                     ]
         except Exception as e:
             print(e)
-            return {"message": "Could not get all users"}
+            return Error(message=str(e))
 
     def get_user_by_id(self, user_id: int):
         try:
@@ -74,7 +81,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, iamge_url, id
+                        SELECT name, username, password, birthday, image_url, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -82,11 +89,11 @@ class UserQueries:
                     )
                     record = result.fetchone()
                     if record is None:
-                        return None
+                        return {"message":"Could not get user"}
                     return self.record_to_user_out(record)
         except Exception as e:
             print(e)
-            return {"message": "Could not get user"}
+            return Error(message=str(e))
 
     def get_user_by_username(self, username: str):
         try:
@@ -102,7 +109,7 @@ class UserQueries:
                     )
                     record = result.fetchone()
                     if record is None:
-                        return None
+                        return {"message":"Could not get user"}
                     return UserOutWithPassword(
                         name=record[0],
                         username=record[1],
@@ -112,10 +119,9 @@ class UserQueries:
 
         except Exception as e:
             print(e)
-            return {"message": "Could not get user"}
+            return Error(message=str(e))
+
     def create_user(self, user, hashed_password):
-        print("**************************************************** user in")
-        print(user)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -131,16 +137,15 @@ class UserQueries:
                             user.name,
                             user.username,
                             hashed_password,
-                            jsonable_encoder(user.birthday),
+                            user.birthday,
                             user.image_url
                         ]
                     )
                     id = result.fetchone()[0]
-                    print(result.fetchone())
                     return self.user_in_and_out(user, id, hashed_password)
         except Exception as e:
             print(e)
-            return {"message": "Could not create user"}
+            return Error(message=str(e))
 
     def delete_user(self, user_id):
         try:
@@ -156,7 +161,7 @@ class UserQueries:
                     return True
         except Exception as e:
             print(e)
-            return {"message": "Could not delete user"}
+            return Error(message=str(e))
 
     def update_user(self, user, user_id, hashed_password):
         try:
@@ -180,27 +185,30 @@ class UserQueries:
                     return self.user_in_and_out(user, user_id, hashed_password)
         except Exception as e:
             print(e)
-            return {"message": "Could not update users"}
+            return Error(message=str(e))
 
     def user_in_and_out(self, user:UserIn, user_id: int, hashed_password):
-        print("******************************* user in and out data")
-        data = user.dict()
-        print(data)
-        return UserOutWithPassword(
-            id=user_id,
-            hashed_password=hashed_password,
-            **data
-            )
-
+        try:
+            data = user.dict()
+            return UserOutWithPassword(
+                id=user_id,
+                hashed_password=hashed_password,
+                **data
+                )
+        except Exception as e:
+            print(e)
+            return Error(message=str(e))
 
     def record_to_user_out(self, record):
-        print("****************************** record out")
-        print(record)
-        return UserOutWithPassword(
-            name=record[0],
-            username=record[1],
-            hashed_password=record[2],
-            birthday = record[3],
-            image_url=record[4],
-            id=record[5]
-        )
+        try:
+            return UserOutWithPassword(
+                name=record[0],
+                username=record[1],
+                hashed_password=record[2],
+                birthday = record[3],
+                image_url=record[4],
+                id=record[5]
+            )
+        except Exception as e:
+            print(e)
+            return Error(message=str(e))
