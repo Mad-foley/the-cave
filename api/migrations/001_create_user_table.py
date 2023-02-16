@@ -8,7 +8,9 @@ steps = [
             username VARCHAR(50) UNIQUE NOT NULL,
             password VARCHAR(1000) NOT NULL,
             birthday DATE,
-            image_url VARCHAR(1000)
+            image_url VARCHAR(1000),
+            modified_on TIMESTAMP,
+            created_on TIMESTAMP
         );
         """,
         # "Down" SQL statement

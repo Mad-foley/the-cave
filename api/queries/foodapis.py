@@ -1,7 +1,8 @@
 import requests
 from pydantic import BaseModel
 from queries.users import Error
-from keys import FOOD_API_KEY
+import os
+FOOD_API_KEY = os.environ.get('FOOD_API_KEY')
 
 
 class WinePairingOut(BaseModel):
