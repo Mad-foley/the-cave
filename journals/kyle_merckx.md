@@ -1,6 +1,6 @@
 ## 2/15/23
 
-
+We got a lot done today. Today we paired off with Malcolm and I working on the wines and comments and Maddy and Scott working on the users and likes. We completed all the necessary API endpoints for the comments and wines. The wines will now require a logged in user to be able to view, edit, create, or delete them. The comments and likes tables have references to both the wines and users tables. Everything appears to be working as intended, but we'll do some further tests tomorrow. We are pretty close to being done with our backend functionality.
 
 ## 2/14/23
 

@@ -1,17 +1,6 @@
-from pydantic import BaseModel
 from queries.db import pool
 from datetime import date
-
-class CommentIn(BaseModel):
-    created_on: date
-    comment: str
-
-class CommentOut(BaseModel):
-    user_id: int
-    wine_id: int
-    created_on: date
-    comment: str
-    id: int
+from models.comment_models import CommentIn, CommentOut
 
 class CommentQueries:
     def get_all_comments(self):
@@ -29,7 +18,6 @@ class CommentQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to find comments"}
-
 
     def get_comment_by_wine(self, wine_id):
         try:

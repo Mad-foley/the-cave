@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 from queries.users import Error
 from typing import List, Union, Optional
 from authenticator import authenticator
-from queries.comments import CommentQueries, CommentIn, CommentOut
+from queries.comments import CommentQueries
+from models.comment_models import CommentIn, CommentOut
 from datetime import date
 router = APIRouter()
 
