@@ -28,7 +28,7 @@ class MyAuthenticator(Authenticator):
         print(user)
         return user.hashed_password
 
-    def get_account_data_for_cookie(self, user: UserOutWithPassword):
+    def get_account_data_for_cookie(self, user: UserOut):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
         return user.username, UserOutWithPassword(**user.dict())

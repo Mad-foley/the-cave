@@ -136,6 +136,7 @@ class UserQueries:
                         ]
                     )
                     id = result.fetchone()[0]
+                    print(result.fetchone())
                     return self.user_in_and_out(user, id, hashed_password)
         except Exception as e:
             print(e)
