@@ -1,7 +1,7 @@
 import requests
 from pydantic import BaseModel
 from queries.users import Error
-
+from typing import List
 
 class SampleWineOut(BaseModel):
     winery: str
@@ -12,7 +12,7 @@ class SampleWineOut(BaseModel):
     id: int
 
 class SampleApiWineQueries:
-    def get_wines(self, type):
+    def get_wines(self, type) -> List[SampleWineOut]:
         response = requests.get(f'https://api.sampleapis.com/wines/{type}')
         if response.ok:
             result = response.json()

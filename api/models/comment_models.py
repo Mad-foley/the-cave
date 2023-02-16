@@ -1,13 +1,13 @@
 from pydantic import BaseModel
-from datetime import date
+from datetime import datetime
 
 class CommentIn(BaseModel):
-    created_on: date
     comment: str
 
 class CommentOut(BaseModel):
     user_id: int
     wine_id: int
-    created_on: date
+    created_on: datetime
+    modified_on: datetime
     comment: str
     id: int

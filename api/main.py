@@ -6,7 +6,7 @@ from queries.foodapis import WinePairingOut, WinePairingQueries
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
-from typing import List, Union
+from typing import List
 
 app = FastAPI()
 router = APIRouter()
