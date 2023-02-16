@@ -1,10 +1,24 @@
 import json
 import datetime
 from queries.db import pool
-from queries.wines import WineIn, WineQueries
+from queries.wines import WineQueries
 currentDT = datetime.datetime.now()
+from pydantic import BaseModel
+from typing import Optional
+from datetime import date
 
-# Create user to pass to have a user id to create new wine 
+
+class WineIn(BaseModel):
+    name: str
+    location: Optional[str]
+    varietal: Optional[str]
+    winery: Optional[str]
+    image_url: Optional[str]
+    vintage: Optional[str]
+    created_on: Optional[date]
+    modified_on: Optional[date]
+    created_by: int
+# Create user to pass to have a user id to create new wine
 with pool.connection() as conn:
     with conn.cursor() as cur:
         result = cur.execute(

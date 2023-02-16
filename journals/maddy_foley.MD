@@ -1,10 +1,11 @@
-## Feb 9, 2023 (start of journaling):
+## Feb 15, 2023:
+Today we touched based as a group and divided tasks.
 
-We collaborated togther to create our repository, finish our wire-framing and designed our APIs. We ensured we are on the same page about the development process and discussed what changes and potential features we would like to make.
+Me and scott paired off and worked on finishing the likes-apis and the food-pairing-api
 
-## Feb 10, 2023:
+## Feb 14, 2023:
 
-Today we finalized out wireframming and felt confident about our project starting point. We studied FastAPI's, postgreSQL and Authentication together and tossed new ideas.
+Today we worked together to get the authentication done and editing our CRUD apps as a group. We mostly spent time debugging today.
 
 ## Feb 13, 2023:
 
@@ -14,6 +15,13 @@ I had a minor bug with docker failing to connect to postgresql, which according 
 
 In the Evening I shared screens so we all pairprogrammed together to fix some merge conflicts and refactor code.
 
-## Feb 14, 2023:
 
-Today we worked together to get the authentication done and editing our CRUD apps as a group. We mostly spent time debugging today.
+## Feb 10, 2023:
+
+Today we finalized out wireframming and felt confident about our project starting point. We studied FastAPI's, postgreSQL and Authentication together and tossed new ideas.
+
+
+
+## Feb 9, 2023 (start of journaling):
+
+We collaborated togther to create our repository, finish our wire-framing and designed our APIs. We ensured we are on the same page about the development process and discussed what changes and potential features we would like to make.
