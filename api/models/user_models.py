@@ -1,6 +1,6 @@
 from jwtdown_fastapi.authentication import Token
 from pydantic import BaseModel
-from datetime import date
+from datetime import date, datetime
 from typing import Optional
 
 default_img = 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'
@@ -28,6 +28,8 @@ class UserOut(BaseModel):
     username: str = defaults['username']
     birthday: Optional[date] = defaults['birthday']
     image_url: Optional[str] = defaults['image_url']
+    modified_on: Optional[datetime]
+    created_on: Optional[datetime]
 
 class UserOutWithPassword(BaseModel):
     id: int
@@ -35,6 +37,8 @@ class UserOutWithPassword(BaseModel):
     username: str
     birthday: Optional[date]
     image_url: Optional[str]
+    modified_on: Optional[datetime]
+    created_on: Optional[datetime]
     hashed_password: str
 
 class UserForm(BaseModel):

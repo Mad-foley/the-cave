@@ -1,10 +1,13 @@
 from models.user_models import (
     UserIn,
+    UserOut,
     Error,
     UserOutWithPassword,
     )
 from queries.db import pool
+import datetime
 
+currentDT = datetime.datetime.now()
 
 class UserQueries:
     def get_all_users(self):
@@ -13,7 +16,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, image_url,  id
+                        SELECT name, username, password, birthday, image_url, modified_on, created_on, id
                         FROM users;
                         """
                     )
@@ -31,7 +34,7 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, image_url, id
+                        SELECT name, username, password, birthday, image_url, modified_on, created_on, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -78,9 +81,9 @@ class UserQueries:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday, image_url)
+                            (name, username, password, birthday, image_url, modified_on, created_on)
                         VALUES
-                            (%s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
@@ -88,7 +91,9 @@ class UserQueries:
                             user.username,
                             hashed_password,
                             user.birthday,
-                            user.image_url
+                            user.image_url,
+                            currentDT,
+                            currentDT
                         ]
                     )
                     id = result.fetchone()[0]
@@ -117,11 +122,12 @@ class UserQueries:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    cur.execute(
+                    result = cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s, birthday=%s, image_url=%s
+                        SET name=%s, username=%s, password=%s, birthday=%s, image_url=%s, modified_on=%s
                         WHERE id = %s
+                        RETURNING name, username, password, birthday, image_url, modified_on, created_on, id
                         """,
                         [
                             user.name,
@@ -129,9 +135,12 @@ class UserQueries:
                             hashed_password,
                             user.birthday,
                             user.image_url,
+                            currentDT,
                             user_id
                         ]
                     )
+                    record = result.fetchone()
+                    return self.record_to_user_out(record)
                     return self.user_in_and_out(user, user_id, hashed_password)
         except Exception as e:
             print(e)
@@ -150,6 +159,8 @@ class UserQueries:
             return Error(message=str(e))
 
     def record_to_user_out(self, record):
+        print("********************************* record out")
+        print(record)
         try:
             return UserOutWithPassword(
                 name=record[0],
@@ -157,7 +168,9 @@ class UserQueries:
                 hashed_password=record[2],
                 birthday = record[3],
                 image_url=record[4],
-                id=record[5]
+                modified_on=record[5],
+                created_on=record[6],
+                id=record[7]
             )
         except Exception as e:
             print(e)
