@@ -6,8 +6,7 @@ from fastapi import (
     HTTPException,
     status
 )
-from queries.users import (
-    UserQueries,
+from models.user_models import (
     UserIn,
     UserOut,
     Error,
@@ -17,6 +16,7 @@ from queries.users import (
     DuplicateUserError,
     TokenResponse
 )
+from queries.users import UserQueries
 from typing import List, Union
 from authenticator import authenticator
 
