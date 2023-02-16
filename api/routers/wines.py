@@ -72,7 +72,7 @@ def get_wine_by_user(
     else:
         return Error(message="You aren't logged in")
 
-@router.get('/api/wines/filter/{query}')
+@router.get('/api/wines/filter/{query}', response_model=Union[List[WineOut], Error])
 def filter_by(
     query: str,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),

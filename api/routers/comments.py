@@ -4,7 +4,6 @@ from typing import List, Union, Optional
 from authenticator import authenticator
 from queries.comments import CommentQueries
 from models.comment_models import CommentIn, CommentOut
-from datetime import date
 router = APIRouter()
 
 @router.get('/api/comments', response_model=Union[List[CommentOut], Error])

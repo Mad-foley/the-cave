@@ -1,12 +1,15 @@
 from fastapi import APIRouter, Depends
 from queries.users import Error
-from typing import List, Union, Optional
+from typing import Optional, List, Union
 from authenticator import authenticator
-from queries.likes import LikeIn, LikeQueries
+from queries.likes import LikeQueries
+from models.like_models import LikeIn, LikeOut
+
+
 router = APIRouter()
 
 
-@router.get('/api/wines/{wine_id}/likes')
+@router.get('/api/wines/{wine_id}/likes', response_model=Union[List[LikeOut], Error])
 def get_likes_by_wine(
     wine_id: int,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
@@ -17,7 +20,7 @@ def get_likes_by_wine(
     else:
        return Error(message = "Your aren't logged in")
 
-@router.get('/api/user/{user_id}/likes')
+@router.get('/api/user/{user_id}/likes', response_model=Union[List[LikeOut], Error])
 def get_likes_by_user(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: LikeQueries = Depends()
@@ -27,7 +30,7 @@ def get_likes_by_user(
     else:
        return Error(message = "Your aren't logged in")
 
-@router.post('/api/wines/{wine_id}/likes')
+@router.post('/api/wines/{wine_id}/likes', response_model=Union[LikeOut, Error])
 def create_like(
     wine_id: int,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),

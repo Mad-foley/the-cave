@@ -1,8 +1,10 @@
 from queries.db import pool
 from models.wine_models import WineIn, WineOut
+from typing import List
+
 
 class WineQueries:
-    def get_all_wines(self):
+    def get_all_wines(self) -> List[WineOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -17,7 +19,8 @@ class WineQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to find wines"}
-    def create_wine(self, wine, user_id):
+
+    def create_wine(self, wine, user_id) -> WineOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -47,7 +50,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to create wine"}
 
-    def update_wine(self, wine_id: int, wine:WineIn):
+    def update_wine(self, wine_id: int, wine:WineIn) -> WineOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -85,7 +88,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to update wine"}
 
-    def get_wine_by_id(self, wine_id):
+    def get_wine_by_id(self, wine_id) -> WineOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -123,7 +126,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to delete wine"}
 
-    def get_wine_by_user(self, user_id):
+    def get_wine_by_user(self, user_id) -> List[WineOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -140,7 +143,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to get wines by user"}
 
-    def filter_by(self, query):
+    def filter_by(self, query) -> List[WineOut]:
         input = '%' + query + '%'
         try:
             with pool.connection() as conn:
@@ -153,9 +156,10 @@ class WineQueries:
                         OR location LIKE %s
                         OR varietal LIKE %s
                         OR winery LIKE %s
+                        OR vintage LIKE %s
                         ;
                         """,
-                        [input, input, input, input]
+                        [input, input, input, input, input]
                     )
                     return [self.record_to_wine_out(record) for record in result]
         except Exception as e:

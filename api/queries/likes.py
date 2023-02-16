@@ -1,17 +1,14 @@
-from pydantic import BaseModel
 from queries.db import pool
-from datetime import date
+from models.like_models import LikeOut
+from datetime import datetime, timezone
+from typing import List
 
-class LikeIn(BaseModel):
-    wine_id: int
-    user_id: int
-    created_on: date | None
 
-class LikeOut(LikeIn):
-    id: int
+def timestamp():
+    return datetime.now(timezone.utc).isoformat()
 
 class LikeQueries:
-    def get_likes_by_wine(self, wine_id):
+    def get_likes_by_wine(self, wine_id:int) -> List[LikeOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -28,7 +25,7 @@ class LikeQueries:
             print(e)
             return {"message":"Failed to find likes"}
 
-    def get_likes_by_user(self, user_id):
+    def get_likes_by_user(self, user_id:int) -> List[LikeOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -45,24 +42,25 @@ class LikeQueries:
             print(e)
             return {"message":"Failed to find likes"}
 
-    def create_like(self, wine_id, user_id):
+    def create_like(self, wine_id:int, user_id:int) -> LikeOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        INSERT INTO likes (wine_id, user_id)
-                        VALUES (%s, %s);
+                        INSERT INTO likes (wine_id, user_id, created_on)
+                        VALUES (%s, %s, %s)
+                        RETURNING wine_id, user_id, created_on, id;
                         """,
-                        [wine_id, user_id]
+                        [wine_id, user_id, timestamp()]
                     )
-            return "sucess"
-
+                    record = result.fetchone()
+                    return self.record_to_like_out(record)
         except Exception as e:
             print(e)
             return {"message":"Failed to like"}
 
-    def delete_like(self,wine_id, user_id):
+    def delete_like(self, wine_id:int, user_id:int) -> bool:
             try:
                 with pool.connection() as conn:
                     with conn.cursor() as cur:
@@ -73,7 +71,9 @@ class LikeQueries:
                             """,
                             [user_id, wine_id]
                         )
-                        return True
+                        if result is not None:
+                            return True
+                        return False
             except Exception as e:
                 print(e)
                 return {"message": "Failed to delete like"}
