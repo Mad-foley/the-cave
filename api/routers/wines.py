@@ -26,7 +26,7 @@ def create_wine(
 ):
     result = repo.create_wine(wine)
     if account_data:
-        return result
+        return repo.create_wine(wine, account_data['id'])
     else:
        return Error(message = "You aren't logged in")
 

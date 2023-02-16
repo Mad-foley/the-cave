@@ -12,9 +12,9 @@ class WineIn(BaseModel):
     vintage: Optional[str]
     created_on: Optional[date]
     modified_on: Optional[date]
-    created_by: int
 
 class WineOut(WineIn):
+    created_by: int
     id: int
 
 
@@ -35,8 +35,12 @@ class WineQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to find wines"}
+<<<<<<< HEAD
 
     def create_wine(self, wine):
+=======
+    def create_wine(self, wine, user_id):
+>>>>>>> 6111fff5608033163fde91cf9cd7bac92e3b2587
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -57,11 +61,11 @@ class WineQueries:
                             wine.vintage,
                             wine.created_on,
                             wine.modified_on,
-                            wine.created_by
+                            user_id
                         ]
                     )
                     id = result.fetchone()[0]
-                    return self.wine_in_and_out(wine, id)
+                    return self.wine_in_and_out(wine, id, user_id)
         except Exception as e:
             print(e)
             return {"message":"Failed to create wine"}
@@ -196,6 +200,6 @@ class WineQueries:
             created_by=record[8],
             id=record[9]
         )
-    def wine_in_and_out(self, record: WineIn, wine_id: int):
+    def wine_in_and_out(self, record: WineIn, wine_id: int, created_by:int):
         data = record.dict()
-        return WineOut(id=wine_id, **data)
+        return WineOut(id=wine_id, created_by=created_by, **data)

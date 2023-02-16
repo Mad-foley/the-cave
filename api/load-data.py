@@ -4,6 +4,21 @@ from queries.db import pool
 from queries.wines import WineIn, WineQueries
 currentDT = datetime.datetime.now()
 
+# Create user to pass to have a user id to create new wine 
+with pool.connection() as conn:
+    with conn.cursor() as cur:
+        result = cur.execute(
+            """
+            INSERT INTO users
+                (name, username, password)
+            VALUES
+                ('user01', 'username01', 'password01')
+            RETURNING id;
+            """
+        )
+        id = result.fetchone()[0]
+
+
 # Get json data from wine bid
 with open('data/winebid-data.json') as json_data:
     data = json.load(json_data)
@@ -17,9 +32,12 @@ with open('data/winebid-data.json') as json_data:
             vintage = wine["vintage"][:4],
             created_on = currentDT,
             modified_on = currentDT,
-            created_by = 1
+            created_by = id
             ) for wine in data ]
     # Save json data into a WineIn object with new values into a list "output"
+
+
+
 for wine in output:
 
     with pool.connection() as conn:

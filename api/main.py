@@ -30,7 +30,7 @@ app.include_router(comments.router, tags=['Comments'])
 
 
 @app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error, tags=['Public APIs'])
-def get_port_wine(
+def get_wines(
         type: str = Query(description="reds, whites, sparkling, dessert, port"),
         repo: SampleApiWineQueries = Depends()
 ):
