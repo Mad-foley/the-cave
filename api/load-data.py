@@ -1,12 +1,10 @@
 import json
 import datetime
 from queries.db import pool
-from queries.wines import WineQueries
-currentDT = datetime.datetime.now()
 from pydantic import BaseModel
 from typing import Optional
 from datetime import date
-
+currentDT = datetime.datetime.now()
 
 class WineIn(BaseModel):
     name: str

@@ -44,29 +44,36 @@ async def create_user(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials"
         )
-    print("************************************* user created results")
-    print(result)
     form = UserForm(username=user.username, password=user.password)
     token = await authenticator.login(response, request, form, repo)
-    print("**************************************** getting user token")
-    print(token)
     return UserToken(user=result, **token.dict())
 
 @router.get('/api/users/{user_id}', response_model=Union[UserOut, Error])
-def get_user(
+def get_user_by_id(
     user_id: int,
     repo: UserQueries = Depends()
 ):
     return repo.get_user_by_id(user_id)
 
-@router.delete('/api/users/{user_id}')
+@router.get('/api/users/username/{username}', response_model=Union[UserOutWithPassword, Error])
+def get_user_by_username(
+    username: str,
+    repo: UserQueries = Depends()
+):
+    try:
+        return repo.get_user_by_username(username)
+    except Exception as e:
+        print(e)
+        return Error(message=str(e))
+
+@router.delete('/api/users/{user_id}', response_model=Union[bool, Error])
 def delete_user(
     user_id: int,
     repo: UserQueries = Depends()
 ):
     return repo.delete_user(user_id)
 
-@router.put('/api/users/{user_id}')
+@router.put('/api/users/{user_id}', response_model=Union[TokenResponse, Error])
 async def update_user(
     user_id: int,
     user: UserIn,
@@ -85,3 +92,15 @@ async def update_user(
     form = UserForm(username=user.username, password=user.password)
     token = await authenticator.login(response, request, form, repo)
     return UserToken(user=result, **token.dict())
+
+@router.get("/token", response_model=UserToken | None)
+async def get_token(
+    request: Request,
+    repo: UserQueries = Depends(authenticator.try_get_current_account_data)
+) -> UserToken | None:
+    if repo and authenticator.cookie_name in request.cookies:
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "user": repo,
+        }

@@ -35,7 +35,6 @@ class WineQueries:
         except Exception as e:
             print(e)
             return {"message":"Failed to find wines"}
-            
     def create_wine(self, wine, user_id):
         try:
             with pool.connection() as conn:
@@ -117,8 +116,6 @@ class WineQueries:
                         [wine_id]
                     )
                     record = result.fetchone()
-                    print("************************ record of wine id")
-                    print(record)
                     return self.record_to_wine_out(record)
         except Exception as e:
             print(e)

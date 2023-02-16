@@ -8,12 +8,10 @@ router = APIRouter()
 
 @router.get('/api/wines', response_model=Union[List[WineOut], Error])
 def get_all_wines(
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data), #get user id from account data
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends()
 ):
     if account_data:
-        print("****************************** account data")
-        print(account_data['id'])
         return repo.get_all_wines()
     else:
        return Error(message = "You aren't logged in")
@@ -24,7 +22,6 @@ def create_wine(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends()
 ):
-    result = repo.create_wine(wine)
     if account_data:
         return repo.create_wine(wine, account_data['id'])
     else:

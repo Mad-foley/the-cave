@@ -11,7 +11,10 @@ def get_all_comments(
     repo: CommentQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data)
 ):
-    return repo.get_all_comments()
+    if account_data:
+        return repo.get_all_comments()
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.get('/api/wines/{wine_id}/comments', response_model=Union[List[CommentOut], Error])
 def get_comment_by_wine(
@@ -19,7 +22,10 @@ def get_comment_by_wine(
     repo: CommentQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data)
 ):
-    return repo.get_comment_by_wine(wine_id)
+    if account_data:
+        return repo.get_comment_by_wine(wine_id)
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.get('/api/users/{user_id}/comments', response_model=Union[List[CommentOut], Error])
 def get_comment_by_user(
@@ -27,7 +33,10 @@ def get_comment_by_user(
     repo: CommentQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data)
 ):
-    return repo.get_comment_by_user(user_id)
+    if account_data:
+        return repo.get_comment_by_user(user_id)
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.post('/api/wines/{wine_id}/comments', response_model=Union[CommentOut, Error])
 def create_comment(
@@ -36,8 +45,11 @@ def create_comment(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: CommentQueries = Depends()
 ):
-    user_id = account_data["id"]
-    return repo.create_comment(wine_id, user_id, comment)
+    if account_data:
+        user_id = account_data["id"]
+        return repo.create_comment(wine_id, user_id, comment)
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.put('/api/wines/comments/{comment_id}', response_model=Union[CommentOut, Error])
 def update_comment(
@@ -46,7 +58,10 @@ def update_comment(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: CommentQueries = Depends()
 ):
-    return repo.update_comment(comment_id, comment)
+    if account_data:
+        return repo.update_comment(comment_id, comment)
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.get('/api/comments/{comment_id}', response_model=Union[CommentOut, Error])
 def get_comment_by_id(
@@ -54,7 +69,10 @@ def get_comment_by_id(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: CommentQueries = Depends()
 ):
-    return repo.get_comment_by_id(comment_id)
+    if account_data:
+        return repo.get_comment_by_id(comment_id)
+    else:
+       return Error(message = "Your aren't logged in")
 
 @router.delete('/api/wines/comments/{comment_id}')
 def delete_comment(
@@ -62,4 +80,7 @@ def delete_comment(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: CommentQueries = Depends()
 ):
-    return repo.delete_comment(comment_id)
+    if account_data:
+        return repo.delete_comment(comment_id)
+    else:
+       return Error(message = "Your aren't logged in")
