@@ -29,16 +29,16 @@ app.include_router(likes.router, tags=['Likes'])
 app.include_router(comments.router, tags=['Comments'])
 
 
-@app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error, tags=['Public APIs'])
+@app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error, tags=['Sample API Wines'])
 def get_wines(
-        type: str = Query(description="reds, whites, sparkling, dessert, port"),
+        type: str = Query("reds", enum=["reds", "whites", "sparkling", "dessert", "port"]),
         repo: SampleApiWineQueries = Depends()
 ):
     return repo.get_wines(type)
 
-@app.get('/api/foodapis', response_model=List[WinePairingOut] | Error, tags=['Food'])
+@app.get('/api/pairings', response_model=List[WinePairingOut] | Error, tags=['Food Pairing API'])
 def get_wine_pairing(
-    food: str,
+    query: str = Query(description="ex: Pasta Bolognese, Cement, Ramen"),
     repo: WinePairingQueries = Depends()
 ):
-    return repo.get_wine_pairing(food)
+    return repo.get_wine_pairing(query)
