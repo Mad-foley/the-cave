@@ -36,7 +36,7 @@ def get_wines(
 ):
     return repo.get_wines(type)
 
-@app.get('/api/foodapis', tags=['Food'])
+@app.get('/api/foodapis', response_model=List[WinePairingOut] | Error, tags=['Food'])
 def get_wine_pairing(
     food: str,
     repo: WinePairingQueries = Depends()

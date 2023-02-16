@@ -1,5 +1,10 @@
 ## Malcolm Pei - Journal
 
+###### February 15th, 2023
+- Finished back-end Fast API Users, Wines, Comments, Likes
+- Testing Public API endpoints through our backend
+- Finished Authentication
+- Passed Authenticated data into other tables such as Wines and Comments to automatically have a user id
 ###### February 14th, 2023
 - Started creating tables for the application
 - Added authentication with JWTO
