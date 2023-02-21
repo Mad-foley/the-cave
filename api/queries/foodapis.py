@@ -1,7 +1,9 @@
+import os
 import requests
 from pydantic import BaseModel
+
 from queries.users import Error
-import os
+
 FOOD_API_KEY = os.environ.get('FOOD_API_KEY')
 
 
