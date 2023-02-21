@@ -1,11 +1,15 @@
+from queries.db import pool
+
 from models.user_models import (
     UserOut,
+    UserIn,
     Error,
     UserOutWithPassword,
     )
-from queries.db import pool
+
 from queries.likes import timestamp
 from typing import List
+
 
 class UserQueries:
     def get_all_users(self) -> List[UserOut]:
@@ -54,6 +58,7 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
+    # Query for the authenticator, keep it simple as to not confuse the authenticator
     def get_user_by_username(self, username: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -80,7 +85,7 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def create_user(self, user, hashed_password) -> UserOutWithPassword:
+    def create_user(self, user:UserIn, hashed_password:str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -114,7 +119,7 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def delete_user(self, user_id) -> bool:
+    def delete_user(self, user_id:int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -125,14 +130,14 @@ class UserQueries:
                         """,
                         [user_id]
                     )
-                    if result is not None:
-                        return True
-                    return False
+                    return True if result is not None else False
+
         except Exception as e:
             print(e)
             return Error(message=str(e))
 
-    def update_user(self, user, user_id, hashed_password) -> UserOutWithPassword:
+    def update_user(self, user:UserIn, user_id:int, hashed_password:str) -> UserOutWithPassword:
+        # User id is gathered from authenticator so only the logged-in user can update their account
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -169,7 +174,7 @@ class UserQueries:
             return Error(message=str(e))
 
 
-    def record_to_user_out(self, record):
+    def record_to_user_out(self, record) -> UserOutWithPassword:
         try:
             return UserOutWithPassword(
                 name=record[0],

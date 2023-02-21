@@ -1,22 +1,10 @@
 import json
 import datetime
 from queries.db import pool
-from pydantic import BaseModel
-from typing import Optional
-from datetime import date
+
 currentDT = datetime.datetime.now()
 
-class WineIn(BaseModel):
-    name: str
-    location: Optional[str]
-    varietal: Optional[str]
-    winery: Optional[str]
-    image_url: Optional[str]
-    vintage: Optional[str]
-    created_on: Optional[date]
-    modified_on: Optional[date]
-    created_by: int
-# Create user to pass to have a user id to create new wine
+# Create default user to insert new wine data
 with pool.connection() as conn:
     with conn.cursor() as cur:
         result = cur.execute(
@@ -30,28 +18,23 @@ with pool.connection() as conn:
         )
         id = result.fetchone()[0]
 
-
-# Get json data from wine bid
 with open('data/winebid-data.json') as json_data:
+    # Get json data
     data = json.load(json_data)
-    output = [
-        WineIn(
-            name = wine["name"][4:],
-            location = wine["region"],
-            varietal = wine["type"],
-            winery = wine["producer"],
-            image_url = wine["photo_url"],
-            vintage = wine["vintage"][:4],
-            created_on = currentDT,
-            modified_on = currentDT,
-            created_by = id
-            ) for wine in data ]
-    # Save json data into a WineIn object with new values into a list "output"
+    # Create a list of new objects formatted to fit into database
+    formatted_data = [
+            {
+            'name':wine["name"][4:],
+            'location': wine["region"],
+            'varietal': wine["type"],
+            'winery':wine["producer"],
+            'image_url': wine["photo_url"],
+            'vintage':wine["vintage"][:4],
+            'created_by': id
+            } for wine in data ]
 
-
-
-for wine in output:
-
+for wine in formatted_data:
+    # For each wine in the list of wines connect to the database
     with pool.connection() as conn:
         with conn.cursor() as cur:
             result = cur.execute(
@@ -63,15 +46,17 @@ for wine in output:
                 RETURNING id;
                 """,
                 [
-                    wine.name,
-                    wine.location,
-                    wine.varietal,
-                    wine.winery,
-                    wine.image_url,
-                    wine.vintage,
-                    wine.created_on,
-                    wine.modified_on,
-                    wine.created_by
+                    wine['name'],
+                    wine['location'],
+                    wine['varietal'],
+                    wine['winery'],
+                    wine['image_url'],
+                    wine['vintage'],
+                    currentDT,
+                    currentDT,
+                    wine['created_by']
                 ]
             )
-            print("successfully added wine data")
+            id = result.fetchone()[0]
+            # Print a message for each insert for visual feedback
+            print("[load-data-log: successfully added wine data] wine ID = ", id)

@@ -1,9 +1,15 @@
 from fastapi import APIRouter, Depends
-from queries.users import Error
-from typing import Optional, List, Union
-from authenticator import authenticator
+
+from models.like_models import LikeOut
+
 from queries.likes import LikeQueries
-from models.like_models import LikeIn, LikeOut
+from queries.users import Error
+from queries.logs import LogQueries
+from queries.wines import WineQueries
+
+from authenticator import authenticator
+
+from typing import Optional, List, Union
 
 
 router = APIRouter()
@@ -34,10 +40,16 @@ def get_likes_by_user(
 def create_like(
     wine_id: int,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
-    repo: LikeQueries = Depends()
+    repo: LikeQueries = Depends(),
+    wine_repo: WineQueries = Depends(),
+    log: LogQueries = Depends()
 ):
     if account_data:
-        return repo.create_like(wine_id, account_data['id'])
+        result = repo.create_like(wine_id, account_data['id'])
+        wine = wine_repo.get_wine_by_id(wine_id)
+        message = f"{account_data['name']} liked{wine.name}"
+        log.create_log(account_data['id'],message)
+        return result
     else:
        return Error(message = "Your aren't logged in")
 
@@ -45,9 +57,15 @@ def create_like(
 def delete_like(
     wine_id: int,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
-    repo: LikeQueries = Depends()
+    repo: LikeQueries = Depends(),
+    wine_repo: WineQueries = Depends(),
+    log: LogQueries = Depends()
 ):
     if account_data:
-        return repo.delete_like(wine_id, account_data['id'])
+        result = repo.delete_like(wine_id, account_data['id'])
+        wine = wine_repo.get_wine_by_id(wine_id)
+        message = f"{account_data['name']} unliked{wine.name}"
+        log.create_log(account_data['id'],message)
+        return result
     else:
        return Error(message = "Your aren't logged in")

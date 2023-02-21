@@ -1,7 +1,11 @@
 from queries.db import pool
+
 from models.comment_models import CommentIn, CommentOut
+
 from queries.likes import timestamp
+
 from typing import List
+
 
 class CommentQueries:
     def get_all_comments(self) -> List[CommentOut]:
@@ -99,13 +103,13 @@ class CommentQueries:
                         """
                         DELETE FROM comments
                         WHERE id = %s
-                        RETURNING id;
+                        RETURNING wine_id;
                         """,
                         [comment_id]
                     )
-                    id = result.fetchone()[0]
-                    if id:
-                        return {"message":"succesfully deleted"}
+                    wine_id = result.fetchone()[0]
+                    if wine_id:
+                        return wine_id
                     return {"message":"Failed to delete comment"}
         except Exception as e:
             print(e)

@@ -1,6 +1,9 @@
 from queries.db import pool
+
 from models.wine_models import WineIn, WineOut
+
 from typing import List
+from queries.likes import timestamp
 
 
 class WineQueries:
@@ -20,7 +23,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to find wines"}
 
-    def create_wine(self, wine, user_id) -> WineOut:
+    def create_wine(self, wine:WineIn, user_id:int) -> WineOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -39,13 +42,24 @@ class WineQueries:
                             wine.winery,
                             wine.image_url,
                             wine.vintage,
-                            wine.created_on,
-                            wine.modified_on,
+                            timestamp(),
+                            timestamp(),
                             user_id
                         ]
                     )
                     id = result.fetchone()[0]
-                    return self.wine_in_and_out(wine, id, user_id)
+                    return WineOut(
+                        id=id,
+                        created_by=user_id,
+                        name=wine.name,
+                        location=wine.location,
+                        varietal=wine.varietal,
+                        winery=wine.winery,
+                        image_url=wine.image_url,
+                        vintage=wine.vintage,
+                        modified_on=str(timestamp()),
+                        created_on=str(timestamp())
+                        )
         except Exception as e:
             print(e)
             return {"message":"Failed to create wine"}
@@ -78,7 +92,7 @@ class WineQueries:
                         wine.winery,
                         wine.image_url,
                         wine.vintage,
-                        wine.modified_on,
+                        timestamp(),
                         wine_id
                         ]
                     )
@@ -88,7 +102,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to update wine"}
 
-    def get_wine_by_id(self, wine_id) -> WineOut:
+    def get_wine_by_id(self, wine_id:int) -> WineOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -106,7 +120,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to get wine by id"}
 
-    def delete_wine(self, wine_id):
+    def delete_wine(self, wine_id:int):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -114,19 +128,19 @@ class WineQueries:
                         """
                         DELETE FROM wines
                         WHERE id=%s
-                        RETURNING id;
+                        RETURNING name;
                         """,
                         [wine_id]
                     )
-                    id = result.fetchone()[0]
-                    if id:
-                        return {"message":"Successfully deleted wine"}
+                    name = result.fetchone()[0]
+                    if name:
+                        return name
                     return {"message":"Failed to delete wine"}
         except Exception as e:
             print(e)
             return {"message":"Failed to delete wine"}
 
-    def get_wine_by_user(self, user_id) -> List[WineOut]:
+    def get_wine_by_user(self, user_id:int) -> List[WineOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -143,7 +157,8 @@ class WineQueries:
             print(e)
             return {"message":"Failed to get wines by user"}
 
-    def filter_by(self, query) -> List[WineOut]:
+    def filter_by(self, query:str) -> List[WineOut]:
+        # To use LIKE in SQL you need to concatenate your query with % symbols before and after
         input = '%' + query + '%'
         try:
             with pool.connection() as conn:
@@ -166,7 +181,7 @@ class WineQueries:
             print(e)
             return {"message":"Failed to get wines by filter"}
 
-    def record_to_wine_out(self, record):
+    def record_to_wine_out(self, record) -> WineOut:
         return WineOut(
             name=record[0],
             location=record[1],
@@ -179,6 +194,3 @@ class WineQueries:
             created_by=record[8],
             id=record[9]
         )
-    def wine_in_and_out(self, record: WineIn, wine_id: int, created_by:int):
-        data = record.dict()
-        return WineOut(id=wine_id, created_by=created_by, **data)

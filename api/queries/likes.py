@@ -1,11 +1,14 @@
 from queries.db import pool
+
 from models.like_models import LikeOut
+
 from datetime import datetime, timezone
 from typing import List
 
-
 def timestamp():
+    # Get current date and time to input into the created or modified on fields automatically
     return datetime.now(timezone.utc).isoformat()
+
 
 class LikeQueries:
     def get_likes_by_wine(self, wine_id:int) -> List[LikeOut]:
