@@ -7,7 +7,6 @@ function WinePage() {
         if (response.ok) {
             const data = await response.json()
             setWines(data)
-            console.log(wines)
         }
     }
     useEffect(() =>{
