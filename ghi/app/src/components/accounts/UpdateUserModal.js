@@ -1,22 +1,25 @@
-import { useCreateUserMutation } from "../../store/queries/userApi"
+import { useUpdateUserMutation } from "../../store/queries/userApi"
 import { useState } from "react"
+import { useGetTokenQuery } from "../../store/queries/authApi"
 
-export default function CreateUserForm() {
+export default function UpdateUserForm() {
+    const {data : token_data } = useGetTokenQuery()
     const [formData, setFormData] = useState({})
-    const [createUser] = useCreateUserMutation()
-
+    const [updateUser] = useUpdateUserMutation()
+    if (token_data) {
+        console.log(token_data.user)
+    }
     const handleFormChange = (e) => {
         setFormData( {
             ...formData,
             [e.target.name]: e.target.value
         }
         )
-
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createUser(formData)
+        updateUser(formData, token_data.user.id)
     }
 
     return (
