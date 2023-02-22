@@ -1,3 +1,9 @@
+## Feb 22, 2023:
+Worked on front end today. Finished user endpoints in redux and now working on wines.
+
+## Feb 21, 2023:
+Pair programmed to start developing the front end - we chose to implement redux and began working on setting that up and a few basic forms.
+
 ## Feb 15, 2023:
 Today we touched based as a group and divided tasks.
 

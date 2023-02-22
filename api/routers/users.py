@@ -63,14 +63,13 @@ async def create_user(
     # Return user info with token
     return UserToken(user=result, **token.dict())
 
-@router.get('/api/users/{user_id}', response_model=Union[UserOut, Error])
+@router.get('/api/users/me', response_model=Union[UserOut, Error])
 def get_user_by_id(
-    user_id: int,
     repo: UserQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
 ):
     if account_data:
-        return repo.get_user_by_id(user_id)
+        return repo.get_user_by_id(account_data['id'])
     return {"message":"You are not logged in"}
 
 @router.get('/api/users/username/{username}', response_model=Union[UserOutWithPassword, Error])
@@ -84,7 +83,7 @@ def get_user_by_username(
         print(e)
         return Error(message=str(e))
 
-@router.delete('/api/users/{user_id}', response_model=Union[bool, Error])
+@router.delete('/api/users/me', response_model=Union[bool, Error])
 def delete_user(
     repo: UserQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),

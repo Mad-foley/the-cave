@@ -20,7 +20,8 @@ export default function UpdateUserForm({ count }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         count(1)
-        updateUser(formData, token_data.user.id)
+        let user_id = token_data.user.id
+        updateUser(formData, user_id)
     }
 
     return (

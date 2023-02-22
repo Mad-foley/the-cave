@@ -60,6 +60,14 @@ export const authApi = createApi({
             }),
             providesTags: ["User"],
         }),
+        getUserById: build.query({
+            query: () => ({
+                url: `/api/users/me`,
+                method: 'get',
+                credentials: 'include',
+            }),
+            providesTags: ["User"],
+        }),
         createUser: build.mutation({
             query: (data) => {
                 return {
@@ -75,6 +83,7 @@ export const authApi = createApi({
                 return {
                     url: `/api/users/${user_id}`,
                     method: "put",
+                    credentials: "include",
                     body: data
                     }
             },
@@ -82,9 +91,18 @@ export const authApi = createApi({
             invalidatesTags: ["Token", "User"],
 
             }),
-
-        }),
+        deleteUser: build.mutation({
+            query: () => {
+                return{
+                url: '/api/users/me',
+                method: 'delete',
+                credentials: 'include'
+            }
+        },
+        invalidatesTags: ["Token", "User"],
+        })
     })
+})
 
 export const {
     useGetTokenQuery,
@@ -92,6 +110,8 @@ export const {
     useLogOutMutation,
     useGetUsersQuery,
     useCreateUserMutation,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useGetUserByIdQuery,
+    useDeleteUserMutation,
 
 } = authApi
