@@ -1,13 +1,13 @@
-import { useUpdateUserMutation } from "../../store/queries/userApi"
+import { useUpdateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 
-export default function UpdateUserForm() {
+export default function UpdateUserForm({ count }) {
     const {data : token_data } = useGetTokenQuery()
     const [formData, setFormData] = useState({})
     const [updateUser] = useUpdateUserMutation()
     if (token_data) {
-    
+
     }
     const handleFormChange = (e) => {
         setFormData( {
@@ -19,6 +19,7 @@ export default function UpdateUserForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        count(1)
         updateUser(formData, token_data.user.id)
     }
 

@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:8000/token',
+        baseUrl: 'http://localhost:8000',
         prepareHeaders: (headers, {getState}) => {
         const selector = authApi.endpoints.getToken.select()
         const {data : token_data} = selector(getState())
@@ -14,11 +14,11 @@ export const authApi = createApi({
         return headers
     }
     }),
-    tagTypes: ['Token'],
+    tagTypes: ['Token', 'User'],
     endpoints: (build) => ({
         getToken: build.query ({
             query: () => ({
-                url: '',
+                url: '/token',
                 method: 'get',
                 credentials: 'include'
             }),
@@ -37,7 +37,7 @@ export const authApi = createApi({
                 }
 
                 return {
-                    url: '',
+                    url: '/token',
                     method: 'post',
                     credentials: 'include',
                     body: formData
@@ -47,13 +47,51 @@ export const authApi = createApi({
         }),
         logOut: build.mutation ({
             query: () => ({
-                url: '',
+                url: '/token',
                 method: 'delete',
                 credentials: 'include'
             }),
             invalidatesTags: ["Token"]
-        })
-    }),
-})
+        }),
+        getUsers: build.query({
+            query: () => ({
+                url: "/api/users",
+                credentials: "include",
+            }),
+            providesTags: ["User"],
+        }),
+        createUser: build.mutation({
+            query: (data) => {
+                return {
+                    url: "/api/users",
+                    method: "post",
+                    body: data
+                    }
+                },
+            providesTags: ["User"],
+            }),
+        updateUser: build.mutation({
+            query: (data, user_id) => {
+                return {
+                    url: `/api/users/${user_id}`,
+                    method: "put",
+                    body: data
+                    }
+            },
+            providesTags: ["User"],
+            invalidatesTags: ["Token", "User"],
 
-export const { useGetTokenQuery, useLogInMutation, useLogOutMutation } = authApi
+            }),
+
+        }),
+    })
+
+export const {
+    useGetTokenQuery,
+    useLogInMutation,
+    useLogOutMutation,
+    useGetUsersQuery,
+    useCreateUserMutation,
+    useUpdateUserMutation
+
+} = authApi

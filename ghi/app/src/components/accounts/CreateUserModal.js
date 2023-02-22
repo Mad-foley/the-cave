@@ -1,4 +1,4 @@
-import { useCreateUserMutation } from "../../store/queries/userApi"
+import { useCreateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
 
 export default function CreateUserForm() {
