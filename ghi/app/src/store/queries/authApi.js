@@ -5,7 +5,7 @@ export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8000/token',
-        prepareHeaders: (headers, {getState} ) =>{
+        prepareHeaders: (headers, {getState}) => {
         const selector = authApi.endpoints.getToken.select()
         const {data : token_data} = selector(getState())
         if (token_data) {
@@ -14,7 +14,7 @@ export const authApi = createApi({
         return headers
     }
     }),
-    tagTypes: ['token'],
+    tagTypes: ['Token'],
     endpoints: (build) => ({
         getToken: build.query ({
             query: () => ({
@@ -22,7 +22,7 @@ export const authApi = createApi({
                 method: 'get',
                 credentials: 'include'
             }),
-            providesTags: ['token']
+            providesTags: ['Token']
         }),
         logIn: build.mutation ({
             query: data => {
@@ -43,7 +43,7 @@ export const authApi = createApi({
                     body: formData
                 }
             },
-            providesTags: ['token']
+            providesTags: ['Token']
         }),
         logOut: build.mutation ({
             query: () => ({
@@ -51,7 +51,7 @@ export const authApi = createApi({
                 method: 'delete',
                 credentials: 'include'
             }),
-            invalidateTags: ["token"]
+            invalidatesTags: ["Token"]
         })
     }),
 })

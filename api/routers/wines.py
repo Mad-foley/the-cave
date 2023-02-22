@@ -10,7 +10,6 @@ from typing import List, Union, Optional
 
 router = APIRouter()
 
-
 @router.get('/api/wines', response_model=Union[List[WineOut], Error])
 def get_all_wines(
     repo: WineQueries = Depends(),

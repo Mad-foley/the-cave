@@ -7,7 +7,7 @@ export default function UpdateUserForm() {
     const [formData, setFormData] = useState({})
     const [updateUser] = useUpdateUserMutation()
     if (token_data) {
-        console.log(token_data.user)
+    
     }
     const handleFormChange = (e) => {
         setFormData( {

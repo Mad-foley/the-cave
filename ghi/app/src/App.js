@@ -12,7 +12,7 @@ import UpdateUserForm from './components/accounts/UpdateUserModal';
 function App() {
   const {data : token_data } = useGetTokenQuery()
   const {data : user_data } = useGetUsersQuery()
-
+  console.log(token_data)
 
   return (
     <div>

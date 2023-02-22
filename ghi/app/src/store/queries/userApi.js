@@ -16,7 +16,7 @@ export const userApi = createApi({
         }
 
     }),
-    tagTypes: ["user", "token"],
+    tagTypes: ["User"],
 
     endpoints: build => ({
         getUsers: build.query({
@@ -25,6 +25,7 @@ export const userApi = createApi({
                 credentials: "include",
             })
         }),
+        providesTags: ["User"],
         createUser: build.mutation({
             query: (data) => {
                 return {
@@ -34,6 +35,7 @@ export const userApi = createApi({
                 }
             }
         }),
+        providesTags: ["User"],
         updateUser: build.mutation({
             query: (data, user_id) => {
                 return {
@@ -44,8 +46,7 @@ export const userApi = createApi({
             }
 
         }),
-        invalidateTags: ["token"], //results variable malcolm was talking about
-        provideTags: ["token"]
+        invalidatesTags: ["User"], //results variable malcolm was talking about
     })
 })
 
