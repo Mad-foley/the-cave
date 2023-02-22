@@ -71,6 +71,7 @@ def get_wine_pairing(
         else suggestion
         for suggestion in result]
 
+    
 
     db_result = []
     for suggestion in result:
