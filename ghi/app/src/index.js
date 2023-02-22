@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+  <h2 className="text-3xl font-bold underline">CSS TEST</h2>
       <App />
     </Provider>
   </React.StrictMode>

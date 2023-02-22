@@ -1,4 +1,3 @@
-import './App.css';
 import FallingBottle from './components/common/FallingBottleLoading.js';
 import WinePage from './pages/WinePage';
 import { authApi, useGetTokenQuery } from './store/queries/authApi';
@@ -29,6 +28,7 @@ function App() {
 
   return (
     <div>
+      <h2 className="text-3xl font-bold underline">CSS TEST</h2>
       <LogInForm />
       <LogOutForm />
       <DeleteUserForm/>
