@@ -23,11 +23,11 @@ export default function LogInForm() {
 
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='container mx-auto shadow p-5'>
+            <form className='shadow p-5' onSubmit={handleSubmit}>
                 <input onChange={handleFormData} name="username" />
                 <input onChange={handleFormData} name="password" />
-                <button>Submit</button>
+                <button>test</button>
             </form>
         </div>
     )
