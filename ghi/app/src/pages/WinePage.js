@@ -1,22 +1,20 @@
 import {useEffect, useState} from 'react'
+import { useGetWinesQuery } from '../store/queries/wineApi'
+import WineCard from '../components/wines/WineCard'
 
 function WinePage() {
-    const [wines, setWines] = useState([])
-    const getWines = async () => {
-        const response = await fetch('http://localhost:8000/api/wines')
-        if (response.ok) {
-            const data = await response.json()
-            setWines(data)
-        }
+    const {data: wines, isSuccess} = useGetWinesQuery()
+    if (isSuccess === true) {
+        return (
+            <div>
+                { wines.filter((item,idx)=>idx<15 && idx>3).map(wine => {
+                    return (
+                        <WineCard wine={wine} key={wine.id} />
+                    )
+                })}
+            </div>
+        )
     }
-    useEffect(() =>{
-        getWines()
-    },[])
-    return (
-        <div>
-            <div>test</div>
-        </div>
-    )
 }
 
 export default WinePage

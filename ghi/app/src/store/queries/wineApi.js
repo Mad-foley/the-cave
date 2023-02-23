@@ -14,13 +14,6 @@ export const wineApi = createApi({
             }
             return headers
         }
-        // prepareHeaders: headers => {
-        //     const {data: token_data} = useGetTokenQuery()
-        //     if(token_data) {
-        //         headers.set('Authorization', `Bearer ${token_data.access_token}`)
-        //     }
-        //     return headers
-        // }
     }),
     tagTypes: ['Wines', 'Wine'],
     endpoints: (build) => ({

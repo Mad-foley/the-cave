@@ -4,24 +4,25 @@ import { useGetWineByIdQuery } from "../../store/queries/wineApi";
 
 export default function UpdateWineForm() {
 
-    const {data: wine, isLoading, isError} = useGetWineByIdQuery(3)
+    const {data: wine} = useGetWineByIdQuery(3)
+    const wine_data = wine
     const [formData, setFormData] = useState({
-        id:0,
-        form:{
-            name:'',
-            location:'',
-            varietal:'',
-            winery:'',
-            image_url:'',
-            vintage:''
+        id: 0,
+        form :{
+            name: '',
+            location: '',
+            varietal: '',
+            winery: '',
+            image_url: '',
+            vintage: ''
         }
     })
     const [updateWine] = useUpdateWineMutation()
 
     const handleFormChange = (e) => {
         setFormData({
-            id:wine.id,
-            form:{
+            id : wine.id,
+            form: {
                 ...formData.form,
                 [e.target.name]: e.target.value
             }
@@ -31,9 +32,10 @@ export default function UpdateWineForm() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        for (const [key,value] of Object.entries(formData.form)) {
-            if (value === "") {
-                formData.form[key] = wine[key]
+        for (const [k, v] of Object.entries(formData.form)){
+
+            if (v === "") {
+                formData.form[k] = wine[k]
             }
         }
         const result = await updateWine(formData)

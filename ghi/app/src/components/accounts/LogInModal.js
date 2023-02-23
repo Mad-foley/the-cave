@@ -17,9 +17,10 @@ export default function LogInForm() {
         )
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        logIn(formData)
+        const result = await logIn(formData)
+        console.log(result)
 
     }
     return (
