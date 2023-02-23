@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from datetime import datetime
 from typing import Optional
 
 class WineIn(BaseModel):
@@ -9,9 +9,10 @@ class WineIn(BaseModel):
     winery: Optional[str]
     image_url: Optional[str]
     vintage: Optional[str]
-    created_on: Optional[date]
-    modified_on: Optional[date]
+
 
 class WineOut(WineIn):
+    created_on: Optional[datetime | str]
+    modified_on: Optional[datetime | str]
     created_by: int
     id: int
