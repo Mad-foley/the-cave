@@ -1,3 +1,15 @@
+## 2/23/23
+
+
+
+## 2/22/23
+
+Worked on more Redux today. Tried to fix a bug with the update_user reducer path. I was feeling sick in the afternoon, so I took the rest of the day off.
+
+## 2/21/23
+
+Today we got started working with Redux. So far, we have it set up to get data from our API endpoints for the token and user data. We appear to have the front-end authentication working, though I'd like to test it further. Redux is kind of confusing but I think I've begun to get a handle on it.
+
 ## 2/15/23
 
 We got a lot done today. Today we paired off with Malcolm and I working on the wines and comments and Maddy and Scott working on the users and likes. We completed all the necessary API endpoints for the comments and wines. The wines will now require a logged in user to be able to view, edit, create, or delete them. The comments and likes tables have references to both the wines and users tables. Everything appears to be working as intended, but we'll do some further tests tomorrow. We are pretty close to being done with our backend functionality.
