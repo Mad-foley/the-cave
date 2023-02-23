@@ -9,24 +9,27 @@ export default function NavBar() {
                 <NavLink to="/" className="flex items-center">
                     <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CAVE</span>
                 </NavLink>
+
                 <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
+                    <div className="flex justify-evenly">
                     <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                        <li>
-                            <NavLink to='/home' className={navlinkClass} aria-current="page">Home</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/home'  aria-current="page">Home</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/account' className={navlinkClass} aria-current="page">Account</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/account'  aria-current="page">Account</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/wines' className={navlinkClass} aria-current="page">Wines</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/wines'  aria-current="page">Wines</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/' className={navlinkClass} aria-current="page">About</NavLink>
+                        <li className={navlinkClass} >
+                            <NavLink to='/' aria-current="page">About</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/' className={navlinkClass} aria-current="page">Contact</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/'  aria-current="page">Contact</NavLink>
                         </li>
                     </ul>
+                    </div>
                 </div>
             </div>
         </nav>
