@@ -10,7 +10,10 @@ export default function DeleteUserForm() {
 
     return (
         <div>
-            <button onClick={handleClick}>Delete</button>
+            <button
+            onClick={handleClick}
+            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            >Delete</button>
         </div>
     )
 }

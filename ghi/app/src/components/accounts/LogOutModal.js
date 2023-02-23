@@ -8,8 +8,11 @@ export default function LogOutForm() {
     }
 
     return (
-        <div>
-            <button onClick={handleClick}>Log out</button>
+        <div className="">
+            <button
+            onClick={handleClick}
+            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            >Log out</button>
         </div>
     )
 }

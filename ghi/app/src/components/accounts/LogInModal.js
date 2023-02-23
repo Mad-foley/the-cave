@@ -25,7 +25,6 @@ export default function LogInForm() {
     return (
         <div className='container mx-auto flex justify-content p-5 text-center'>
             <form className='w-full max-w-xs shadow p-5' onSubmit={handleSubmit}>
-                <h1>Log In</h1>
                 <div className='mb-4 field'>
                     <input
                     onChange={handleFormData}
