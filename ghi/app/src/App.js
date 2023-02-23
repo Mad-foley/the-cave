@@ -1,14 +1,17 @@
 import './App.css';
-import FallingBottle from './components/common/FallingBottleLoading.js';
-import WinePage from './pages/WinePage';
-import { authApi, useGetTokenQuery } from './store/queries/authApi';
-import LogInForm from './components/accounts/LogInModal'
-import LogOutForm from './components/accounts/LogOutModal';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { useGetTokenQuery } from './store/queries/authApi';
 import { useGetUsersQuery, useGetUserByIdQuery } from './store/queries/authApi';
+
 import CreateUserForm from './components/accounts/CreateUserModal';
 import UpdateUserForm from './components/accounts/UpdateUserModal';
-import { useEffect, useState } from 'react';
 import DeleteUserForm from './components/accounts/DeleteUserModal';
+import LogInForm from './components/accounts/LogInModal';
+import LogOutForm from './components/accounts/LogOutModal';
+
+import NavBar from './components/common/NavBar';
 
 
 function App() {
@@ -29,11 +32,14 @@ function App() {
 
   return (
     <div>
-      <LogInForm />
-      <LogOutForm />
-      <DeleteUserForm/>
-      <CreateUserForm />
-      <UpdateUserForm token={token_data} count = {setCount} />
+      <BrowserRouter>
+        <NavBar/>
+        <div>
+          <Routes>
+            <Route path="/" element={<LogInForm/>}/>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
