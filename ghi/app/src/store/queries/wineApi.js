@@ -50,11 +50,11 @@ export const wineApi = createApi({
             invalidatesTags: ["Wines"]
         }),
         updateWine: build.mutation ({
-            query: (data, wine_id) => ({
-                url: `/api/wines/${wine_id}`,
+            query: (data) => ({
+                url: `/api/wines/${data.id}`,
                 method: 'put',
                 credentials:'include',
-                body: data
+                body: data.form
             }),
             providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
         }),
