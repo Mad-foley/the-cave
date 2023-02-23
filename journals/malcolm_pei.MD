@@ -1,5 +1,14 @@
 ## Malcolm Pei - Journal
 
+
+###### February 22nd, 2023
+```
+- Built the redux store
+- Created the authentication redux endpoints
+- Started the wine redux endpoints
+- Used tailwind to start styling authentication features
+- Started on basic navigation bar
+```
 ###### February 18th, 2023
 ```
 - Installed Tailwind CSS

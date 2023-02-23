@@ -31,16 +31,20 @@ function App() {
   const {data : user_data } = useGetUsersQuery()
 
   return (
-    <div>
       <BrowserRouter>
         <NavBar/>
         <div>
           <Routes>
             <Route path="/" element={<LogInForm/>}/>
+            <Route path="login" element={<LogInForm/>}/>
+            <Route path="logout" element={<LogOutForm/>}/>
+            <Route path="user">
+              <Route path="create" element={<CreateUserForm/>}/>
+              <Route path="update" element={<UpdateUserForm/>}/>
+            </Route>
           </Routes>
         </div>
       </BrowserRouter>
-    </div>
   );
 }
 
