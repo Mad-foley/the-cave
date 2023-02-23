@@ -14,7 +14,7 @@ export const wineApi = createApi({
             return headers
         }
     }),
-    tagTypes: ['Wines'],
+    tagTypes: ['Wines', 'Wine'],
     endpoints: (build) => ({
         getWines: build.query({
             query: () => ({
@@ -22,6 +22,49 @@ export const wineApi = createApi({
                 method: 'get'
             }),
             providesTags: ['Wines']
-        })
+        }),
+        getWineById: build.query({
+            query: (wine_id) => ({
+                    url: `/api/wines/${wine_id}`,
+                    method: 'get'
+            }),
+            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+        }),
+        createWine: build.mutation({
+            query: (data) => {
+                return {
+                    url: '/api/wines',
+                    method: 'post',
+                    credentials: 'include',
+                    body: data
+                }
+            },
+            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+        }),
+        deleteWine: build.mutation ({
+            query: (wine_id) => ({
+                url: `/api/wines/${wine_id}`,
+                method: 'delete',
+                credentials: 'include'
+            }),
+            invalidatesTags: ["Wines"]
+        }),
+        updateWine: build.mutation ({
+            query: (data, wine_id) => ({
+                url: `/api/wines/${wine_id}`,
+                method: 'put',
+                credentials:'include',
+                body: data
+            }),
+            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+        }),
     })
 })
+
+export const {
+    useGetWinesQuery,
+    useGetWineByIdQuery,
+    useCreateWineMutation,
+    useDeleteWineMutation,
+    useUpdateWineMutation
+} = wineApi

@@ -1,3 +1,6 @@
+## Feb 23, 2023:
+Continued to work on redux together. Working on finishing our redux and some endpoints. We worked on tailwind and organizing our wine-data front end.
+
 ## Feb 22, 2023:
 Worked on front end today. Finished user endpoints in redux and now working on wines.
 

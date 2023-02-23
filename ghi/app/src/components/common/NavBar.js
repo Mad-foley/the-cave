@@ -25,8 +25,8 @@ export default function NavBar() {
                             <NavLink to='/user/update' aria-current="page">update user</NavLink>
                         </li>
                     </ul>
+                    </div>
                 </div>
-            </div>
         </nav>
     )
 }
