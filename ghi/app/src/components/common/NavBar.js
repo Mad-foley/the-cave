@@ -1,30 +1,28 @@
 import { NavLink } from "react-router-dom";
-
+import { logo } from "../../utilities/constants";
 
 export default function NavBar() {
-    const navlinkClass = 'block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"'
+    const navlinkClass = 'container py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
     return (
-        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
-            <div className="container flex flex-wrap justify-between items-center mx-auto">
-                <NavLink to="/" className="flex items-center">
-                    <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CAVE</span>
-                </NavLink>
-                <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
-                    <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                        <li>
-                            <NavLink to='/home' className={navlinkClass} aria-current="page">Home</NavLink>
+        <nav className="shadow">
+            <div className="flex flex-column-2">
+                <div className="container"><img src={logo} style={{width:"30px"}}/></div>
+                <div className="w-full">
+                    <ul className="flex">
+                        <li className={navlinkClass}>
+                            <NavLink to='/home'  aria-current="page">Home</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/account' className={navlinkClass} aria-current="page">Account</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/login'  aria-current="page">Login</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/wines' className={navlinkClass} aria-current="page">Wines</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/logout'  aria-current="page">Logout</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/' className={navlinkClass} aria-current="page">About</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/user/create' aria-current="page">Create user</NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/' className={navlinkClass} aria-current="page">Contact</NavLink>
+                        <li className={navlinkClass}>
+                            <NavLink to='/user/update' aria-current="page">update user</NavLink>
                         </li>
                     </ul>
                 </div>
