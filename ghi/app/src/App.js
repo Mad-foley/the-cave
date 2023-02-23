@@ -33,11 +33,11 @@ function App() {
 
   // const {data: user} = useGetUserByIdQuery()
   // console.log(user)
-  // const {data : token_data } = useGetTokenQuery()
+  const {data : token_data } = useGetTokenQuery()
   // const {data : user_data } = useGetUsersQuery()
   // const {data: wine_data} = useGetWineByIdQuery(4)
   // console.log(wine_data)
-
+  console.log(token_data)
   return (
       <BrowserRouter>
         <NavBar/>

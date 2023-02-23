@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { authApi } from './authApi'
+import { authApi, useGetTokenQuery } from './authApi'
+
 
 export const wineApi = createApi({
     reducerPath: 'wineApi',
@@ -13,6 +14,13 @@ export const wineApi = createApi({
             }
             return headers
         }
+        // prepareHeaders: headers => {
+        //     const {data: token_data} = useGetTokenQuery()
+        //     if(token_data) {
+        //         headers.set('Authorization', `Bearer ${token_data.access_token}`)
+        //     }
+        //     return headers
+        // }
     }),
     tagTypes: ['Wines', 'Wine'],
     endpoints: (build) => ({
@@ -50,11 +58,11 @@ export const wineApi = createApi({
             invalidatesTags: ["Wines"]
         }),
         updateWine: build.mutation ({
-            query: (data, wine_id) => ({
-                url: `/api/wines/${wine_id}`,
+            query: (data) => ({
+                url: `/api/wines/${data.id}`,
                 method: 'put',
                 credentials:'include',
-                body: data
+                body: data.form
             }),
             providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
         }),
