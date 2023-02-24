@@ -6,10 +6,12 @@ function WinePage() {
     const {data: wines, isSuccess} = useGetWinesQuery()
     if (isSuccess === true) {
         return (
-            <div>
+            <div className = "flex flex-wrap">
                 { wines.filter((item,idx)=>idx<15 && idx>3).map(wine => {
                     return (
+                        <div className = "border-2  container p-5 mx-auto">
                         <WineCard wine={wine} key={wine.id} />
+                        </div>
                     )
                 })}
             </div>

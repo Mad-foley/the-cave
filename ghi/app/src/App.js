@@ -17,7 +17,7 @@ import CreateWineForm from './components/wines/CreateWineModal';
 import DeleteWineById from './components/wines/DeleteWineModal';
 import UpdateWineForm from './components/wines/UpdateWineModal';
 import { useGetLikesByWinesQuery, useGetLikesByUserQuery } from './store/queries/likesApi';
-
+import LogOutWindow from './components/accounts/LogOutWindow';
 
 import NavBar from './components/common/NavBar';
 import WinePage from './pages/WinePage';
@@ -25,35 +25,10 @@ import WinePage from './pages/WinePage';
 
 
 function App() {
-  const getToken = async () => {
-    const response = await fetch('http://localhost:8000/token');
-    if (response.ok) {
-      const data = await response.json();
-    }
-  }
-  const [count, setCount] = useState(0)
-  useEffect(() => {getToken()}, [count])
-
-  // const {data: likes} = useGetLikesByWinesQuery(5)
-  // console.log(likes)
-
-  // const { data: likes_user } = useGetLikesByUserQuery(2)
-  // console.log(likes_user)
-
-  const { data: wine_data } = useGetWinesQuery()
-
-  // const {data: user} = useGetUserByIdQuery()
-  // console.log(user)
-  const {data : token_data } = useGetTokenQuery()
-  // const {data : user_data } = useGetUsersQuery()
-  // const {data: wine_data} = useGetWineByIdQuery(4)
-  // console.log(wine_data)
   return (
       <BrowserRouter>
         <NavBar/>
-        {/* < CreateWineForm /> */}
-        < DeleteWineById />
-        < UpdateWineForm />
+        <LogOutWindow />
         <div>
           <Routes>
             <Route path="/" element={<WinePage/>}/>
@@ -61,8 +36,8 @@ function App() {
             <Route path="logout" element={<LogOutForm/>}/>
             <Route path="user">
               <Route path="create" element={<CreateUserForm/>}/>
-              <Route path="update" element={<UpdateUserForm/>}/>
             </Route>
+            {/* <Route path="/wines/account" element={< */}
           </Routes>
         </div>
       </BrowserRouter>
