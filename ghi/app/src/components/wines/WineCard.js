@@ -29,13 +29,15 @@ export default function WineCard({wine}) {
     }
 
     return (
-        <div className='card mx-auto'>
-            <div className='mx-auto'>{wine.name}</div>
-            <div>{wine.vintage}</div>
-            <div>{wine.location}</div>
-            <div>{wine.varietal}</div>
-            <div>{wine.winery}</div>
-            <div>
+        <div className='flex ju card mx-auto'>
+            <div className = "flex flex-nowrap">
+                <div className='mx-auto'>{wine.name}</div>
+                <div>{wine.vintage}</div>
+                <div>{wine.location}</div>
+                <div>{wine.varietal}</div>
+                <div>{wine.winery}</div>
+            </div>
+            <div className = "inset-x-0">
                 <img style={{width: '50px'}} src={wine.image_url}/>
             </div>
             <button onClick={handleLike} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Like</button>

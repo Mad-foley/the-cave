@@ -4,15 +4,17 @@ export default function LogOutForm() {
     const [logOut] = useLogOutMutation()
 
     const handleClick = () => {
-        logOut()
+        // logOut()
     }
 
     return (
-        <div className="">
-            <button
-            onClick={handleClick}
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            >Log out</button>
+        <div>
+            <div className="">
+                <button
+                onClick={handleClick}
+                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                >Log out</button>
+            </div>
         </div>
     )
 }

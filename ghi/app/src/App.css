@@ -1,0 +1,10 @@
+body {
+    background-color: gray;
+    color: white;
+}
+* {
+    border-color: pink;
+}
+div {
+    border: pink 1px solid;
+}
