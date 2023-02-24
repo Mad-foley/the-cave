@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { useGetWinesQuery } from '../store/queries/wineApi'
 import WineCard from '../components/wines/WineCard'
 
+
 function WinePage() {
     const {data: wines, isSuccess} = useGetWinesQuery()
     if (isSuccess === true) {

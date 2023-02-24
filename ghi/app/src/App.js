@@ -28,7 +28,8 @@ function App() {
   return (
       <BrowserRouter>
         <NavBar/>
-        <LogOutWindow />
+        {/* <LogOutWindow /> */}
+        <WinePage/>
         <div>
           <Routes>
             <Route path="/" element={<WinePage/>}/>
