@@ -1,6 +1,6 @@
 import { useLogOutMutation } from "../../store/queries/authApi"
 
-export default function LogOutForm({setLogoutWindow}) {
+export default function LogOutForm({setLogoutWindow, setLogged}) {
     const [logOut] = useLogOutMutation()
     return (
         <div className="container fixed z-10">
@@ -11,6 +11,10 @@ export default function LogOutForm({setLogoutWindow}) {
                     onClick={async () => {
                         const result = await logOut()
                         console.log(result)
+                        if(result.data) {
+                            setLogoutWindow(false)
+                            setLogged(false)
+                        }
                     }}
                     className="bg-blue-500 py-2 px-4 text-white hover:bg-blue-400"
                     >Confirm</button>

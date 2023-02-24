@@ -21,7 +21,7 @@ export default function NavBar() {
 
     const navlinkClass = 'block py-2 pl-3 pr-4 hover:text-blue-500 font-medium'
     return (
-        <nav className="px-2">
+        <nav className="px-2 pt-3">
             <div className="flex items-center justify-between ml-5 mr-5">
                 <NavLink to='/' className="flex items-center">
                     <img src={logo} className='h-6 mr-3 sm:h-9'/>
@@ -29,13 +29,13 @@ export default function NavBar() {
                 </NavLink>
                 <ul className="flex">
                     <li className={navlinkClass}>
-                        <NavLink to='/home'  aria-current="page">Home</NavLink>
+                        <NavLink to='/'  aria-current="page">Home</NavLink>
                     </li>
                     <li className={navlinkClass}>
-                        <NavLink to='/wines/account'  aria-current="page">Collection</NavLink>
+                        <NavLink to='/wines'  aria-current="page">Collection</NavLink>
                     </li>
                     <li className={navlinkClass}>
-                        <NavLink to='/create/wine'  aria-current="page">Create</NavLink>
+                        <NavLink to='/wines/create'  aria-current="page">Create</NavLink>
                     </li>
                 </ul>
                 <ul className="flex">
@@ -48,7 +48,7 @@ export default function NavBar() {
                 </ul>
             </div>
             {loginWindow ? <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow}/> : <div></div>}
-            {logoutWindow ? <LogOutForm setLogoutWindow={setLogoutWindow}/> : <div></div>}
+            {logoutWindow ? <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged}/> : <div></div>}
         </nav>
     )
 }

@@ -21,24 +21,24 @@ import LogOutWindow from './components/accounts/LogOutWindow';
 
 import NavBar from './components/common/NavBar';
 import WinePage from './pages/WinePage';
-
-
+import HomePage from './pages/HomePage';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
       <BrowserRouter>
         <NavBar/>
-        {/* <LogOutWindow /> */}
-        <WinePage/>
         <div>
           <Routes>
-            <Route path="/" element={<WinePage/>}/>
-            <Route path="login" element={<LogInForm/>}/>
-            <Route path="logout" element={<LogOutForm/>}/>
-            <Route path="user">
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="wines">
+              <Route path="" element={<WinePage/>}/>
+              <Route path="create" element={<CreateWineForm/>}/>
+            </Route>
+            <Route path="account">
+              <Route path="" element={<UserPage/>}/>
               <Route path="create" element={<CreateUserForm/>}/>
             </Route>
-            {/* <Route path="/wines/account" element={< */}
           </Routes>
         </div>
       </BrowserRouter>
