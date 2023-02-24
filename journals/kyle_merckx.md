@@ -1,3 +1,7 @@
+## 2/24/23
+
+
+
 ## 2/23/23
 
 Continued working on our Redux code. Today we set up a reducer for getting data from the likes API as well as the wines API. Started to work on building out the pages and did some minor styling with tailwind css.
