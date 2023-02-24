@@ -2,3 +2,37 @@ body {
     background-color: gray;
     color: white;
 }
+
+.winecard {
+    animation: wineload 2s linear 0.5s 1 normal forwards;
+    opacity: 0;
+}
+.winepage div:nth-child(2) {
+    animation-delay: 1s;
+}
+.winepage div:nth-child(3) {
+    animation-delay: 2s;
+}
+.winepage div:nth-child(4) {
+    animation-delay: 3s;
+}
+.winepage div:nth-child(5) {
+    animation-delay: 4s;
+}
+.winepage div:nth-child(6) {
+    animation-delay: 5s;
+}
+.winepage div:nth-child(7) {
+    animation-delay: 6s;
+}
+.winepage div:nth-child(8) {
+    animation-delay: 7s;
+}
+@keyframes wineload {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
