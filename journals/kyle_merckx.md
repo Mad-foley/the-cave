@@ -1,6 +1,6 @@
 ## 2/24/23
 
-
+Worked on some styling for the first part of the day. Tried to set up a redux slice for our wine data, but are running into issues with our specific implementation of it.  
 
 ## 2/23/23
 

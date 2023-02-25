@@ -8,7 +8,7 @@ export const store = configureStore({
     reducer: {
         [ authApi.reducerPath ] : authApi.reducer,
         [ wineApi.reducerPath ] : wineApi.reducer,
-        [ likesApi.reducerPath ] : likesApi.reducer
+        [ likesApi.reducerPath ] : likesApi.reducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()
