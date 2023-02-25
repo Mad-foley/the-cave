@@ -23,20 +23,20 @@ function WinePage() {
     const pageButtonClass = 'bg-white text-black font-bold p-3 rounded hover:bg-blue-500 hover:text-white'
     if (!isLoading) {
         return (
-            <div>
-                <div className='flex justify-between pt-5'>
+            <div className='relative'>
+                <div className='pt-5 p-2 relative'>
                     <button
                     onClick={handlePreviousPage}
-                    className={pageButtonClass}>Previous page</button>
+                    className='bg-white text-black font-bold p-3 rounded fixed left-5 hover:bg-blue-500 hover:text-white'>Previous page</button>
                     <button
                     onClick={handleNextPage}
-                    className={pageButtonClass}>Next Page</button>
+                    className='bg-white text-black font-bold p-3 rounded fixed right-5 hover:bg-blue-500 hover:text-white'>Next Page</button>
                 </div>
                 <div
-                className='winepage grid grid-cols-2 pt-3 pl-10 pr-10'>
+                className='winepage pt-3 pl-10 pr-10 grid place-items-center'>
                     { wines.filter((item,idx)=>idx>indexes.start && idx<indexes.end).map(wine => {
                         return (
-                            <div className="winecard p-3" key={wine.id}>
+                            <div className="winecard m-5" key={wine.id}>
                                 <WineCard wine={wine}  />
                             </div>
                         )
