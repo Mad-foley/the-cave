@@ -2,35 +2,29 @@ import {useEffect, useState} from 'react'
 import { useGetWinesQuery } from '../store/queries/wineApi'
 import WineCard from '../components/wines/WineCard'
 
+import { addWine } from '../store/queries/wineSlice'
+import { useDispatch } from 'react-redux'
+import { store } from '../store/store'
 
 function WinePage() {
-    const {data: wines, isSuccess} = useGetWinesQuery()
+    const {data: wines, isSuccess, isLoading} = useGetWinesQuery()
     const [indexes, setIndexes] = useState({start:0,end:9})
-    const [wineList, setWineList] = useState([])
 
     const handlePreviousPage = () => {
-        indexes.start -= 10
-        indexes.end -= 10
+        setIndexes({start:indexes.start - 10, end:indexes.end - 10})
         if (indexes.start < 0) {
-            indexes.start = 0
-            indexes.end = 9
+            setIndexes({start:0, end:9})
         }
-        console.log(indexes)
-        setWineList(wines.filter((item,idx)=>idx>indexes.start && idx<indexes.end))
     }
     const handleNextPage = () => {
-        indexes.start += 10
-        indexes.end += 10
+        setIndexes({start:indexes.start + 10, end:indexes.end + 10})
         if (indexes.start > wines.length) {
-            indexes.start = 0
-            indexes.end = 9
+            setIndexes({start:0, end:9})
         }
-        console.log(indexes)
-        setWineList(wines.filter((item,idx)=>idx>indexes.start && idx<indexes.end))
     }
 
     const pageButtonClass = 'bg-white text-black font-bold p-3 rounded hover:bg-blue-500 hover:text-white'
-    if (isSuccess === true) {
+    if (!isLoading) {
         return (
             <div>
                 <div className='flex justify-between pt-5'>
@@ -43,7 +37,7 @@ function WinePage() {
                 </div>
                 <div
                 className='winepage grid grid-cols-2 pt-3 pl-10 pr-10'>
-                    { wineList.map(wine => {
+                    { wines.filter((item,idx)=>idx>indexes.start && idx<indexes.end).map(wine => {
                         return (
                             <div className="winecard p-3" key={wine.id}>
                                 <WineCard wine={wine}  />

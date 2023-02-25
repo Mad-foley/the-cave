@@ -24,7 +24,25 @@ import WinePage from './pages/WinePage';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
 
+import { addWine, wineState } from './store/queries/wineSlice';
+import { store } from './store/store';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+
 function App() {
+  // const test = useSelector(store, (state) => {state.test})
+
+  // console.log(useSelector((state) => state.wine))
+
+
+
+  const dispatch = useDispatch()
+
+  const result = dispatch(addWine({name:'stuff',location:'thing'}))
+  // console.log(result)
+  // console.log(store.getState())
+
   return (
       <BrowserRouter>
         <NavBar/>
