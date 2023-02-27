@@ -43,7 +43,8 @@ export const authApi = createApi({
                     body: formData
                 }
             },
-            providesTags: ['Token']
+            providesTags: ['Token'],
+            invalidatesTags: ['Token']
         }),
         logOut: build.mutation ({
             query: () => ({

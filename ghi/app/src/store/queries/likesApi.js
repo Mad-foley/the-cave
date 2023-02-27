@@ -37,13 +37,16 @@ export const likesApi = createApi({
         createLike: build.mutation({
             query: (wine_id) => {
                 let formData = null
-                if (wine_id instanceof HTMLElement){
-                    formData = new FormData({"wine_id": wine_id})
+                try{
+                    if (wine_id instanceof HTMLElement){
+                        formData = new FormData({"wine_id": wine_id})
+                    }
+                    else {
+                        formData = new FormData()
+                        formData.append("wine_id", wine_id)
+                    }
                 }
-                else {
-                    formData = new FormData()
-                    formData.append("wine_id", wine_id)
-                }
+                catch(e){ console.log(e)}
                 return (
                     {
                         url: `/api/wines/${wine_id}/likes`,
