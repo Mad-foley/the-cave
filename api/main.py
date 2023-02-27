@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, APIRouter, Depends, Query, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import users, wines, likes, comments, logs, sockets
+from routers import users, wines, likes, comments, logs
 
 from queries.sampleapis import SampleApiWineQueries, SampleWineOut
 from queries.users import Error
