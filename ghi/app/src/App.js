@@ -8,8 +8,10 @@ import WinePage from './pages/WinePage';
 import WineDetails from './components/wines/WineDetails';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
-import { addWine, wineState } from './store/queries/wineSlice';
+import { setId } from './store/queries/wineSlice';
 import { useDispatch } from 'react-redux';
+import { store } from './store/store';
+
 
 
 import LoadingAnimation from './components/common/LoadingAnimate';
@@ -20,10 +22,8 @@ function App() {
       return 'bg-blur'
     }
   }
-  const [wineId, setWineId] = useState(0)
-  const dispatch = useDispatch()
-  const result = dispatch(addWine({name:'stuff',location:'thing'}))
   const [blur, setBlur] = useState(false)
+  const currentWineId = store.getState().wineId.wineId.wineId
   return (
       <BrowserRouter>
         <NavBar setBlur={setBlur}/>
@@ -32,9 +32,9 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<LoadingAnimation/>}/>
             <Route path="wines">
-              <Route path="" element={<WinePage setWineId = {setWineId}/>}/>
+              <Route path="" element={<WinePage />}/>
               <Route path="create" element={<CreateWineForm/>}/>
-              <Route path="details" element={<WineDetails/>}/>
+              <Route path="details" element={<WineDetails wineId = {currentWineId}/>}/>
             </Route>
             <Route path="account">
               <Route path="" element={<UserPage/>}/>

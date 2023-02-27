@@ -4,7 +4,7 @@ import WineCard from '../components/wines/WineCard'
 import { rightArrow, leftArrow } from '../utilities/constants'
 import { useNavigate } from 'react-router-dom'
 
-function WinePage({setWineId}) {
+function WinePage() {
     const {data: wines, isSuccess, isLoading} = useGetWinesQuery()
     const [indexes, setIndexes] = useState({start:-1,end:10})
     const wineMain = document.querySelector('.winepage')
@@ -14,19 +14,18 @@ function WinePage({setWineId}) {
         if (indexes.start < 0) {
             setIndexes({start:-1, end:10})
         }
-        wineMain.scrollTo(0,0)
+        if (wineMain) {
+            wineMain.scrollTo(0,0)
+        }
     }
     const handleNextPage = () => {
         setIndexes({start:indexes.start + 10, end:indexes.end + 10})
         if (indexes.end > wines.length-10) {
             setIndexes({start:wines.length - 10, end:wines.length - 1})
         }
+        if (wineMain) {
         wineMain.scrollTo(0,0)
-    }
-
-    const handleDetail = (wine_id) => {
-        setWineId(wine_id)
-        
+        }
     }
 
     if (!isLoading) {
@@ -43,9 +42,9 @@ function WinePage({setWineId}) {
                 className='winepage pt-3 pl-10 pr-10 grid place-items-center'>
                     { wines.filter((item,idx)=>idx>indexes.start && idx<indexes.end).map(wine => {
                         return (
-                            <button onClick={handleDetail} className="winecard m-5" key={wine.id}>
-                                <WineCard wine={wine}  />
-                            </button>
+                            <div className="winecard m-5" key={wine.id}>
+                                <WineCard wine={wine} />
+                            </div>
                         )
                     })}
                 </div>
