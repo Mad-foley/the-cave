@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLogInMutation } from '../../store/queries/authApi'
+import { useNavigate } from 'react-router-dom'
 
 export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
     const [formData, setFormData] = useState({
@@ -7,6 +8,7 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
         password: ''
     })
     const [logIn] = useLogInMutation()
+    const navigate = useNavigate()
 
     const handleFormData = (e) => {
         setFormData(
@@ -28,6 +30,13 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
         }
 
     }
+
+    const handleCreateUser = () => {
+        setLoginWindow(false)
+        setBlur(false)
+        navigate('/account/create')
+    }
+
     return (
         <div className='container fixed flex justify-center m-10 p-10 z-10'>
             <div className='shadow bg-slate-200 rounded'>
@@ -58,7 +67,7 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
                 </form>
                 <div className='flex justify-center text-black pb-3'>
                     <div>Register a new account:</div>
-                    <button className='pl-3 font-bold text-sm text-blue-500 hover:text-blue-800'>New</button>
+                    <button onClick={handleCreateUser} className='pl-3 font-bold text-sm text-blue-500 hover:text-blue-800'>New</button>
                 </div>
             </div>
         </div>
