@@ -1,8 +1,8 @@
 import os
-from fastapi import FastAPI, APIRouter, Depends, Query
+from fastapi import FastAPI, APIRouter, Depends, Query, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import users, wines, likes, comments, logs
+from routers import users, wines, likes, comments, logs, sockets
 
 from queries.sampleapis import SampleApiWineQueries, SampleWineOut
 from queries.users import Error
@@ -35,7 +35,6 @@ app.include_router(likes.router, tags=['Likes'])
 app.include_router(comments.router, tags=['Comments'])
 app.include_router(logs.router, tags=['Logs'])
 
-
 # Public API routes
 @app.get('/api/sampleapi/wines', response_model=List[SampleWineOut] | Error, tags=['Sample API Wines'])
 def get_wines(
@@ -58,26 +57,18 @@ def get_wine_pairing(
     repo: WinePairingQueries = Depends(),
     wines: WineQueries = Depends()
 ):
-    # Save the public API food pairing results
-    result = repo.get_wine_pairing(query)
-    # Create a new list for potential matches
-    # Query the wines database for any wines matching suggested wine names
-    # If there are matches, generate a random index based on the length of the matching wines
-    # Get a random wine out of the list of matches
-    # If there are no matches, use the default suggestion from the public API
-    return [
-        wines.filter_by(suggestion.name)[randint(0,len(wines.filter_by(suggestion.name))-1)]
-        if wines.filter_by(suggestion.name)
-        else suggestion
-        for suggestion in result]
-
-    
-
-    db_result = []
-    for suggestion in result:
-        matches = wines.filter_by(suggestion.name)
-        if matches:
-            db_result.append(matches[randint(0,len(matches)-1)])
-        else:
-            db_result.append(suggestion)
-    return db_result
+    try:
+        # Save the public API food pairing results
+        result = repo.get_wine_pairing(query)
+        # Create a new list for potential matches
+        # Query the wines database for any wines matching suggested wine names
+        # If there are matches, generate a random index based on the length of the matching wines
+        # Get a random wine out of the list of matches
+        # If there are no matches, use the default suggestion from the public API
+        return [
+            wines.filter_by(suggestion.name)[randint(0,len(wines.filter_by(suggestion.name))-1)]
+            if wines.filter_by(suggestion.name)
+            else suggestion
+            for suggestion in result]
+    except Exception as e:
+        return {'message': 'Failed to get pairings'}

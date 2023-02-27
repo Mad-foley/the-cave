@@ -29,26 +29,24 @@ import { store } from './store/store';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
+import LoadingAnimation from './components/common/LoadingAnimate';
 
 function App() {
-  // const test = useSelector(store, (state) => {state.test})
-
-  // console.log(useSelector((state) => state.wine))
-
-
-
+  const blurClass = () => {
+    if (blur) {
+      return 'bg-blur'
+    }
+  }
   const dispatch = useDispatch()
-
   const result = dispatch(addWine({name:'stuff',location:'thing'}))
-  // console.log(result)
-  // console.log(store.getState())
-
+  const [blur, setBlur] = useState(false)
   return (
       <BrowserRouter>
-        <NavBar/>
-        <div>
+        <NavBar setBlur={setBlur}/>
+        <div className={blurClass()}>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
+            <Route path='recommendations' element={<LoadingAnimation/>}/>
             <Route path="wines">
               <Route path="" element={<WinePage/>}/>
               <Route path="create" element={<CreateWineForm/>}/>

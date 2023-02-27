@@ -27,21 +27,34 @@ export default function WineCard({wine}) {
             console.log(result)
         }
     }
-
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString('en-us', {
+            weekday:'long',
+            year:'numeric',
+            month:'short',
+            day:'numeric'
+        })
+    }
     return (
         <div
-        className='flex justify-between bg-white text-black rounded relative'
+        className='wine-body flex justify-between bg-white text-black rounded relative'
         style={{height:'300px', width:'600px'}}
         >
-            <div className = "text-end p-10">
-                <div className='text-xl border-b'>{wine.name}</div>
-                <div>{wine.vintage}</div>
-                <br></br>
-                <div>{wine.location}</div>
-                <div>{wine.varietal}</div>
-                <div>{wine.winery}</div>
+            <div className="border p-3 m-3 relative" style={{width:'500px'}}>
+                <div className = "text-center">
+                    <div className='text-xl font-bold border-b'>{wine.name}</div>
+                    <div>{wine.vintage}</div>
+                </div>
+                <div className="pl-1">
+                    <br></br>
+                    <div>{wine.varietal}</div>
+                    <div>{wine.location}</div>
+
+                    <div>{wine.winery}</div>
+                </div>
+                <div className="absolute bottom-1">added: {formatDate(wine.created_on)}</div>
             </div>
-            <div className = "relative mr-10" style={{minWidth:'100px'}}>
+            <div className = "relative mr-10" style={{width:'200px'}}>
                 <img
                 src={wine.image_url}
                 className='absolute bottom-0 p-1'
@@ -50,7 +63,7 @@ export default function WineCard({wine}) {
             </div>
             <button
             onClick={handleLike}
-            className='absolute right-1 top-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+            className='absolute right-1 top-1 likebutton p-3 font-semibold py-2 rounded'
             >Like</button>
         </div>
     )
