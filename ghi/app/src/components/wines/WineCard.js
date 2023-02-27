@@ -29,23 +29,28 @@ export default function WineCard({wine}) {
     }
 
     return (
-        <div className='flex h-full bg-white text-black rounded'>
-            <div className = "text-end pr-10">
+        <div
+        className='flex justify-between bg-white text-black rounded relative'
+        style={{height:'300px', width:'600px'}}
+        >
+            <div className = "text-end p-10">
                 <div className='text-xl border-b'>{wine.name}</div>
                 <div>{wine.vintage}</div>
+                <br></br>
                 <div>{wine.location}</div>
                 <div>{wine.varietal}</div>
                 <div>{wine.winery}</div>
             </div>
-            <div className = "pr-10 relative overflow-hidden">
+            <div className = "relative mr-10" style={{minWidth:'100px'}}>
                 <img
                 src={wine.image_url}
-                className='absolute bottom-0 h-full'
+                className='absolute bottom-0 p-1'
+                style={{maxHeight:'300px', minHeight:'250px'}}
                 />
             </div>
             <button
             onClick={handleLike}
-            className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+            className='absolute right-1 top-1 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
             >Like</button>
         </div>
     )
