@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { authApi, useGetTokenQuery } from './authApi'
+import { authApi } from './authApi'
 import { baseUrl } from '../../utilities/constants'
 
 

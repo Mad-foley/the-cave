@@ -6,7 +6,7 @@ import LogOutForm from "../accounts/LogOutModal";
 import LogInForm from "../accounts/LogInModal";
 
 
-export default function NavBar() {
+export default function NavBar({setBlur}) {
     const [logoutWindow, setLogoutWindow] = useState(false)
     const [loginWindow, setLoginWindow] = useState(false)
     const [logged, setLogged] = useState(false)
@@ -14,20 +14,28 @@ export default function NavBar() {
 
     const handleLogoutWindow = () => {
         setLogoutWindow(true)
+        setBlur(true)
     }
     const handleLoginWindow = () => {
         setLoginWindow(true)
+        setBlur(true)
     }
-
-    const navlinkClass = 'block py-2 pl-3 pr-4 hover:text-blue-500 font-medium'
+    const navlinkClass = 'navbutton block py-2 pl-3 pr-4 font-medium rounded-xl'
     return (
         <nav className="px-2 pt-3">
-            <div className="flex items-center justify-between ml-5 mr-5">
-                <NavLink to='/' className="flex items-center">
-                    <img src={logo} className='h-6 mr-3 sm:h-9'/>
-                    <span className="font-bold text-xl">CAVE</span>
-                </NavLink>
-                <ul className="flex">
+            <div className="grid grid-cols-3 ml-5 mr-5 p-3">
+                <ul className="flex items-center">
+                    <li>
+                        <NavLink to='/' className="flex items-center pr-5">
+                            <span className="custom-type top-2 left-6" style={{fontSize:'60px'}}>C</span>
+                            <span className="font-bold text-xl">CAVE</span>
+                        </NavLink>
+                    </li>
+                    <li className={navlinkClass}>
+                        <NavLink to='/recommendations'>Recommendations</NavLink>
+                    </li>
+                </ul>
+                <ul className="flex justify-center">
                     <li className={navlinkClass}>
                         <NavLink to='/'  aria-current="page">Home</NavLink>
                     </li>
@@ -38,7 +46,7 @@ export default function NavBar() {
                         <NavLink to='/wines/create'  aria-current="page">Create</NavLink>
                     </li>
                 </ul>
-                <ul className="flex">
+                <ul className="flex justify-end">
                     <li className={navlinkClass}>
                         <NavLink to="/account">Account</NavLink>
                     </li>
@@ -47,8 +55,9 @@ export default function NavBar() {
                     </li>
                 </ul>
             </div>
-            {loginWindow ? <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow}/> : <div></div>}
-            {logoutWindow ? <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged}/> : <div></div>}
+            {loginWindow ? <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow} setBlur={setBlur}/> : <div></div>}
+            {logoutWindow ? <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged} setBlur={setBlur}/> : <div></div>}
+
         </nav>
     )
 }

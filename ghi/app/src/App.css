@@ -1,11 +1,24 @@
 body {
     background-color: #73343A;
     color: white;
+    font-family: 'Playfair Display', serif;
 }
-
+/* To make default scrollbar hidden*/
+::-webkit-scrollbar {
+    display: none;
+}
+/* Wine page collection loading in animation */
 .winecard {
     animation: wineload 0.5s ease-out 0.3s 1 normal forwards;
     opacity: 0;
+}
+.wine-body:hover {
+    transform: scale(110%);
+    transition: 1s ease-out;
+}
+.winepage {
+    height: 80vh;
+    overflow-x: hidden;
 }
 .winepage div:nth-child(2) {
     animation-delay: 0.5s;
@@ -43,4 +56,123 @@ body {
         opacity: 1;
         transform: translateX(0%)
     }
+}
+/* Navbar custom colors */
+.navbutton {
+    background-color: #73343A;
+}
+.navbutton:hover {
+    background-color: white;
+    color:#73343A
+}
+/* Loading animation */
+
+.load-container {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 400px;
+    top: 100px
+}
+.load-content {
+    font-size: 100px;
+    position: absolute;
+    animation: loading 4s linear infinite;
+    opacity: 0;
+}
+.load-body {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+@keyframes loading {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+}
+.load-body div:nth-child(2) {
+    animation-delay: 1s;
+}
+.load-body div:nth-child(3) {
+    animation-delay: 2s;
+}
+.load-body div:nth-child(4) {
+    animation-delay: 3s;
+}
+/* background blur  */
+.bg-blur {
+    filter: blur(0);
+    animation: blurring 1s ease-out 0.2s 1 normal forwards;
+}
+@keyframes blurring {
+    0% {
+        filter: blur(0);
+    }
+    100% {
+        filter: blur(5px);
+    }
+}
+/* Create wine form animation */
+.wine-form {
+    transform: translateX(1600px);
+    animation: slidein 1s ease-out 0s 1 normal forwards;
+}
+.preview {
+    transform: translateX(1600px);
+    animation: slidein 1s ease-out 0.5s 1 normal forwards;
+}
+.quote {
+    transform: translateX(1600px);
+    animation: slidein 1s ease-out 1s 1 normal forwards;
+}
+.form-root input:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.form-root input:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.form-root input:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.form-root input:nth-child(4) {
+    animation-delay: 0.4s;
+}
+.form-root input:nth-child(5) {
+    animation-delay: 0.5s;
+}
+.form-root input:nth-child(6) {
+    animation-delay: 0.4s;
+}
+.form-root input:nth-child(7) {
+    animation-delay: 0.3s;
+}
+@keyframes slidein {
+    0% {
+        transform: translateX(1600px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+/* Logo */
+.custom-type {
+    font-family: 'Monsieur La Doulaise', cursive;
+    position: absolute;
+    opacity: 0.2;
+}
+.likebutton:hover {
+    background-color: white;
+    color: #73343A;
+}
+.likebutton {
+    background-color: #73343A;
+    color: white;
 }
