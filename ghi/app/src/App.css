@@ -176,3 +176,8 @@ body {
     background-color: #73343A;
     color: white;
 }
+
+.scroll_button:hover {
+    transform: scale(120%);
+    transition: 0.3s;
+}

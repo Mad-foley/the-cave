@@ -1,33 +1,16 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-import { useGetTokenQuery } from './store/queries/authApi';
-import { useGetUsersQuery, useGetUserByIdQuery } from './store/queries/authApi';
-import { useGetWineByIdQuery, useGetWinesQuery } from './store/queries/wineApi';
-
+import { useState } from 'react';
 import CreateUserForm from './components/accounts/CreateUserModal';
-import UpdateUserForm from './components/accounts/UpdateUserModal';
-import DeleteUserForm from './components/accounts/DeleteUserModal';
-import LogInForm from './components/accounts/LogInModal';
-import LogOutForm from './components/accounts/LogOutModal';
-
-
 import CreateWineForm from './components/wines/CreateWineModal';
-import DeleteWineById from './components/wines/DeleteWineModal';
-import UpdateWineForm from './components/wines/UpdateWineModal';
-import { useGetLikesByWinesQuery, useGetLikesByUserQuery } from './store/queries/likesApi';
-import LogOutWindow from './components/accounts/LogOutWindow';
-
 import NavBar from './components/common/NavBar';
 import WinePage from './pages/WinePage';
+import WineDetails from './components/wines/WineDetails';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
-
 import { addWine, wineState } from './store/queries/wineSlice';
-import { store } from './store/store';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+
 
 import LoadingAnimation from './components/common/LoadingAnimate';
 
@@ -37,6 +20,7 @@ function App() {
       return 'bg-blur'
     }
   }
+  const [wineId, setWineId] = useState(0)
   const dispatch = useDispatch()
   const result = dispatch(addWine({name:'stuff',location:'thing'}))
   const [blur, setBlur] = useState(false)
@@ -48,8 +32,9 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<LoadingAnimation/>}/>
             <Route path="wines">
-              <Route path="" element={<WinePage/>}/>
+              <Route path="" element={<WinePage setWineId = {setWineId}/>}/>
               <Route path="create" element={<CreateWineForm/>}/>
+              <Route path="details" element={<WineDetails/>}/>
             </Route>
             <Route path="account">
               <Route path="" element={<UserPage/>}/>
