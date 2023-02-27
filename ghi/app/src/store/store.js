@@ -11,10 +11,7 @@ export const store = configureStore({
         [ authApi.reducerPath ] : authApi.reducer,
         [ wineApi.reducerPath ] : wineApi.reducer,
         [ likesApi.reducerPath ] : likesApi.reducer,
-<<<<<<< HEAD
-=======
         ['wine']:wineSlice
->>>>>>> main
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()

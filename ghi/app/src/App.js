@@ -24,14 +24,11 @@ import WinePage from './pages/WinePage';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
 
-<<<<<<< HEAD
-=======
 import { addWine, wineState } from './store/queries/wineSlice';
 import { store } from './store/store';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
->>>>>>> main
 
 function App() {
   // const test = useSelector(store, (state) => {state.test})
