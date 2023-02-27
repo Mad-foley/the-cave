@@ -1,6 +1,10 @@
+## 2/27/23
+
+
+
 ## 2/24/23
 
-Worked on some styling for the first part of the day. Tried to set up a redux slice for our wine data, but are running into issues with our specific implementation of it.  
+Worked on some styling for the first part of the day. Tried to set up a redux slice for our wine data, but are running into issues with our specific implementation of it. We worked with Jimmy and tried a bunch of different solutions out. In the end, we solved the problem but did not need to do anything involving our Redux code.
 
 ## 2/23/23
 
