@@ -15,7 +15,7 @@ function WinePage() {
     }
     const handleNextPage = () => {
         setIndexes({start:indexes.start + 10, end:indexes.end + 10})
-        if (indexes.end > wines.length) {
+        if (indexes.end > wines.length - 10) {
             setIndexes({start:wines.length - 10, end:wines.length - 1})
         }
         wineMain.scrollTo(0,0)
