@@ -43,7 +43,7 @@ export default function WineCard({wine}) {
 
     if (!isLoading) {
         return (
-            <div className='wine-body flex justify-between bg-white text-black rounded relative' style={{height:'300px', width:'600px'}}>
+            <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
                     <button onClick={handleWineId}>
                     <div className = "text-center">

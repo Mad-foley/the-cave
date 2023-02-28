@@ -15,19 +15,27 @@ export const leftArrow =  <svg xmlns="http://www.w3.org/2000/svg" fill="none" vi
 
 export const quotes = [
       {
-          quote:'“Life is too short to drink bad wine.”',
-          author:'Anonymous'
+        quote:'“Life is too short to drink bad wine.”',
+        author:'Anonymous'
       },
       {
-          quote: '“My only regret in life is that I didn’t drink more wine.”',
-          author: 'Ernest Hemingway'
+        quote: '“My only regret in life is that I didn’t drink more wine.”',
+        author: 'Ernest Hemingway'
       },
       {
-          quote: '“I cook with wine. Sometimes I even add it to the food.”',
-          author: 'W.C. Fields'
+        quote: '“I cook with wine. Sometimes I even add it to the food.”',
+        author: 'W.C. Fields'
       },
       {
-          quote: '“Champagne is appropriate for breakfast, lunch, or dinner.”',
-          author: 'Madeline Puckette'
+        quote: '“Champagne is appropriate for breakfast, lunch, or dinner.”',
+        author: 'Madeline Puckette'
+      },
+      {
+        quote: '“Too much of anything is bad, but too much Champagne is just right.”',
+        author: 'F. Scott Fitzgerald'
+      },
+      {
+        quote: '“Drinking good wine with good food in good company is one of lifes most civilized pleasures.”',
+        author: 'Michael Broadbent'
       }
   ]
