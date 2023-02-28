@@ -11,6 +11,20 @@ def timestamp():
 
 
 class LikeQueries:
+    def get_all_likes(self):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT wine_id, user_id, created_on, id
+                        FROM likes
+                        """
+                    )
+                    return [self.record_to_like_out(record) for record in result]
+        except Exception as e:
+            return {"message":"failed to get likes"}
+        
     def get_likes_by_wine(self, wine_id:int) -> List[LikeOut]:
         try:
             with pool.connection() as conn:

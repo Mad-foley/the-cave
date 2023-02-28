@@ -22,7 +22,7 @@ export default function NavBar({setBlur}) {
     }
     const navlinkClass = 'navbutton block py-2 pl-3 pr-4 font-medium rounded-xl'
     return (
-        <nav className="px-2 pt-3">
+        <nav className="px-2 pt-3 sticky top-0 bg-wine z-20">
             <div className="grid grid-cols-3 ml-5 mr-5 p-3">
                 <ul className="flex items-center">
                     <li>
