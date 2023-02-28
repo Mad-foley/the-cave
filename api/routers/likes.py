@@ -14,6 +14,11 @@ from typing import Optional, List, Union
 
 router = APIRouter()
 
+@router.get('/api/likes')
+def get_all_likes(
+    repo: LikeQueries = Depends()
+):
+    return repo.get_all_likes()
 
 @router.get('/api/wines/{wine_id}/likes', response_model=Union[List[LikeOut], Error])
 def get_likes_by_wine(

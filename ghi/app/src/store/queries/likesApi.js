@@ -16,7 +16,7 @@ export const likesApi = createApi({
             return headers
         }
     }),
-    tagTypes: ['LikesByWine'],
+    tagTypes: ['LikesByWine', 'Likes'],
     endpoints: (build) => ({
         getLikesByWines: build.query({
             query: (wine_id) => ({
@@ -56,7 +56,7 @@ export const likesApi = createApi({
                     }
                 )
             },
-            invalidatesTags: ['LikesByWine']
+            invalidatesTags: ['LikesByWine', 'Likes']
         }),
         deleteLike: build.mutation({
             query: (wine_id) => ({
@@ -64,9 +64,21 @@ export const likesApi = createApi({
                 method: 'delete',
                 credentials: 'include'
             }),
-            invalidatesTags: ['LikesByWine']
+            invalidatesTags: ['LikesByWine', 'Likes']
         }),
+        getAllLikes: build.query({
+            query: () => ({
+                url: '/api/likes',
+            }),
+            providesTags:['Likes']
+        })
     })
 })
 
-export const { useGetLikesByWinesQuery, useGetLikesByUserQuery, useCreateLikeMutation, useDeleteLikeMutation } = likesApi
+export const {
+    useGetLikesByWinesQuery,
+    useGetLikesByUserQuery,
+    useCreateLikeMutation,
+    useDeleteLikeMutation,
+    useGetAllLikesQuery
+} = likesApi
