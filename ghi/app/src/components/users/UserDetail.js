@@ -9,7 +9,7 @@ export default function UserDetail() {
     const { data: user, isLoading} = useGetUserByIdQuery()
 
     const handleUpdate = async (e) => {
-        navigate("/user/update")
+        navigate("/account/update")
     }
 
     if(!isLoading){

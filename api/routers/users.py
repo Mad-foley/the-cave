@@ -91,7 +91,7 @@ def delete_user(
     if account_data:
         return repo.delete_user(account_data['id'])
 
-@router.put('/api/users/{user_id}', response_model=Union[TokenResponse, Error])
+@router.put('/api/users/me', response_model=Union[TokenResponse, Error])
 async def update_user(
     user: UserIn,
     request: Request,
