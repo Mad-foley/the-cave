@@ -2,19 +2,22 @@ import { useGetUsersQuery } from "../../store/queries/authApi"
 import { useGetWineByIdQuery } from "../../store/queries/wineApi"
 import { useParams } from "react-router-dom"
 import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
+import { useGetTokenQuery } from "../../store/queries/authApi"
+
 
 export default function WineDetails({wineId}) {
     let {id} = useParams()
     const {data: wine, isSuccess} = useGetWineByIdQuery(id)
     const {data: users, isLoading} = useGetUsersQuery()
-    const {data: likes} = useGetLikesByWinesQuery(id)
-
+    const {data: likes, isError} = useGetLikesByWinesQuery(id)
+    const {data: token} = useGetTokenQuery()
     const creator = (id) => {
         for (let user of users) {
             if (user.id === id) {
-                return user
-            }
+            return user
         }
+        }
+
     }
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-us', {
@@ -24,7 +27,7 @@ export default function WineDetails({wineId}) {
             day:'numeric'
         })
     }
-    if (isSuccess && !isLoading) {
+    if (isSuccess && !isLoading && !isError && token) {
             return (
             <div className="pl-10 ml-10 pt-5">
                 <div className="flex mt-5 mx-10 px-10 h-full">
@@ -65,6 +68,13 @@ export default function WineDetails({wineId}) {
                     </div>
                     <div style={{width: "900px", height: "400px"}} className="absolute mt-9 ml-5 border bottom-10 p-3 rounded-xl">Comments</div>
                 </div>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className="flex justify-center pt-10">
+                <div style={{fontSize:'100px'}}>Log in to see details</div>
             </div>
         )
     }
