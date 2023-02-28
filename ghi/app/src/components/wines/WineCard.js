@@ -10,24 +10,17 @@ export default function WineCard({wine}) {
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
 
-
     const handleLike = async (e) => {
         e.preventDefault()
         if (likes.length > 0) {
             let liked = false
-            for (let item of likes) {
-                if (item.user_id === token.user.id){
+            likes.map(item => {
+                if(item.user_id === token.user.id) {
                     liked = true
                 }
-            }
-            if (!liked) {
-                const results = await like(wine.id)
-                console.log(results)
-            }
-            else if (liked) {
-                const results = await unlike(wine.id)
-                console.log(results)
-            }
+            })
+            const result = liked ? await unlike(wine.id) : await like(wine.id)
+            console.log(result)
         }
         else {
             const result = await like(wine.id)
@@ -48,13 +41,9 @@ export default function WineCard({wine}) {
         navigate(`/wines/details/${wine.id}`)
     }
 
-    if (!isLoading)
-        {
-            return (
-            <div
-            className='wine-body flex justify-between bg-white text-black rounded relative'
-            style={{height:'300px', width:'600px'}}
-            >
+    if (!isLoading) {
+        return (
+            <div className='wine-body flex justify-between bg-white text-black rounded relative' style={{height:'300px', width:'600px'}}>
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
                     <button onClick={handleWineId}>
                     <div className = "text-center">
