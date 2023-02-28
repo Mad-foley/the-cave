@@ -2,13 +2,11 @@ import { useState} from 'react'
 import { useGetWinesQuery } from '../store/queries/wineApi'
 import WineCard from '../components/wines/WineCard'
 import { rightArrow, leftArrow } from '../utilities/constants'
-import { useNavigate } from 'react-router-dom'
 
 function WinePage() {
-    const {data: wines, isSuccess, isLoading} = useGetWinesQuery()
+    const {data: wines, isLoading} = useGetWinesQuery()
     const [indexes, setIndexes] = useState({start:-1,end:10})
     const wineMain = document.querySelector('.winepage')
-    const navigate = useNavigate()
     const handlePreviousPage = () => {
         setIndexes({start:indexes.start - 10, end:indexes.end - 10})
         if (indexes.start < 0) {

@@ -1,12 +1,13 @@
 import { useGetUsersQuery } from "../../store/queries/authApi"
 import { useGetWineByIdQuery } from "../../store/queries/wineApi"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 
 
-export default function WineDetails({wineId}) {
+export default function WineDetails() {
     let {id} = useParams()
+    const navigate = useNavigate()
     const {data: wine, isSuccess} = useGetWineByIdQuery(id)
     const {data: users, isLoading} = useGetUsersQuery()
     const {data: likes, isError} = useGetLikesByWinesQuery(id)
@@ -15,7 +16,7 @@ export default function WineDetails({wineId}) {
         for (let user of users) {
             if (user.id === id) {
             return user
-        }
+            }
         }
 
     }
@@ -27,8 +28,8 @@ export default function WineDetails({wineId}) {
             day:'numeric'
         })
     }
-    if (isSuccess && !isLoading && !isError && token) {
-            return (
+    if (isSuccess && !isLoading && likes && token) {
+        return (
             <div className="pl-10 ml-10 pt-5">
                 <div className="flex mt-5 mx-10 px-10 h-full">
                     <div>
@@ -62,7 +63,7 @@ export default function WineDetails({wineId}) {
                             <img style={{width: "205px"}} className="rounded-xl" src={wine.image_url}/>
                         </div>
                         <div className="absolute top-0 right-0">
-                            <button className="navbutton rounded p-1">Edit</button>
+                            <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
                             <button className="navbutton rounded p-1">Delete</button>
                         </div>
                     </div>
