@@ -4,14 +4,14 @@ import { authApi } from './queries/authApi'
 import { wineApi } from './queries/wineApi'
 import { likesApi } from './queries/likesApi'
 
-import wineSlice from './queries/wineSlice'
+import wineIdSlice from './queries/wineSlice'
 
 export const store = configureStore({
     reducer: {
         [ authApi.reducerPath ] : authApi.reducer,
         [ wineApi.reducerPath ] : wineApi.reducer,
         [ likesApi.reducerPath ] : likesApi.reducer,
-        ['wine']:wineSlice
+        ['wineId']:wineIdSlice
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()

@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { wineApi } from "./wineApi";
 
 
-export const wineSlice = createSlice({
-    name: 'wine',
-    initialState: {wineList:{}},
+export const wineIdSlice = createSlice({
+    name: 'wineId',
+    initialState: {wineId: 1},
     reducers: {
-        addWine: (state,action) => {
-            state.wineList = action.payload
+        setId: (state,action) => {
+            state.wineId = action.payload
         },
-        wineState: (state) => state.test
     },
+
 
 })
 
-export const {addWine, wineState} = wineSlice.actions
-export default wineSlice.reducer
+export const {setId} = wineIdSlice.actions
+export default wineIdSlice.reducer

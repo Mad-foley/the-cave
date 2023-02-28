@@ -1,12 +1,14 @@
 import { useCreateLikeMutation, useDeleteLikeMutation, useGetLikesByUserQuery, useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
-import { isRouteErrorResponse } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
     const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
+    const navigate = useNavigate()
 
 
     const handleLike = async (e) => {
@@ -32,7 +34,7 @@ export default function WineCard({wine}) {
             console.log(result)
         }
     }
-    
+
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-us', {
             weekday:'long',
@@ -41,6 +43,11 @@ export default function WineCard({wine}) {
             day:'numeric'
         })
     }
+
+    const handleWineId = () => {
+        navigate(`/wines/details/${wine.id}`)
+    }
+
     if (!isLoading)
         {
             return (
@@ -49,6 +56,7 @@ export default function WineCard({wine}) {
             style={{height:'300px', width:'600px'}}
             >
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
+                    <button onClick={handleWineId}>
                     <div className = "text-center">
                         <div className='text-xl font-bold border-b'>{wine.name}</div>
                         <div>{wine.vintage}</div>
@@ -60,6 +68,7 @@ export default function WineCard({wine}) {
 
                         <div>{wine.winery}</div>
                     </div>
+                    </button>
                     <div className="absolute bottom-1">added: {formatDate(wine.created_on)}</div>
                 </div>
                 <div className = "relative mr-10" style={{width:'200px'}}>
