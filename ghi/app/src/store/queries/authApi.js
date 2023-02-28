@@ -80,9 +80,9 @@ export const authApi = createApi({
             providesTags: ["User"],
             }),
         updateUser: build.mutation({
-            query: (data, user_id) => {
+            query: (data) => {
                 return {
-                    url: `/api/users/${user_id}`,
+                    url: `/api/users/me`,
                     method: "put",
                     credentials: "include",
                     body: data

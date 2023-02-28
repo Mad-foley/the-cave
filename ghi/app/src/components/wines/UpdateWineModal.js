@@ -25,7 +25,6 @@ export default function UpdateWineForm() {
                 [e.target.name]: e.target.value
             }
         })
-        console.log(formData)
     }
 
     const handleSubmit = async(e) => {
@@ -36,7 +35,6 @@ export default function UpdateWineForm() {
             }
         }
         const result = await updateWine(formData)
-        console.log(result)
     }
 
     const inputClass = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
