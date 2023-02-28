@@ -3,6 +3,9 @@ body {
     color: white;
     font-family: 'Playfair Display', serif;
 }
+.bg-wine {
+    background-color: #73343A;
+}
 /* To make default scrollbar hidden*/
 ::-webkit-scrollbar {
     display: none;
@@ -12,9 +15,12 @@ body {
     animation: wineload 0.5s ease-out 0.3s 1 normal forwards;
     opacity: 0;
 }
+.wine-body {
+    transition: 0.3s ease-out;
+}
 .wine-body:hover {
     transform: scale(110%);
-    transition: 1s ease-out;
+    transition: 0.5s ease-out;
 }
 .winepage {
     height: 80vh;
@@ -118,7 +124,7 @@ body {
         filter: blur(0);
     }
     100% {
-        filter: blur(5px);
+        filter: blur(2px);
     }
 }
 /* Create wine form animation */
@@ -181,4 +187,8 @@ body {
 .scroll_button:hover {
     transform: scale(120%);
     transition: 0.3s;
+}
+.home-bg-img {
+    background-attachment: scroll;
+    transition-delay: 1s;
 }

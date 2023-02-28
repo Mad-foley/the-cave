@@ -40,6 +40,7 @@ export default function CreateUserForm() {
             <form
             onSubmit={handleSubmit}
             className="mx-9 px-8 pt-6 pb-8 mb-4">
+                <div className="pb-10 font-bold text-2xl">Create a new account</div>
                 <input
                 onChange={handleFormChange}
                 name="name"

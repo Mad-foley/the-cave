@@ -31,9 +31,9 @@ export default function WineDetails() {
     if (isSuccess && !isLoading && likes && token) {
         return (
             <div className="pl-10 ml-10 pt-5">
-                <div className="flex mt-5 mx-10 px-10 h-full">
-                    <div>
-                        <div style={{width:'950px'}} className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
+                <div className="flex mt-5 mx-10 px-10 h-full relative">
+                    <div style={{width:'950px'}} className='relative'>
+                        <div className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
                             <div>{wine.name}</div>
                             <div>{wine.vintage}</div>
                         </div>
@@ -53,21 +53,21 @@ export default function WineDetails() {
                                 <div className="pr-3 text-xl">{creator(wine.created_by).name}</div>
                             </div>
                         </div>
-                        <div className="pl-3">
+                        <div className="pl-3 absolute ">
                             <span>liked by</span>
                             <span className="pl-1 text-xl font-bold">{likes.length}</span>
                         </div>
                     </div>
-                    <div className="pl-10 pt-10 relative">
+                    <div className="pl-10 pt-10 relative" style={{width:'320px'}}>
                         <div className="bg-white rounded-xl px-10 py-3">
-                            <img style={{width: "205px"}} className="rounded-xl" src={wine.image_url}/>
+                            <img className="rounded-xl" src={wine.image_url}/>
                         </div>
                         <div className="absolute top-0 right-0">
                             <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
                             <button className="navbutton rounded p-1">Delete</button>
                         </div>
                     </div>
-                    <div style={{width: "900px", height: "400px"}} className="absolute mt-9 ml-5 border bottom-10 p-3 rounded-xl">Comments</div>
+                    <div style={{width: "950px", height: "390px"}} className="absolute border bottom-0 p-3 rounded-xl">Comments</div>
                 </div>
             </div>
         )
