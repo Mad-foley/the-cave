@@ -62,7 +62,7 @@ export const authApi = createApi({
             providesTags: ["User"],
         }),
         getUserById: build.query({
-            query: () => ({
+            query: (id) => ({
                 url: `/api/users/me`,
                 method: 'get',
                 credentials: 'include',

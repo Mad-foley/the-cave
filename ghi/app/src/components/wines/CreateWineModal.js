@@ -59,7 +59,7 @@ export default function CreateWineForm() {
     const handleSubmit = async(e) => {
         e.preventDefault()
        const wine = await createWine(formData)
-       console.log(wine.id)
+       console.log(wine)
     }
 
     const inputClass = "wine-form mb-3 rounded w-full py-2 px-3 text-gray-700"

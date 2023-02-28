@@ -1,27 +1,70 @@
-
+import { useGetUsersQuery } from "../../store/queries/authApi"
 import { useGetWineByIdQuery } from "../../store/queries/wineApi"
-import wineSlice from "../../store/queries/wineSlice"
-import { store } from "../../store/store"
+import { useParams } from "react-router-dom"
+import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 
-export default function WineDetails() {
-    const wineId = store.getState().wineId.wineId
-    const {data: wine, isSuccess} = useGetWineByIdQuery(wineId)
+export default function WineDetails({wineId}) {
+    let {id} = useParams()
+    const {data: wine, isSuccess} = useGetWineByIdQuery(id)
+    const {data: users, isLoading} = useGetUsersQuery()
+    const {data: likes} = useGetLikesByWinesQuery(id)
 
-    if (isSuccess)
-        {
+    const creator = (id) => {
+        for (let user of users) {
+            if (user.id === id) {
+                return user
+            }
+        }
+    }
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString('en-us', {
+            weekday:'long',
+            year:'numeric',
+            month:'short',
+            day:'numeric'
+        })
+    }
+    if (isSuccess && !isLoading) {
             return (
-            <div>
-                <div className="container relative mt-5 mx-10">
-                    <div style={{width: "975px"}}className="pb-1 mb-3 text-2xl border-b-2">{wine.name}</div>
-                    <div className="ml-5 text-xl">{wine.varietal}</div>
-                    <div className="ml-5 text-xl">{wine.vintage}</div>
-                    <div className="ml-5 text-xl">{wine.winery}</div>
-                    <div className="ml-5 text-xl">{wine.location}</div>
+            <div className="pl-10 ml-10 pt-5">
+                <div className="flex mt-5 mx-10 px-10 h-full">
                     <div>
-                        <img style={{width: "250px"}} className="absolute top-0 right-0" src={wine.image_url}/>
+                        <div style={{width:'950px'}} className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
+                            <div>{wine.name}</div>
+                            <div>{wine.vintage}</div>
+                        </div>
+                        <div className="pt-10 pl-10 grid grid-cols-2">
+                            <div className="">
+                                <div className="ml-5 text-xl pb-1">{wine.varietal}</div>
+                                <div className="ml-5 text-xl pb-1">{wine.winery}</div>
+                                <div className="ml-5 text-xl">{wine.location}</div>
+                            </div>
+                            <div className="text-end">
+                                <div className="text-sm">created on</div>
+                                <div className="pr-3">{formatDate(wine.created_on)}</div>
+                                <div className="text-sm">modified on</div>
+                                <div className="pr-3">{formatDate(wine.modified_on)}</div>
+                                <br></br>
+                                <div className="text-sm">Created by</div>
+                                <div className="pr-3 text-xl">{creator(wine.created_by).name}</div>
+                            </div>
+                        </div>
+                        <div className="pl-3">
+                            <span>liked by</span>
+                            <span className="pl-1 text-xl font-bold">{likes.length}</span>
+                        </div>
                     </div>
+                    <div className="pl-10 pt-10 relative">
+                        <div className="bg-white rounded-xl px-10 py-3">
+                            <img style={{width: "205px"}} className="rounded-xl" src={wine.image_url}/>
+                        </div>
+                        <div className="absolute top-0 right-0">
+                            <button className="navbutton rounded p-1">Edit</button>
+                            <button className="navbutton rounded p-1">Delete</button>
+                        </div>
+                    </div>
+                    <div style={{width: "900px", height: "400px"}} className="absolute mt-9 ml-5 border bottom-10 p-3 rounded-xl">Comments</div>
                 </div>
-                <div style={{width: "1000px", height: "500px"}} className="mt-9 ml-5 border">Comments</div>
             </div>
         )
     }

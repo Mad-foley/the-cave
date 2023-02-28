@@ -1,9 +1,7 @@
 import { useCreateLikeMutation, useDeleteLikeMutation, useGetLikesByUserQuery, useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
-import { isRouteErrorResponse } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { setId } from "../../store/queries/wineSlice"
-import { useDispatch } from "react-redux"
+
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
@@ -11,7 +9,6 @@ export default function WineCard({wine}) {
     const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
 
     const handleLike = async (e) => {
@@ -48,8 +45,7 @@ export default function WineCard({wine}) {
     }
 
     const handleWineId = () => {
-        dispatch(setId(wine.id))
-        navigate('/wines/details')
+        navigate(`/wines/details/${wine.id}`)
     }
 
     if (!isLoading)

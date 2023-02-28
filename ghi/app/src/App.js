@@ -8,8 +8,6 @@ import WinePage from './pages/WinePage';
 import WineDetails from './components/wines/WineDetails';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
-import { setId } from './store/queries/wineSlice';
-import { useDispatch } from 'react-redux';
 import { store } from './store/store';
 
 
@@ -17,13 +15,15 @@ import { store } from './store/store';
 import LoadingAnimation from './components/common/LoadingAnimate';
 
 function App() {
+  const [blur, setBlur] = useState(false)
+  const currentWineId = store.getState().wineId.wineId.wineId
+
   const blurClass = () => {
     if (blur) {
       return 'bg-blur'
     }
   }
-  const [blur, setBlur] = useState(false)
-  const currentWineId = store.getState().wineId.wineId.wineId
+
   return (
       <BrowserRouter>
         <NavBar setBlur={setBlur}/>
@@ -34,7 +34,7 @@ function App() {
             <Route path="wines">
               <Route path="" element={<WinePage />}/>
               <Route path="create" element={<CreateWineForm/>}/>
-              <Route path="details" element={<WineDetails wineId = {currentWineId}/>}/>
+              <Route path="details/:id" element={<WineDetails/>}/>
             </Route>
             <Route path="account">
               <Route path="" element={<UserPage/>}/>
