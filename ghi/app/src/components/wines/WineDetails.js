@@ -12,7 +12,7 @@ export default function WineDetails() {
             return (
             <div>
                 <div className="container relative mt-5 mx-10">
-                    <div className="mb-3 text-2xl">{wine.name}</div>
+                    <div style={{width: "975px"}}className="pb-1 mb-3 text-2xl border-b-2">{wine.name}</div>
                     <div className="ml-5 text-xl">{wine.varietal}</div>
                     <div className="ml-5 text-xl">{wine.vintage}</div>
                     <div className="ml-5 text-xl">{wine.winery}</div>
