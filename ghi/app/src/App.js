@@ -12,6 +12,7 @@ import UpdateWineForm from './components/wines/UpdateWineModal';
 import HomePage from './pages/HomePage';
 
 import UserPage from './pages/UserPage';
+import UserUpdate from './components/users/UserUpdate';
 import CreateUserForm from './components/accounts/CreateUserModal';
 
 import LoadingAnimation from './components/common/LoadingAnimate';
@@ -40,6 +41,7 @@ function App() {
             <Route path="account">
               <Route path="" element={<UserPage/>}/>
               <Route path="create" element={<CreateUserForm/>}/>
+              <Route path="update" element={<UserUpdate />} />
             </Route>
           </Routes>
         </div>
