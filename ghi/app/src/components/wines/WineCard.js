@@ -9,7 +9,6 @@ export default function WineCard({wine}) {
     const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
-
     const handleLike = async (e) => {
         e.preventDefault()
         if (likes.length > 0) {
@@ -45,12 +44,12 @@ export default function WineCard({wine}) {
         return (
             <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
-                    <button onClick={handleWineId}>
+                    <button onClick={handleWineId} className='w-full'>
                     <div className = "text-center">
                         <div className='text-xl font-bold border-b'>{wine.name}</div>
                         <div>{wine.vintage}</div>
                     </div>
-                    <div className="pl-1">
+                    <div className="pl-1 text-start">
                         <br></br>
                         <div>{wine.varietal}</div>
                         <div>{wine.location}</div>
@@ -70,7 +69,7 @@ export default function WineCard({wine}) {
                 <button
                 onClick={handleLike}
                 className='absolute right-1 top-1 likebutton p-3 font-semibold py-2 rounded'
-                >Like {likes.length > 0 ? likes.length : 0}</button>
+                >Like {likes.length ? likes.length : 0}</button>
             </div>
         )
     }

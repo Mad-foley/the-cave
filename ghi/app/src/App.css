@@ -116,17 +116,15 @@ body {
 }
 /* background blur  */
 .bg-blur {
-    filter: blur(0);
-    animation: blurring 1s ease-out 0.2s 1 normal forwards;
+    filter: blur(2px);
+    transition: 0.5s;
 }
-@keyframes blurring {
-    0% {
-        filter: blur(0);
-    }
-    100% {
-        filter: blur(2px);
-    }
+
+.img-multiply {
+    mix-blend-mode: multiply;
+    opacity: 0.5;
 }
+
 /* Create wine form animation */
 .wine-form {
     transform: translateX(1600px);
@@ -187,8 +185,4 @@ body {
 .scroll_button:hover {
     transform: scale(120%);
     transition: 0.3s;
-}
-.home-bg-img {
-    background-attachment: scroll;
-    transition-delay: 1s;
 }

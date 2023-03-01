@@ -48,7 +48,7 @@ export default function HomePage() {
                     <div className="grid justify-center pt-10">
                         <div className="z-10" >
                             <div className="grid justify-center">
-                                <div className="bg-wine p-5 rounded-xl">
+                                <div className=" p-5 rounded-xl">
                                     <div className="" style={{fontSize:'30px'}}>Welcome to the CAVE</div>
                                     <div className="grid justify-center">for wine lovers by wine lovers</div>
                                 </div>
@@ -85,7 +85,8 @@ export default function HomePage() {
                                 <div className="text-center">{quotes[randomNumber2].author}</div>
                             </div>
                             <img
-                            style={{width:'100vw', mixBlendMode:'multiply', opacity:'0.5'}}
+                            className="img-multiply"
+                            style={{width:'100vw'}}
                             src='https://t3.ftcdn.net/jpg/03/15/93/00/360_F_315930038_dhziskNkOA8Dt24G6TCEPAV6r7bt5MEY.jpg'/>
                         </div>
                         <div className="bg-wine z-10 pb-10">
@@ -93,8 +94,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div className="fixed top-0 bg-gradient-to-l from-white rotate-[315deg] blur" style={{width:'2000px', height:'100vh'}}></div>
-                <img className="fixed top-0 home-bg-img" src={bg_img} style={{mixBlendMode:'multiply', opacity:'0.5'}}/>
+                <img className="fixed top-0 img-multiply" src={bg_img}/>
             </div>
         )
     }
