@@ -4,9 +4,10 @@ from typing import Optional
 
 
 class LogIn(BaseModel):
-    note:str
+    note: str
+
 
 class LogOut(LogIn):
-    user_id:int
-    id:int
-    created_on:Optional[datetime | str]
+    user_id: int
+    id: int
+    created_on: Optional[datetime | str]

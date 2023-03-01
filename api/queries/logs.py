@@ -1,10 +1,6 @@
 from queries.db import pool
-
 from models.log_models import LogOut
-
 from queries.likes import timestamp
-
-
 from typing import List
 
 
@@ -29,9 +25,9 @@ class LogQueries:
                     ) for record in result]
         except Exception as e:
             print(e)
-            return {"message":"Failed to get all logs"}
+            return {"message": "Failed to get all logs"}
 
-    def create_log(self, user_id:int, note:str) -> LogOut:
+    def create_log(self, user_id: int, note: str) -> LogOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -43,7 +39,7 @@ class LogQueries:
                             (%s, %s, %s)
                         RETURNING id;
                         """,
-                        [user_id,note,timestamp()]
+                        [user_id, note, timestamp()]
                     )
                     id = result.fetchone()[0]
                     return LogOut(
@@ -54,8 +50,9 @@ class LogQueries:
                     )
         except Exception as e:
             print(e)
-            return {"message":"Failed to create log"}
-    def get_my_log(self, user_id:int) -> List[LogOut]:
+            return {"message": "Failed to create log"}
+
+    def get_my_log(self, user_id: int) -> List[LogOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -75,4 +72,4 @@ class LogQueries:
                     ) for record in result]
         except Exception as e:
             print(e)
-            return {"messagge":"Failed to get my logs"}
+            return {"messagge": "Failed to get my logs"}
