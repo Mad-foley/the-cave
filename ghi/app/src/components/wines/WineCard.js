@@ -79,7 +79,7 @@ export default function WineCard({wine}) {
                 <button
                 onClick={handleLike}
                 className='absolute right-1 top-1 likebutton p-3 font-semibold py-2 rounded'
-                ><img src={heart}/> {likes.length}</button>
+                >Like {likes.length > 0 ? likes.length : 0}</button>
             </div>
         )
     }
