@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage';
 
 import UserPage from './pages/UserPage';
 import UserUpdate from './components/users/UserUpdate';
+import UserLikes from './components/users/UserLikes';
 import CreateUserForm from './components/accounts/CreateUserModal';
 
 import LoadingAnimation from './components/common/LoadingAnimate';
@@ -42,6 +43,7 @@ function App() {
               <Route path="" element={<UserPage/>}/>
               <Route path="create" element={<CreateUserForm/>}/>
               <Route path="update" element={<UserUpdate />} />
+              <Route path="likes" element={<UserLikes />}/>
             </Route>
           </Routes>
         </div>

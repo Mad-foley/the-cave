@@ -3,13 +3,16 @@ import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useGetUserByIdQuery } from "../../store/queries/authApi"
 import { useNavigate } from "react-router-dom"
 
-
 export default function UserDetail() {
     const navigate = useNavigate()
     const { data: user, isLoading} = useGetUserByIdQuery()
 
-    const handleUpdate = async (e) => {
-        navigate("/user/update")
+    const handleUpdate = (e) => {
+        navigate("/account/update")
+    }
+
+    const handleList = (e) => {
+        navigate("/account/likes")
     }
 
     if(!isLoading){
@@ -27,10 +30,14 @@ export default function UserDetail() {
             <button
                 onClick={handleUpdate}
                 className=''
-                >Update</button>
+                >Update
+            </button>
+            <button
+                onClick={handleList}
+                className='likebutton'
+                >Likes
+            </button>
             </div>
         )
     }
-
-
 }

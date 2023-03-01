@@ -1,27 +1,11 @@
 import { useCreateWineMutation } from "../../store/queries/wineApi";
 import { useState } from "react";
 import WineCard from "./WineCard";
+import { quotes } from "../../utilities/constants";
+
 
 export default function CreateWineForm() {
     const today = new Date()
-    const quotes = [
-        {
-            quote:'“Life is too short to drink bad wine.”',
-            author:'Anonymous'
-        },
-        {
-            quote: '“My only regret in life is that I didn’t drink more wine.”',
-            author: 'Ernest Hemingway'
-        },
-        {
-            quote: '“I cook with wine. Sometimes I even add it to the food.”',
-            author: 'W.C. Fields'
-        },
-        {
-            quote: '“Champagne is appropriate for breakfast, lunch, or dinner.”',
-            author: 'Madeline Puckette'
-        }
-    ]
     const [formData, setFormData] = useState({
         name:'',
         location:'',
@@ -117,7 +101,7 @@ export default function CreateWineForm() {
                     <WineCard wine={previewData}/>
                 </div>
             </div>
-            <div className="quote">
+            <div className="quote text-center mx-10">
                 <div className="flex justify-center" style={{fontSize:'50px'}}>{quotes[randomNumber].quote}</div>
                 <div className="flex justify-center">{quotes[randomNumber].author}</div>
             </div>
