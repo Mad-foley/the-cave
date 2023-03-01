@@ -27,10 +27,9 @@ export const wineApi = createApi({
         }),
         getWineById: build.query({
             query: (wine_id) => ({
-                    url: `/api/wines/${wine_id}`,
+                    url: `/api/wines/${wine_id || 1}`,
                     method: 'get'
-            }),
-            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+            })
         }),
         createWine: build.mutation({
             query: (data) => {
@@ -41,7 +40,7 @@ export const wineApi = createApi({
                     body: data
                 }
             },
-            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+            invalidatesTags: ['Wines']
         }),
         deleteWine: build.mutation ({
             query: (wine_id) => ({
