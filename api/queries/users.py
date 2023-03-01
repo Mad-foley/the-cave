@@ -18,7 +18,8 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, birthday, image_url, modified_on, created_on, id
+                        SELECT name, username, birthday, image_url
+                             , modified_on, created_on, id
                         FROM users;
                         """
                     )
@@ -44,7 +45,8 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, image_url, modified_on, created_on, id
+                        SELECT name, username, password, birthday, image_url
+                             , modified_on, created_on, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -58,7 +60,8 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    # Query for the authenticator, keep it simple as to not confuse the authenticator
+    # Query for the authenticator, keep it simple
+    # as to not confuse the authenticator
     def get_user_by_username(self, username: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -85,14 +88,16 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def create_user(self, user: UserIn, hashed_password: str) -> UserOutWithPassword:
+    def create_user(self, user: UserIn,
+                    hashed_password: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday, image_url, modified_on, created_on)
+                            (name, username, password, birthday, image_url
+                            , modified_on, created_on)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
@@ -136,15 +141,18 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def update_user(self, user: UserIn, user_id: int, hashed_password: str) -> UserOutWithPassword:
-        # User id is gathered from authenticator so only the logged-in user can update their account
+    def update_user(self, user: UserIn, user_id: int,
+                    hashed_password: str) -> UserOutWithPassword:
+        # User id is gathered from authenticator so only
+        # the logged-in user can update their account
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s, birthday=%s, image_url=%s, modified_on=%s
+                        SET name=%s, username=%s, password=%s, birthday=%s
+                          , image_url=%s, modified_on=%s
                         WHERE id = %s
                         RETURNING created_on;
                         """,

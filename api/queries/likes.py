@@ -5,7 +5,8 @@ from typing import List
 
 
 def timestamp():
-    # Get current date and time to input into the created or modified on fields automatically
+    # Get current date and time to input into the created
+    # or modified on fields automatically
     return datetime.now(timezone.utc).isoformat()
 
 
@@ -20,7 +21,8 @@ class LikeQueries:
                         FROM likes
                         """
                     )
-                    return [self.record_to_like_out(record) for record in result]
+                    return [self.record_to_like_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "failed to get likes"}
@@ -37,7 +39,8 @@ class LikeQueries:
                         """,
                         [wine_id]
                     )
-                    return [self.record_to_like_out(record) for record in result]
+                    return [self.record_to_like_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "Failed to find likes"}
@@ -54,7 +57,8 @@ class LikeQueries:
                         """,
                         [user_id]
                     )
-                    return [self.record_to_like_out(record) for record in result]
+                    return [self.record_to_like_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "Failed to find likes"}

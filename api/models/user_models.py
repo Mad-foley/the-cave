@@ -4,7 +4,11 @@ from datetime import date, datetime
 from typing import Optional
 
 
-default_img = 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'
+default_img = (
+    'https://www.pngfind.com/pngs/m'
+    '/676-6764065_default-profile-picture-transparent-hd-png-download.png'
+    )
+
 defaults = {
     'name': 'Joe Smith',
     'username': 'joesmith',

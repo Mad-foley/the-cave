@@ -11,12 +11,15 @@ class WineQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by, id
+                        SELECT name, location, varietal, winery
+                             , image_url, vintage, created_on
+                             , modified_on, created_by, id
                         FROM wines
                         ORDER BY id;
                         """
                     )
-                    return [self.record_to_wine_out(record) for record in result]
+                    return [self.record_to_wine_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "Failed to find wines"}
@@ -28,7 +31,9 @@ class WineQueries:
                     result = cur.execute(
                         """
                         INSERT INTO wines
-                            (name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by)
+                            (name, location, varietal, winery
+                                 , image_url, vintage, created_on
+                                 , modified_on, created_by)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
@@ -69,7 +74,9 @@ class WineQueries:
                     result = cur.execute(
                         """
                         UPDATE wines
-                        SET name=%s, location=%s, varietal=%s, winery=%s, image_url=%s, vintage=%s, modified_on=%s
+                        SET name=%s, location=%s, varietal=%s
+                          , winery=%s, image_url=%s, vintage=%s
+                          , modified_on=%s
                         WHERE id=%s
                         RETURNING
                         name,
@@ -106,7 +113,9 @@ class WineQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by, id
+                        SELECT name, location, varietal, winery
+                             , image_url, vintage, created_on
+                             , modified_on, created_by, id
                         FROM wines
                         WHERE id=%s;
                         """,
@@ -144,26 +153,32 @@ class WineQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by, id
+                        SELECT name, location, varietal, winery
+                             , image_url, vintage, created_on
+                             , modified_on, created_by, id
                         FROM wines
                         WHERE created_by = %s;
                         """,
                         [user_id]
                     )
-                    return [self.record_to_wine_out(record) for record in result]
+                    return [self.record_to_wine_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "Failed to get wines by user"}
 
     def filter_by(self, query: str) -> List[WineOut]:
-        # To use LIKE in SQL you need to concatenate your query with % symbols before and after
+        # To use LIKE in SQL you need to concatenate your query
+        # with % symbols before and after
         input = '%' + query + '%'
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by, id
+                        SELECT name, location, varietal, winery
+                             , image_url, vintage, created_on
+                             , modified_on, created_by, id
                         FROM wines
                         WHERE name LIKE %s
                         OR location LIKE %s
@@ -174,7 +189,8 @@ class WineQueries:
                         """,
                         [input, input, input, input, input]
                     )
-                    return [self.record_to_wine_out(record) for record in result]
+                    return [self.record_to_wine_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
             return {"message": "Failed to get wines by filter"}
