@@ -7,5 +7,6 @@ class LikeIn(BaseModel):
     user_id: int
     created_on: date | None
 
+
 class LikeOut(LikeIn):
     id: int

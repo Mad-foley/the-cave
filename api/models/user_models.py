@@ -3,17 +3,24 @@ from pydantic import BaseModel
 from datetime import date, datetime
 from typing import Optional
 
-default_img = 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'
+
+default_img = (
+    'https://www.pngfind.com/pngs/m'
+    '/676-6764065_default-profile-picture-transparent-hd-png-download.png'
+    )
+
 defaults = {
     'name': 'Joe Smith',
     'username': 'joesmith',
     'password': 'supersecretpassword',
-    'birthday': date(1999,12,25),
+    'birthday': date(1999, 12, 25),
     'image_url': default_img
     }
 
+
 class Error(BaseModel):
     message: str
+
 
 class UserIn(BaseModel):
     name: str = defaults['name']
@@ -21,6 +28,7 @@ class UserIn(BaseModel):
     password: str = defaults['password']
     birthday: Optional[date] = defaults['birthday']
     image_url: Optional[str] = defaults['image_url']
+
 
 class UserOut(BaseModel):
     id: int
@@ -30,6 +38,7 @@ class UserOut(BaseModel):
     image_url: Optional[str] = defaults['image_url']
     modified_on: Optional[datetime]
     created_on: Optional[datetime]
+
 
 class UserOutWithPassword(BaseModel):
     id: int
@@ -41,18 +50,23 @@ class UserOutWithPassword(BaseModel):
     created_on: Optional[datetime]
     hashed_password: str
 
+
 class UserForm(BaseModel):
     username: str
     password: str
 
+
 class UserToken(Token):
     user: UserOutWithPassword
+
 
 class HttpError(BaseModel):
     detail: str
 
+
 class DuplicateUserError(ValueError):
     pass
+
 
 class TokenResponse(BaseModel):
     access_token: str

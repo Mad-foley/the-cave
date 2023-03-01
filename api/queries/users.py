@@ -18,19 +18,20 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, birthday, image_url, modified_on, created_on, id
+                        SELECT name, username, birthday, image_url
+                             , modified_on, created_on, id
                         FROM users;
                         """
                     )
                     return [
                         UserOut(
-                        name=record[0],
-                        username=record[1],
-                        birthday=record[2],
-                        image_url=record[3],
-                        modified_on=record[4],
-                        created_on=record[5],
-                        id=record[6]
+                            name=record[0],
+                            username=record[1],
+                            birthday=record[2],
+                            image_url=record[3],
+                            modified_on=record[4],
+                            created_on=record[5],
+                            id=record[6]
                         )
                         for record in result
                     ]
@@ -44,7 +45,8 @@ class UserQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, birthday, image_url, modified_on, created_on, id
+                        SELECT name, username, password, birthday, image_url
+                             , modified_on, created_on, id
                         FROM users
                         WHERE id = %s;
                         """,
@@ -52,13 +54,14 @@ class UserQueries:
                     )
                     record = result.fetchone()
                     if record is None:
-                        return {"message":"Could not get user"}
+                        return {"message": "Could not get user"}
                     return self.record_to_user_out(record)
         except Exception as e:
             print(e)
             return Error(message=str(e))
 
-    # Query for the authenticator, keep it simple as to not confuse the authenticator
+    # Query for the authenticator, keep it simple
+    # as to not confuse the authenticator
     def get_user_by_username(self, username: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -73,7 +76,7 @@ class UserQueries:
                     )
                     record = result.fetchone()
                     if record is None:
-                        return {"message":"Could not get user"}
+                        return {"message": "Could not get user"}
                     return UserOutWithPassword(
                         name=record[0],
                         username=record[1],
@@ -85,14 +88,16 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def create_user(self, user:UserIn, hashed_password:str) -> UserOutWithPassword:
+    def create_user(self, user: UserIn,
+                    hashed_password: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         INSERT INTO users
-                            (name, username, password, birthday, image_url, modified_on, created_on)
+                            (name, username, password, birthday, image_url
+                            , modified_on, created_on)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
@@ -119,7 +124,7 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def delete_user(self, user_id:int) -> bool:
+    def delete_user(self, user_id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -136,15 +141,18 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-    def update_user(self, user:UserIn, user_id:int, hashed_password:str) -> UserOutWithPassword:
-        # User id is gathered from authenticator so only the logged-in user can update their account
+    def update_user(self, user: UserIn, user_id: int,
+                    hashed_password: str) -> UserOutWithPassword:
+        # User id is gathered from authenticator so only
+        # the logged-in user can update their account
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
                         UPDATE users
-                        SET name=%s, username=%s, password=%s, birthday=%s, image_url=%s, modified_on=%s
+                        SET name=%s, username=%s, password=%s, birthday=%s
+                          , image_url=%s, modified_on=%s
                         WHERE id = %s
                         RETURNING created_on;
                         """,
@@ -173,14 +181,13 @@ class UserQueries:
             print(e)
             return Error(message=str(e))
 
-
     def record_to_user_out(self, record) -> UserOutWithPassword:
         try:
             return UserOutWithPassword(
                 name=record[0],
                 username=record[1],
                 hashed_password=record[2],
-                birthday = record[3],
+                birthday=record[3],
                 image_url=record[4],
                 modified_on=record[5],
                 created_on=record[6],

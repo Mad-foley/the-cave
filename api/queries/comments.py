@@ -1,9 +1,6 @@
 from queries.db import pool
-
 from models.comment_models import CommentIn, CommentOut
-
 from queries.likes import timestamp
-
 from typing import List
 
 
@@ -14,53 +11,60 @@ class CommentQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT user_id, wine_id, comment, created_on, modified_on, id
+                        SELECT user_id, wine_id, comment, created_on
+                             , modified_on, id
                         FROM comments
                         ORDER BY created_on;
                         """
                     )
-                    return [self.record_to_comment_out(record) for record in result]
+                    return [self.record_to_comment_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
-            return {"message":"Failed to find comments"}
+            return {"message": "Failed to find comments"}
 
-    def get_comment_by_wine(self, wine_id:int) -> List[CommentOut]:
+    def get_comment_by_wine(self, wine_id: int) -> List[CommentOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT user_id, wine_id, comment, created_on, modified_on, id
+                        SELECT user_id, wine_id, comment, created_on
+                             , modified_on, id
                         FROM comments
                         WHERE wine_id = %s
                         ORDER BY created_on;
                         """,
                         [wine_id]
                     )
-                    return [self.record_to_comment_out(record) for record in result]
+                    return [self.record_to_comment_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
-            return {"message":"Failed to find comments"}
+            return {"message": "Failed to find comments"}
 
-    def get_comment_by_user(self, user_id:int) -> List[CommentOut]:
+    def get_comment_by_user(self, user_id: int) -> List[CommentOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT user_id, wine_id, comment, created_on, modified_on, id
+                        SELECT user_id, wine_id, comment, created_on
+                             , modified_on, id
                         FROM comments
                         WHERE user_id = %s
                         ORDER BY created_on;
                         """,
                         [user_id]
                     )
-                    return [self.record_to_comment_out(record) for record in result]
+                    return [self.record_to_comment_out(record)
+                            for record in result]
         except Exception as e:
             print(e)
-            return {"message":"Failed to find comments"}
+            return {"message": "Failed to find comments"}
 
-    def update_comment(self, comment_id:int, comment: CommentIn) -> CommentOut:
+    def update_comment(self, comment_id: int,
+                       comment: CommentIn) -> CommentOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -69,22 +73,24 @@ class CommentQueries:
                         UPDATE comments
                         SET comment=%s, modified_on=%s
                         WHERE id = %s
-                        RETURNING user_id, wine_id, comment, created_on, modified_on, id;
+                        RETURNING user_id, wine_id, comment, created_on
+                                , modified_on, id;
                         """,
                         [comment.comment, timestamp(), comment_id]
                     )
                     return self.record_to_comment_out(result.fetchone())
         except Exception as e:
             print(e)
-            return {"message":"Failed to update comment"}
+            return {"message": "Failed to update comment"}
 
-    def get_comment_by_id(self, comment_id:int) -> CommentOut:
+    def get_comment_by_id(self, comment_id: int) -> CommentOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT user_id, wine_id, comment, created_on, modified_on, id
+                        SELECT user_id, wine_id, comment, created_on
+                             , modified_on, id
                         FROM comments
                         WHERE id = %s;
                         """,
@@ -93,9 +99,9 @@ class CommentQueries:
                     return self.record_to_comment_out(result.fetchone())
         except Exception as e:
             print(e)
-            return {"message":"Failed to find comment"}
+            return {"message": "Failed to find comment"}
 
-    def delete_comment(self, comment_id:int):
+    def delete_comment(self, comment_id: int):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -110,27 +116,31 @@ class CommentQueries:
                     wine_id = result.fetchone()[0]
                     if wine_id:
                         return wine_id
-                    return {"message":"Failed to delete comment"}
+                    return {"message": "Failed to delete comment"}
         except Exception as e:
             print(e)
-            return {"message":"Failed to delete comment"}
+            return {"message": "Failed to delete comment"}
 
-    def create_comment(self, wine_id:int, user_id:int, comment: CommentIn) -> CommentOut:
+    def create_comment(self, wine_id: int, user_id: int,
+                       comment: CommentIn) -> CommentOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        INSERT INTO  comments (wine_id, user_id, created_on, modified_on, comment)
+                        INSERT INTO  comments (wine_id, user_id, created_on
+                                   , modified_on, comment)
                         VALUES (%s, %s, %s, %s, %s)
-                        RETURNING user_id, wine_id, comment, created_on, modified_on, id;
+                        RETURNING user_id, wine_id, comment, created_on
+                                , modified_on, id;
                         """,
-                        [wine_id, user_id, timestamp(), timestamp(), comment.comment]
+                        [wine_id, user_id, timestamp(),
+                         timestamp(), comment.comment]
                     )
                     return self.record_to_comment_out(result.fetchone())
         except Exception as e:
             print(e)
-            return {"message":"Failed to create comment"}
+            return {"message": "Failed to create comment"}
 
     def record_to_comment_out(self, record):
         return CommentOut(

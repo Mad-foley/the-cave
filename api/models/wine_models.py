@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
+
 class WineIn(BaseModel):
     name: str
     location: Optional[str]

@@ -24,14 +24,14 @@ with open('data/winebid-data.json') as json_data:
     # Create a list of new objects formatted to fit into database
     formatted_data = [
             {
-            'name':wine["name"][4:],
-            'location': wine["region"],
-            'varietal': wine["type"],
-            'winery':wine["producer"],
-            'image_url': wine["photo_url"],
-            'vintage':wine["vintage"][:4],
-            'created_by': id
-            } for wine in data ]
+                'name': wine["name"][4:],
+                'location': wine["region"],
+                'varietal': wine["type"],
+                'winery':wine["producer"],
+                'image_url': wine["photo_url"],
+                'vintage':wine["vintage"][:4],
+                'created_by': id
+            } for wine in data]
 
 for wine in formatted_data:
     # For each wine in the list of wines connect to the database
@@ -40,7 +40,8 @@ for wine in formatted_data:
             result = cur.execute(
                 """
                 INSERT INTO wines
-                    (name, location, varietal, winery, image_url, vintage, created_on, modified_on, created_by)
+                    (name, location, varietal, winery, image_url,
+                    vintage, created_on, modified_on, created_by)
                 VALUES
                     (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id;
@@ -59,4 +60,6 @@ for wine in formatted_data:
             )
             id = result.fetchone()[0]
             # Print a message for each insert for visual feedback
-            print("[load-data-log: successfully added wine data] wine ID = ", id)
+            print(
+                "[load-data-log: successfully added wine data] wine ID = ", id
+            )
