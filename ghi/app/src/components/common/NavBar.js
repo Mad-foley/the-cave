@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useGetTokenQuery } from "../../store/queries/authApi";
-import { logo } from "../../utilities/constants";
 import LogOutForm from "../accounts/LogOutModal";
 import LogInForm from "../accounts/LogInModal";
 
@@ -43,21 +42,20 @@ export default function NavBar({setBlur}) {
                         <NavLink to='/wines'  aria-current="page">Collection</NavLink>
                     </li>
                     <li className={navlinkClass}>
-                        <NavLink to='/wines/create'  aria-current="page">Create</NavLink>
+                        {token && <NavLink to='/wines/create'  aria-current="page">Create</NavLink>}
                     </li>
                 </ul>
                 <ul className="flex justify-end">
                     <li className={navlinkClass}>
-                        <NavLink to="/account">Account</NavLink>
+                        {token && <NavLink to="/account">Account</NavLink>}
                     </li>
                     <li className={navlinkClass}>
                         {logged || token ? <button onClick={handleLogoutWindow}>Logout</button> : <button onClick={handleLoginWindow}>Login</button>}
                     </li>
                 </ul>
             </div>
-            {loginWindow ? <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow} setBlur={setBlur}/> : <div></div>}
-            {logoutWindow ? <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged} setBlur={setBlur}/> : <div></div>}
-
+            {loginWindow && <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow} setBlur={setBlur}/>}
+            {logoutWindow && <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged} setBlur={setBlur}/>}
         </nav>
     )
 }

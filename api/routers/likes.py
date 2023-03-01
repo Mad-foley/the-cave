@@ -23,13 +23,10 @@ def get_all_likes(
 @router.get('/api/wines/{wine_id}/likes', response_model=Union[List[LikeOut], Error])
 def get_likes_by_wine(
     wine_id: int,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: LikeQueries = Depends()
 ):
-    if account_data:
-        return repo.get_likes_by_wine(wine_id)
-    else:
-       return Error(message = "Your aren't logged in")
+    return repo.get_likes_by_wine(wine_id)
+
 
 @router.get('/api/user/me/likes', response_model=Union[List[LikeOut], Error])
 def get_likes_by_user(

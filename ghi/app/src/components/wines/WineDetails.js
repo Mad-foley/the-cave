@@ -28,6 +28,7 @@ export default function WineDetails() {
             day:'numeric'
         })
     }
+
     if (isSuccess && !isLoading && likes && token) {
         return (
             <div className="pl-10 ml-10 pt-5">
@@ -57,17 +58,17 @@ export default function WineDetails() {
                             <span>liked by</span>
                             <span className="pl-1 text-xl font-bold">{likes.length}</span>
                         </div>
+                        <div style={{height:'350px'}} className="border p-3 mt-8 rounded-xl">Comments</div>
                     </div>
                     <div className="pl-10 pt-10 relative" style={{width:'320px'}}>
                         <div className="bg-white rounded-xl px-10 py-3">
                             <img className="rounded-xl" src={wine.image_url}/>
                         </div>
                         <div className="absolute top-0 right-0">
-                            <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
-                            <button className="navbutton rounded p-1">Delete</button>
+                            {token.user.id === wine.created_by ? <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>:<div></div>}
+                            {token.user.id === wine.created_by ? <button className="navbutton rounded p-1">Delete</button> : <div></div>}
                         </div>
                     </div>
-                    <div style={{width: "950px", height: "390px"}} className="absolute border bottom-0 p-3 rounded-xl">Comments</div>
                 </div>
             </div>
         )

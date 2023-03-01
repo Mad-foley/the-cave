@@ -116,17 +116,15 @@ body {
 }
 /* background blur  */
 .bg-blur {
-    filter: blur(0);
-    animation: blurring 1s ease-out 0.2s 1 normal forwards;
+    filter: blur(2px);
+    transition: 0.5s;
 }
-@keyframes blurring {
-    0% {
-        filter: blur(0);
-    }
-    100% {
-        filter: blur(2px);
-    }
+
+.img-multiply {
+    mix-blend-mode: multiply;
+    opacity: 0.5;
 }
+
 /* Create wine form animation */
 .wine-form {
     transform: translateX(1600px);
@@ -188,7 +186,50 @@ body {
     transform: scale(120%);
     transition: 0.3s;
 }
-.home-bg-img {
-    background-attachment: scroll;
-    transition-delay: 1s;
+/* hover over button scale increase effect */
+.heartButton {
+    transition: 0.3s;
+}
+.heartButton:hover {
+    transform: scale(110%);
+    transition: 0.3s;
+}
+/* Home page load in animation */
+.home-page {
+    animation: welcome 1s ease-out 0.2s 1 normal forwards;
+    opacity: 0;
+}
+@keyframes welcome {
+    0% {
+        transform: scale(0)
+    }
+    100% {
+        transform: scale(100%);
+        opacity: 1;
+    }
+}
+.home-page:nth-child(2) {
+    animation-delay: 1s;
+}
+.home-page:nth-child(3) {
+    animation-delay: 2s;
+}
+/* Shaking effect */
+.wine-login {
+    animation: shake 0.2s linear 0s 3 normal forwards;
+}
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(1%);
+    }
+    100% {
+        transform: translateX(0)
+    }
+}
+/* Make image border a circle */
+.profile-img {
+    border-radius: 50%;
 }
