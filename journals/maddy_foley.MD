@@ -1,3 +1,6 @@
+## Feb 28, 2023:
+We worked on adding user CRUD functionality in redux and react and filted out user's liked wines. Fixed some small peices of the backend.
+
 ## Feb 23, 2023:
 Continued to work on redux together. Working on finishing our redux and some endpoints. We worked on tailwind and organizing our wine-data front end.
 
