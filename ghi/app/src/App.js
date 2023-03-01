@@ -18,6 +18,8 @@ import CreateUserForm from './components/accounts/CreateUserModal';
 
 import LoadingAnimation from './components/common/LoadingAnimate';
 
+
+
 function App() {
   const [blur, setBlur] = useState(false)
   const blurClass = () => {
