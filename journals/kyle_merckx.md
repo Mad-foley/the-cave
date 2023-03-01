@@ -1,10 +1,10 @@
 ## 3/1/23
 
-
+Was out sick again today. I ran flake8 and cleaned up all of the style errors.
 
 ## 2/28/23
 
-For the first part of the day Malcolm and I worked on building and styling the home page. We got it looking pretty nice. I was feeling sick so I was not present for the rest of the day.
+For the first part of the day Malcolm and I worked on building and styling the home page. We got it looking pretty nice. I was feeling sick so I was not present for the rest of the day. Worked on configuring all of our CI/CD stuff to prepare for next week.
 
 ## 2/27/23
 
