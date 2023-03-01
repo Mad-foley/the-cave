@@ -1,6 +1,26 @@
 ## Malcolm Pei - Journal
 
 
+##### February 28th, 2023
+```
+- Added home page
+- Helped some teams with their issues
+```
+##### February 27th, 2023
+```
+- Styled create wine page
+- Added blur to background when login/logout modal is open
+```
+###### February 24th, 2023
+```
+- Testing out redux slices
+- Fixed pageanation
+```
+###### February 23rd, 2023
+```
+- Added pageanation to the wines list
+- Added animation to wines list
+```
 ###### February 22nd, 2023
 ```
 - Built the redux store

@@ -27,8 +27,8 @@ export const likesApi = createApi({
             providesTags: (result, error, arg) => [{ type : 'LikesByWine', 'id' : arg }]
         }),
         getLikesByUser: build.query({
-            query: (user_id) => ({
-                url: `/api/user/${user_id}/likes`,
+            query: () => ({
+                url: `/api/user/me/likes`,
                 method: 'get',
                 credentials: 'include'
             }),

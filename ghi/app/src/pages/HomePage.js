@@ -1,4 +1,3 @@
-import { useGetWinesQuery } from "../store/queries/wineApi"
 import { useGetAllLikesQuery } from "../store/queries/likesApi"
 import { useGetWineByIdQuery } from "../store/queries/wineApi"
 import { useState, useEffect } from "react"
@@ -47,19 +46,19 @@ export default function HomePage() {
                 <div className="pt-10">
                     <div className="grid justify-center pt-10">
                         <div className="z-10" >
-                            <div className="grid justify-center">
+                            <div className="home-page grid justify-center">
                                 <div className=" p-5 rounded-xl">
-                                    <div className="" style={{fontSize:'30px'}}>Welcome to the CAVE</div>
+                                    <div className="" style={{fontSize:'40px'}}>Welcome to the CAVE</div>
                                     <div className="grid justify-center">for wine lovers by wine lovers</div>
                                 </div>
 
                             </div>
-                            <div className="grid justify-center pt-10 mt-10">
+                            <div className="home-page grid justify-center pt-10 mt-10">
                                 <div className="pt-10 mt-10" style={{height:'600px'}}>
                                     <NavLink to='/account/create' className="likebutton p-3 rounded-xl">get started</NavLink>
                                 </div>
                             </div>
-                            <div className="grid justify-center">
+                            <div className="home-page grid justify-center">
                                 <div className="bg-wine p-5 rounded-xl ">
                                     <div style={{fontSize:'30px'}} className='text-center pb-10'>Most Popular Wine</div>
                                     <WineCard wine={wine}/>
@@ -67,7 +66,7 @@ export default function HomePage() {
                             </div>
                         </div>
                         <div className="bg-wine z-10 mt-10" style={{height:'800px', width:'100vw'}}>
-                            <div style={{fontSize:'30px'}} className='quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
+                            <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
                             <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
                             <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
                                 <div className="p-3 m-3 text-end" style={{fontSize:'50px'}}>Curate yourself a collection of wines and share them with your friends</div>

@@ -5,9 +5,7 @@ export default function DeleteUserForm() {
 
     const handleClick = () => {
         deleteUser();
-        console.log(true)
     }
-
     return (
         <div>
             <button

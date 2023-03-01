@@ -1,7 +1,10 @@
 import { useCreateLikeMutation, useDeleteLikeMutation, useGetLikesByUserQuery, useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useNavigate } from "react-router-dom"
-
+import filledHeart from "../../utilities/png/filledHeart.png"
+import heartOutline from "../../utilities/png/heartOutline.png"
+import { bookmarkFilled } from "../../utilities/constants"
+import { bookmarkOutline } from "../../utilities/constants"
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
@@ -18,12 +21,15 @@ export default function WineCard({wine}) {
                     liked = true
                 }
             })
-            const result = liked ? await unlike(wine.id) : await like(wine.id)
-            console.log(result)
+            if(liked) {
+                const result = await unlike(wine.id)
+            } else {
+                const result = await like(wine.id)
+            }
         }
         else {
             const result = await like(wine.id)
-            console.log(result)
+
         }
     }
 
@@ -39,7 +45,18 @@ export default function WineCard({wine}) {
     const handleWineId = () => {
         navigate(`/wines/details/${wine.id}`)
     }
-
+    const handleHeart = () => {
+        let liked = false
+        if (!isLoading && token && likes) {
+            for (let like of likes) {
+                if (like.wine_id === wine.id) {
+                    liked = true
+                    }
+                }
+                return liked
+        }
+        return liked
+    }
     if (!isLoading) {
         return (
             <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
@@ -53,7 +70,6 @@ export default function WineCard({wine}) {
                         <br></br>
                         <div>{wine.varietal}</div>
                         <div>{wine.location}</div>
-
                         <div>{wine.winery}</div>
                     </div>
                     </button>
@@ -66,10 +82,14 @@ export default function WineCard({wine}) {
                     style={{maxHeight:'300px', minHeight:'250px'}}
                     />
                 </div>
-                <button
-                onClick={handleLike}
-                className='absolute right-1 top-1 likebutton p-3 font-semibold py-2 rounded'
-                >Like {likes.length ? likes.length : 0}</button>
+                <div className="absolute right-1 top-1 p-3">
+                    <div className={handleHeart() ? "absolute top-1 right-9 invert z-10" : "absolute top-1 right-9"}>{likes ? likes.length : 0}</div>
+                    <button
+                    onClick={handleLike}
+                    className='heartButton absolute top-0 right-5'
+                    >{handleHeart() ? bookmarkFilled : bookmarkOutline}</button>
+                    {/* >{handleHeart() ? <img src={filledHeart}/>:<img src={heartOutline}/>}</button> */}
+                </div>
             </div>
         )
     }

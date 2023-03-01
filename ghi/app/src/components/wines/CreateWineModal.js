@@ -2,10 +2,12 @@ import { useCreateWineMutation } from "../../store/queries/wineApi";
 import { useState } from "react";
 import WineCard from "./WineCard";
 import { quotes } from "../../utilities/constants";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CreateWineForm() {
     const today = new Date()
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name:'',
         location:'',
@@ -44,6 +46,9 @@ export default function CreateWineForm() {
         e.preventDefault()
        const wine = await createWine(formData)
        console.log(wine)
+       if (!wine.error) {
+        navigate(`/wines/details/${wine.data.id}`)
+       }
     }
 
     const inputClass = "wine-form mb-3 rounded w-full py-2 px-3 text-gray-700"
