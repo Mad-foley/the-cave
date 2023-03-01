@@ -11,10 +11,11 @@ class WinePairingOut(BaseModel):
     name: str
     description: str
 
+
 class WinePairingQueries:
-    def get_wine_pairing(self, food:str):
+    def get_wine_pairing(self, food: str):
         url = f"https://zylalabs.com/api/1201/the+ultimate+wine+api/1047/get+wine?q={food}"
-        fetchConfigs = {'Authorization': 'Bearer ' + FOOD_API_KEY }
+        fetchConfigs = {'Authorization': 'Bearer ' + FOOD_API_KEY}
         response = requests.get(url, headers=fetchConfigs)
         if response.ok:
             result = response.json()

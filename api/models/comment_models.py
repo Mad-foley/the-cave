@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class CommentIn(BaseModel):
     comment: str
+
 
 class CommentOut(BaseModel):
     user_id: int

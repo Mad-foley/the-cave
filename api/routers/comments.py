@@ -1,17 +1,14 @@
 from fastapi import APIRouter, Depends
-
 from models.comment_models import CommentIn, CommentOut
-
 from queries.users import Error
 from queries.comments import CommentQueries
 from queries.logs import LogQueries
 from queries.wines import WineQueries
-
 from authenticator import authenticator
-
 from typing import List, Union, Optional
 
 router = APIRouter()
+
 
 @router.get('/api/comments', response_model=Union[List[CommentOut], Error])
 def get_all_comments(
@@ -21,29 +18,32 @@ def get_all_comments(
     if account_data:
         return repo.get_all_comments()
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.get('/api/wines/{wine_id}/comments', response_model=Union[List[CommentOut], Error])
 def get_comment_by_wine(
-    wine_id:int,
+    wine_id: int,
     repo: CommentQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data)
 ):
     if account_data:
         return repo.get_comment_by_wine(wine_id)
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.get('/api/users/{user_id}/comments', response_model=Union[List[CommentOut], Error])
 def get_comment_by_user(
-    user_id:int,
+    user_id: int,
     repo: CommentQueries = Depends(),
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data)
 ):
     if account_data:
         return repo.get_comment_by_user(user_id)
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.post('/api/wines/{wine_id}/comments', response_model=Union[CommentOut, Error])
 def create_comment(
@@ -62,11 +62,12 @@ def create_comment(
         # Use wine detail to populate message
         message = f"{account_data['name']} commented on{wine.name}"
         # Create a new log
-        log.create_log(account_data['id'],message)
+        log.create_log(account_data['id'], message)
         # Return comment result
         return result
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.put('/api/wines/comments/{comment_id}', response_model=Union[CommentOut, Error])
 def update_comment(
@@ -84,11 +85,12 @@ def update_comment(
         # Use wine to populate message
         message = f"{account_data['name']} updated their comment on{wine.name}"
         # Create log
-        log.create_log(account_data['id'],message)
+        log.create_log(account_data['id'], message)
         # Return comment
         return result
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.get('/api/comments/{comment_id}', response_model=Union[CommentOut, Error])
 def get_comment_by_id(
@@ -99,7 +101,8 @@ def get_comment_by_id(
     if account_data:
         return repo.get_comment_by_id(comment_id)
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="You aren't logged in")
+
 
 @router.delete('/api/wines/comments/{comment_id}')
 def delete_comment(
@@ -116,7 +119,7 @@ def delete_comment(
         # Use wine to populate message
         message = f"{account_data['name']} deleted their comment on{wine.name}"
         # Create log
-        log.create_log(account_data['id'],message)
-        return {"message":"Successfully deleted comment"}
+        log.create_log(account_data['id'], message)
+        return {"message": "Successfully deleted comment"}
     else:
-       return Error(message = "Your aren't logged in")
+        return Error(message="Your aren't logged in")
