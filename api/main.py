@@ -72,7 +72,8 @@ def get_wine_pairing(
         # If there are no matches, use the default
         # suggestion from the public API
         return [
-            wines.filter_by(suggestion.name)[randint(0, len(wines.filter_by(suggestion.name))-1)]
+            (wines.filter_by(suggestion.name)
+             [randint(0, len(wines.filter_by(suggestion.name))-1)])
             if wines.filter_by(suggestion.name)
             else suggestion
             for suggestion in result]

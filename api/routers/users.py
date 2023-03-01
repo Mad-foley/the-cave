@@ -28,7 +28,8 @@ router = APIRouter()
 @router.get('/api/users', response_model=Union[List[UserOut], Error])
 def get_all_users(
     repo: UserQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
 ):
     if account_data:
         return repo.get_all_users()
@@ -63,17 +64,20 @@ async def create_user(
     return UserToken(user=result, **token.dict())
 
 
-@router.get('/api/users/me', response_model=Union[UserOut, Error])
+@router.get('/api/users/me',
+            response_model=Union[UserOut, Error])
 def get_user_by_id(
     repo: UserQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
 ):
     if account_data:
         return repo.get_user_by_id(account_data['id'])
     return {"message": "You are not logged in"}
 
 
-@router.get('/api/users/username/{username}', response_model=Union[UserOutWithPassword, Error])
+@router.get('/api/users/username/{username}',
+            response_model=Union[UserOutWithPassword, Error])
 def get_user_by_username(
     username: str,
     repo: UserQueries = Depends()
@@ -88,7 +92,8 @@ def get_user_by_username(
 @router.delete('/api/users/me', response_model=Union[bool, Error])
 def delete_user(
     repo: UserQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
 ):
     if account_data:
         return repo.delete_user(account_data['id'])
@@ -100,12 +105,14 @@ async def update_user(
     request: Request,
     response: Response,
     repo: UserQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
     log: LogQueries = Depends()
 ):
     hashed_password = authenticator.hash_password(user.password)
     try:
-        result = repo.update_user(user, account_data['id'], hashed_password=hashed_password)
+        result = repo.update_user(user, account_data['id'],
+                                  hashed_password=hashed_password)
         message = f"{account_data['name']} updated their account"
         log.create_log(account_data['id'], message)
     except DuplicateUserError:

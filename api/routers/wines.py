@@ -19,7 +19,8 @@ def get_all_wines(
 @router.post('/api/wines', response_model=Union[WineOut, Error])
 def create_wine(
     wine: WineIn,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends(),
     log: LogQueries = Depends()
 ):
@@ -27,7 +28,8 @@ def create_wine(
         # Save the WineOut object into results
         result = repo.create_wine(wine, account_data['id'])
         # Construct log message
-        message = f"{account_data['name']} added {result.dict()['name']} to the database"
+        message = (f"{account_data['name']} added"
+                   f"{result.dict()['name']} to the database")
         # Querie the log table to create a new log
         log.create_log(account_data['id'], message)
         # Return the WineOut object
@@ -40,7 +42,8 @@ def create_wine(
 def update_wine(
     wine_id: int,
     wine: WineIn,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends(),
     log: LogQueries = Depends()
 ):
@@ -64,7 +67,8 @@ def get_wine_by_id(
 @router.delete('/api/wines/{wine_id}')
 def delete_wine(
     wine_id: int,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
     repo: WineQueries = Depends(),
     log: LogQueries = Depends()
 ):
@@ -77,7 +81,8 @@ def delete_wine(
         return Error(message="You aren't logged in")
 
 
-@router.get('/api/users/{user_id}/wines', response_model=Union[List[WineOut], Error])
+@router.get('/api/users/{user_id}/wines',
+            response_model=Union[List[WineOut], Error])
 def get_wine_by_user(
     user_id: int,
     repo: WineQueries = Depends()
@@ -85,7 +90,8 @@ def get_wine_by_user(
     return repo.get_wine_by_user(user_id)
 
 
-@router.get('/api/wines/filter/{query}', response_model=Union[List[WineOut], Error])
+@router.get('/api/wines/filter/{query}',
+            response_model=Union[List[WineOut], Error])
 def filter_by(
     query: str,
     repo: WineQueries = Depends()
