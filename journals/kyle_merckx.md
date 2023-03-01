@@ -1,6 +1,10 @@
+## 2/28/23
+
+For the first part of the day Malcolm and I worked on building and styling the home page. We got it looking pretty nice. I was feeling sick so I was not present for the rest of the day.
+
 ## 2/27/23
 
-
+Worked on trying to get the like counter to function properly when multiple users like the same wine. We had to refactor the function defined in the WineCard.js to do this. We got that working then worked on the style of our pages.
 
 ## 2/24/23
 
