@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { wineApi } from "./wineApi";
 
 
 export const wineIdSlice = createSlice({

@@ -1,7 +1,11 @@
 import { useCreateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
+import { useLogInMutation } from "../../store/queries/authApi"
+
 
 export default function CreateUserForm() {
+    const profileOption1 = 'https://www.freedomspromise.org/wp-content/uploads/2020/01/male-silluette.jpg'
+    const profileOption2 = 'https://simg.nicepng.com/png/small/356-3568165_blank-profile-picture-female.png'
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -15,9 +19,7 @@ export default function CreateUserForm() {
         setFormData( {
             ...formData,
             [e.target.name]: e.target.value
-        }
-        )
-
+        })
     }
 
     const handleSubmit = (e) => {
@@ -35,7 +37,7 @@ export default function CreateUserForm() {
     }
     const inputClass = "shadow rounded w-full leading-tight py-2 px-3 text-gray-700 mb-3"
     return (
-        <div className="container mx-auto justify-center p-5 text-center"
+        <div className="container mx-auto flex justify-center p-5 text-center"
              style={{width: "800px"}}>
             <form
             onSubmit={handleSubmit}
@@ -72,10 +74,16 @@ export default function CreateUserForm() {
                 placeholder="Profile picture URL"
                 value={formData.image_url}
                 className={inputClass}/>
+                <button className="p-2" onClick={handleFormChange} name='image_url' type='button' value={profileOption1}>option 1</button>
+                <button className='p-2' onClick={handleFormChange} name='image_url' type='button' value={profileOption2}>option 2</button>
+                <br></br>
                 <button
                 className="navbutton mt-2 font-bold text-sm py-2 px-4 rounded"
                 >Submit</button>
             </form>
+            <div style={{width:'400px', height:'400px'}} className='pt-10 mt-10'>
+                <img src={formData.image_url} className='profile-img mt-5'/>
+            </div>
         </div>
     )
 }

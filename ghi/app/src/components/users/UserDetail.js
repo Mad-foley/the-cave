@@ -1,5 +1,3 @@
-import { useRoutes } from "react-router-dom"
-import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useGetUserByIdQuery } from "../../store/queries/authApi"
 import { useNavigate } from "react-router-dom"
 

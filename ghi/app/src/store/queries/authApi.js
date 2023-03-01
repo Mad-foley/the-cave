@@ -43,8 +43,7 @@ export const authApi = createApi({
                     body: formData
                 }
             },
-            providesTags: ['Token'],
-            invalidatesTags: ['Token']
+            invalidatesTags: ['Token', 'User']
         }),
         logOut: build.mutation ({
             query: () => ({
@@ -52,7 +51,7 @@ export const authApi = createApi({
                 method: 'delete',
                 credentials: 'include'
             }),
-            invalidatesTags: ["Token"]
+            invalidatesTags: ["Token", 'User']
         }),
         getUsers: build.query({
             query: () => ({

@@ -9,24 +9,27 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
     })
     const [logIn] = useLogInMutation()
     const navigate = useNavigate()
-
+    const [shake, setShake] = useState('')
     const handleFormData = (e) => {
         setFormData(
             {
-                ...formData,
-                [e.currentTarget.name]: e.currentTarget.value,
+            ...formData,
+            [e.currentTarget.name]: e.currentTarget.value,
             }
         )
     }
 
     const handleSubmit = async (e) => {
+        setShake('')
         e.preventDefault()
         const result = await logIn(formData)
-        console.log(result)
         if (!result.error) {
             setLogged(true)
             setLoginWindow(false)
             setBlur(false)
+        }
+        else {
+            setShake('wine-login')
         }
 
     }
@@ -36,9 +39,9 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
         setBlur(false)
         navigate('/account/create')
     }
-
+    const loginContainerClass = `${shake} container fixed flex justify-center m-10 p-10 z-10`
     return (
-        <div className='container fixed flex justify-center m-10 p-10 z-10'>
+        <div className={loginContainerClass}>
             <div className='shadow bg-slate-200 rounded'>
                 <button
                 onClick={()=>{
