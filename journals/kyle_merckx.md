@@ -1,3 +1,7 @@
+## 3/1/23
+
+
+
 ## 2/28/23
 
 For the first part of the day Malcolm and I worked on building and styling the home page. We got it looking pretty nice. I was feeling sick so I was not present for the rest of the day.
