@@ -3,7 +3,7 @@ import { useGetWineByIdQuery } from "../../store/queries/wineApi"
 import { useNavigate, useParams } from "react-router-dom"
 import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
-
+import CreateComment from "../comments/CreateCommentModal"
 
 export default function WineDetails() {
     let {id} = useParams()
@@ -18,7 +18,6 @@ export default function WineDetails() {
             return user
             }
         }
-
     }
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-us', {
@@ -28,13 +27,12 @@ export default function WineDetails() {
             day:'numeric'
         })
     }
-
     if (isSuccess && !isLoading && likes && token) {
         return (
             <div className="pl-10 ml-10 pt-5">
-                <div className="flex mt-5 mx-10 px-10 h-full relative">
-                    <div style={{width:'950px'}} className='relative'>
-                        <div className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
+                <div className="flex mt-5 mx-10 px-10 h-full">
+                    <div>
+                        <div style={{width:'950px'}} className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
                             <div>{wine.name}</div>
                             <div>{wine.vintage}</div>
                         </div>
@@ -54,19 +52,23 @@ export default function WineDetails() {
                                 <div className="pr-3 text-xl">{creator(wine.created_by).name}</div>
                             </div>
                         </div>
-                        <div className="pl-3 absolute ">
+                        <div className="pl-3">
                             <span>liked by</span>
                             <span className="pl-1 text-xl font-bold">{likes.length}</span>
                         </div>
-                        <div style={{height:'350px'}} className="border p-3 mt-8 rounded-xl">Comments</div>
                     </div>
-                    <div className="pl-10 pt-10 relative" style={{width:'320px'}}>
+                    <div className="pl-10 pt-10 relative">
                         <div className="bg-white rounded-xl px-10 py-3">
-                            <img className="rounded-xl" src={wine.image_url}/>
+                            <img style={{width: "205px"}} className="rounded-xl" src={wine.image_url}/>
                         </div>
                         <div className="absolute top-0 right-0">
-                            {token.user.id === wine.created_by ? <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>:<div></div>}
-                            {token.user.id === wine.created_by ? <button className="navbutton rounded p-1">Delete</button> : <div></div>}
+                            <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
+                            <button className="navbutton rounded p-1">Delete</button>
+                        </div>
+                    </div>
+                    <div style={{width: "900px", height: "400px"}} className="absolute mt-9 ml-5 border bottom-10 p-3 rounded-xl">
+                        <div>
+                            <CreateComment wine_id={wine.id}/>
                         </div>
                     </div>
                 </div>
