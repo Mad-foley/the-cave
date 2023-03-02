@@ -1,6 +1,6 @@
 ## Mar 1, 2023:
-Worked on redux together to create comments.
-We worked on css and
+Worked on redux together to create comments on frontend and got the basic functionality.
+We worked on css and fixing some bugs.
 
 ## Feb 28, 2023:
 We worked on adding user CRUD functionality in redux and react and filted out user's liked wines.

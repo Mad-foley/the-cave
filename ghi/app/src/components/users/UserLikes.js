@@ -20,7 +20,7 @@ export default function UserLikes () {
         }
     if (token) {
         return (
-            <div>
+            <div className="grid justify-center">
                 {likedWines.map(wine => {
                     return (
                     <div className="winecard m-5" key={wine.id}>

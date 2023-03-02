@@ -5,6 +5,8 @@ import filledHeart from "../../utilities/png/filledHeart.png"
 import heartOutline from "../../utilities/png/heartOutline.png"
 import { bookmarkFilled } from "../../utilities/constants"
 import { bookmarkOutline } from "../../utilities/constants"
+import { heartFilled } from "../../utilities/constants"
+import { heartNotFilled } from "../../utilities/constants"
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
@@ -49,7 +51,7 @@ export default function WineCard({wine}) {
         let liked = false
         if (!isLoading && token && likes) {
             for (let like of likes) {
-                if (like.wine_id === wine.id) {
+                if (like.user_id === token.user.id) {
                     liked = true
                     }
                 }
@@ -85,10 +87,10 @@ export default function WineCard({wine}) {
                 <div className="absolute right-1 top-1 p-3">
                     <div className={handleHeart() ? "absolute top-1 right-9 invert z-10" : "absolute top-1 right-9"}>{likes ? likes.length : 0}</div>
                     <button
+                    style={{height:'20px', width:'30px'}}
                     onClick={handleLike}
                     className='heartButton absolute top-0 right-5'
-                    >{handleHeart() ? bookmarkFilled : bookmarkOutline}</button>
-                    {/* >{handleHeart() ? <img src={filledHeart}/>:<img src={heartOutline}/>}</button> */}
+                    >{handleHeart() ? heartFilled : heartNotFilled}</button>
                 </div>
             </div>
         )

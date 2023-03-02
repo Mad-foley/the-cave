@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import { useLogOutMutation } from "../../store/queries/authApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 
 
 export default function LogOutForm({setLogoutWindow, setLogged, setBlur}) {
+    const navigate = useNavigate()
     const {data:token} = useGetTokenQuery()
     const [logOut] = useLogOutMutation()
 
@@ -18,6 +20,7 @@ export default function LogOutForm({setLogoutWindow, setLogged, setBlur}) {
                             setLogoutWindow(false)
                             setLogged(false)
                             setBlur(false)
+                            navigate('/')
                         }
                     }}
                     className="bg-blue-500 py-2 px-4 text-white hover:bg-blue-400 mr-3 rounded-xl"

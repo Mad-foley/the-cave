@@ -34,11 +34,12 @@ export default function UserUpdate() {
 
 
 
-    const inputClass = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    const inputClass = "w-full rounded my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
     if(!isLoading) {
         return (
             <div className="container mx-auto flex justify-center p-5 text-center">
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 mb-4">
+                <h1 className="text-2xl pb-3">Update your information</h1>
                 <input
                 onChange={handleFormChange}
                 name="name"
@@ -54,7 +55,7 @@ export default function UserUpdate() {
                 onChange={handleFormChange}
                 name="username"
                 defaultValue={user.username}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                className={inputClass}/>
                 <input
                 onChange={handleFormChange}
                 name="password"
@@ -67,7 +68,7 @@ export default function UserUpdate() {
                 defaultValue={user.image_url}
                 className={inputClass}/>
                 <button
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                className="likebutton p-2 rounded"
                 >Update</button>
             </form>
         </div>
