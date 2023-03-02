@@ -4,8 +4,11 @@ import { useState, useEffect } from "react"
 import WineCard from '../components/wines/WineCard'
 import { NavLink } from "react-router-dom"
 import { quotes } from "../utilities/constants"
+import swirlIcon from "../utilities/png/swirlIcon.png"
+
 
 export default function HomePage() {
+    const gifPour = 'https://giphy.com/embed/pzGIuR1UeI2oFhyqP1'
     const bg_img = 'https://img.freepik.com/premium-vector/rustic-vineyard-rural-landscape-with-houses-solar-tuscany-background-fields-cypress-trees-harvesting-haystacks-engraved-hand-drawn-old-sketch-vintage-style-label_248627-3126.jpg?w=2000'
     const {data:likes, isSuccess} = useGetAllLikesQuery()
     const [wineId, setWineId] = useState(4)
@@ -51,9 +54,15 @@ export default function HomePage() {
                                     <div className="" style={{fontSize:'40px'}}>Welcome to the CAVE</div>
                                     <div className="grid justify-center">for wine lovers by wine lovers</div>
                                 </div>
-
                             </div>
-                            <div className="home-page grid justify-center pt-10 mt-10">
+                            <div className="flex justify-center relative">
+                                <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
+                                <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
+                            </div>
+                            <div className="flex justify-center pt-10">
+                                <img src={swirlIcon} className="swirlIcon"/>
+                            </div>
+                            <div className="home-page grid justify-center">
                                 <div className="pt-10 mt-10" style={{height:'600px'}}>
                                     <NavLink to='/account/create' className="likebutton p-3 rounded-xl">get started</NavLink>
                                 </div>
