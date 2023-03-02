@@ -4,6 +4,7 @@ import { useGetLikesByUserQuery } from "../../store/queries/likesApi"
 import {useGetWineByIdQuery} from "../../store/queries/wineApi"
 import { useEffect, useState } from "react"
 import WineCard from "../wines/WineCard"
+import LogsFeed from "./LogsFeedModal"
 
 
 export default function UserDetail() {
@@ -62,6 +63,14 @@ export default function UserDetail() {
                             >Update
                         </button>
                     </div>
+                </div>
+                 <div className="text-center text-2xl pb-3">Your Logs</div>
+                    <div>
+                        <div className="relative pl-5 winepage rounded border p-5 m-2 shadow-xl bg-black" style={{height:'25vh'}}>
+                            <div className="absolute w-full pr-10">
+                                <LogsFeed />
+                            </div>
+                        </div>
                 </div>
                 <div className="absolute top-10 left-7 text-end">
                     <button

@@ -4,6 +4,8 @@ import { authApi } from './queries/authApi'
 import { wineApi } from './queries/wineApi'
 import { likesApi } from './queries/likesApi'
 import { commentsApi } from './queries/commentsApi'
+import { logsApi } from './queries/logsApi'
+import { recApi } from './queries/recApi'
 
 import wineIdSlice from './queries/wineSlice'
 
@@ -13,6 +15,8 @@ export const store = configureStore({
         [ wineApi.reducerPath ] : wineApi.reducer,
         [ likesApi.reducerPath ] : likesApi.reducer,
         [ commentsApi.reducerPath ] : commentsApi.reducer,
+        [ logsApi.reducerPath ] : logsApi.reducer,
+        [ recApi.reducerPath ] : recApi.reducer,
         ['wineId']:wineIdSlice
     },
     middleware: (getDefaultMiddleware) => {
@@ -21,6 +25,8 @@ export const store = configureStore({
             .concat(wineApi.middleware)
             .concat(likesApi.middleware)
             .concat(commentsApi.middleware)
+            .concat(logsApi.middleware)
+            .concat(recApi.middleware)
     },
 })
 

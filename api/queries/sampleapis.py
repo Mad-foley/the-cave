@@ -20,7 +20,7 @@ def format_type(type):
         return 'Red Wine'
     elif type == 'whites':
         return 'White Wine'
-    elif type == 'sparking':
+    elif type == 'sparkling':
         return 'Sparkling'
     elif type == 'dessert':
         return 'Dessert'

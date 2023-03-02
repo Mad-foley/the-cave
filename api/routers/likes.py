@@ -55,7 +55,6 @@ def create_like(
         wine = wine_repo.get_wine_by_id(wine_id)
         message = f"{account_data['name']} liked{wine.name}"
         log.create_log(account_data['id'], message)
-        print("********************", result)
         return result
 
     else:
