@@ -39,7 +39,7 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
         setBlur(false)
         navigate('/account/create')
     }
-    const loginContainerClass = `${shake} container fixed flex justify-center m-10 p-10 z-10`
+    const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-10`
     return (
         <div className={loginContainerClass}>
             <div className='shadow bg-slate-200 rounded'>
