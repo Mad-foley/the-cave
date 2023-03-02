@@ -9,7 +9,7 @@ export default function LogOutForm({setLogoutWindow, setLogged, setBlur}) {
     const [logOut] = useLogOutMutation()
 
     return (
-        <div className="container fixed z-10 pt-10 left-20 pr-9 ">
+        <div className="w-full fixed z-10 pt-10 mt-20">
             <div className="flex justify-center">
                 <div className="bg-slate-200 text-black p-5 rounded shadow">
                     <div className="flex justify-center pb-3">Logging out {token.user.name}?</div>

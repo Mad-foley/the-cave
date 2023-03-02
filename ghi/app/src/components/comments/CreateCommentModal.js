@@ -13,15 +13,16 @@ export default function CreateComment({wine_id}) {
             "wine_id": wine_id,
             [e.target.name]: e.target.value
         })
-        console.log(formData)
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
         const comment = await createComment(formData)
-        setFormData({
-            wine_id: 2,
-            comment:''
-        })
+        if (comment.data) {
+            setFormData({
+                wine_id: 2,
+                comment:''
+            })
+        }
     }
 
 
@@ -29,7 +30,7 @@ export default function CreateComment({wine_id}) {
         <div className="text-black text-end">
             <form onSubmit={handleSubmit}>
                 <input
-                className="p-2 rounded-xl"
+                className="p-2 rounded-xl text-end"
                 name = "comment"
                 value={formData.comment}
                 onChange={handleFormChange}

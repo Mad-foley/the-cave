@@ -22,16 +22,10 @@ import LoadingAnimation from './components/common/LoadingAnimate';
 
 function App() {
   const [blur, setBlur] = useState(false)
-  const blurClass = () => {
-    if (blur) {
-      return 'bg-blur'
-    }
-  }
-
   return (
       <BrowserRouter>
         <NavBar setBlur={setBlur}/>
-        <div className={blurClass()}>
+        <div className={blur ? 'bg-blur' : ''}>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<LoadingAnimation/>}/>

@@ -129,14 +129,20 @@ body {
 .wine-form {
     transform: translateX(1600px);
     animation: slidein 1s ease-out 0s 1 normal forwards;
+    opacity: 0;
+    filter: blur(2px);
 }
 .preview {
     transform: translateX(1600px);
     animation: slidein 1s ease-out 0.5s 1 normal forwards;
+    opacity: 0;
+    filter: blur(2px);
 }
 .quote {
     transform: translateX(1600px);
     animation: slidein 1s ease-out 1s 1 normal forwards;
+    opacity: 0;
+    filter: blur(2px);
 }
 .form-root input:nth-child(1) {
     animation-delay: 0.1s;
@@ -165,6 +171,8 @@ body {
     }
     100% {
         transform: translateX(0px);
+        opacity: 1;
+        filter: blur(0);
     }
 }
 /* Logo */
