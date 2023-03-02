@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import CreateComment from "../comments/CreateCommentModal"
+import CommentModal from "../comments/Comments"
+
 
 export default function WineDetails() {
     let {id} = useParams()
@@ -32,24 +34,37 @@ export default function WineDetails() {
             <div className="pl-10 ml-10 pt-5">
                 <div className="flex mt-5 mx-10 px-10 h-full">
                     <div>
-                        <div style={{width:'950px'}} className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2">
+                        <div style={{width:'950px'}} className="flex justify-between border-b-2 text-2xl pl-6 pr-5 pb-2 mb-5">
                             <div>{wine.name}</div>
                             <div>{wine.vintage}</div>
                         </div>
-                        <div className="pt-10 pl-10 grid grid-cols-2">
-                            <div className="">
-                                <div className="ml-5 text-xl pb-1">{wine.varietal}</div>
-                                <div className="ml-5 text-xl pb-1">{wine.winery}</div>
-                                <div className="ml-5 text-xl">{wine.location}</div>
+                        <div className="pt-10 pl-10 grid grid-cols-3 border p-8 rounded-xl">
+                            <div className="col-span-2">
+                                <div className="border p-2 rounded" style={{width:'300px'}}>
+                                    <div>Varietal</div>
+                                    <div className="ml-5 text-xl pb-1">{wine.varietal}</div>
+                                </div>
+                                <div className="border p-2 mt-2" style={{width:'300px'}}>
+                                    <div>Winery</div>
+                                    <div className="ml-5 text-xl pb-1">{wine.winery}</div>
+                                </div>
+                                <div className="border mt-2 rounded p-2" style={{width:'300px'}}>
+                                    <div>Appellation</div>
+                                    <div className="ml-5 text-xl">{wine.location}</div>
+                                </div>
                             </div>
-                            <div className="text-end">
-                                <div className="text-sm">created on</div>
-                                <div className="pr-3">{formatDate(wine.created_on)}</div>
-                                <div className="text-sm">modified on</div>
-                                <div className="pr-3">{formatDate(wine.modified_on)}</div>
+                            <div className="col-span-1">
+                                <div className="border p-2 border rounded">
+                                   <div className="text-sm">created on</div>
+                                   <div className="pl-3">{formatDate(wine.created_on)}</div>
+                                </div>
+                                <div className="border p-2 rounded mt-2">
+                                    <div className="text-sm">modified on</div>
+                                    <div className="pl-3">{formatDate(wine.modified_on)}</div>
+                                </div>
                                 <br></br>
                                 <div className="text-sm">Created by</div>
-                                <div className="pr-3 text-xl">{creator(wine.created_by).name}</div>
+                                <div className="ml-5 pr-3 text-xl">{creator(wine.created_by).name}</div>
                             </div>
                         </div>
                         <div className="pl-3">
@@ -61,14 +76,22 @@ export default function WineDetails() {
                         <div className="bg-white rounded-xl px-10 py-3">
                             <img style={{width: "205px"}} className="rounded-xl" src={wine.image_url}/>
                         </div>
+                        {token.user.id === wine.created_by &&
                         <div className="absolute top-0 right-0">
                             <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
                             <button className="navbutton rounded p-1">Delete</button>
-                        </div>
+                        </div>}
                     </div>
                     <div style={{width: "900px", height: "400px"}} className="absolute mt-9 ml-5 border bottom-10 p-3 rounded-xl">
                         <div>
                             <CreateComment wine_id={wine.id}/>
+                            <div className="relative pl-5 winepage rounded" style={{height:'330px'}}>
+                                <div className="absolute">
+                                    <CommentModal wine_id={wine.id}/>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
