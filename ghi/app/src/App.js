@@ -20,8 +20,6 @@ import LoadingAnimation from './components/common/LoadingAnimate';
 
 import RecSelect from './components/recommendations/RecSelect';
 
-
-
 function App() {
   const [blur, setBlur] = useState(false)
 

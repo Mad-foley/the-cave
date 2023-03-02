@@ -7,7 +7,7 @@ import { commentsApi } from './queries/commentsApi'
 import { logsApi } from './queries/logsApi'
 import { recApi } from './queries/recApi'
 
-import wineIdSlice from './queries/wineSlice'
+import { wineRecSlice } from './queries/wineSlice'
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +17,7 @@ export const store = configureStore({
         [ commentsApi.reducerPath ] : commentsApi.reducer,
         [ logsApi.reducerPath ] : logsApi.reducer,
         [ recApi.reducerPath ] : recApi.reducer,
-        ['wineId']:wineIdSlice
+        ['wineRec']:wineRecSlice.reducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()
