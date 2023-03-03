@@ -13,7 +13,7 @@ client = TestClient(app)
 def test_get_wines():
     response = client.get('/api/wines')
     data = response.json()
-
+    
     assert response.status_code == 200
     assert type(data) == type([])
     assert type(data[0]) == type({})
@@ -41,6 +41,7 @@ class FakeWineData:
             created_by=2,
             id=wine_id
             )
+
 
 class FakeLogData:
     def create_log(self, user_id, note):
