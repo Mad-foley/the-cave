@@ -1,3 +1,8 @@
+## Mar 3, 2023:
+Created our test files individually but as a group.
+Helped eachother debug test files and figure it out together.
+
+
 ## Mar 2, 2023:
 Created reccomendations list.
 Added login logic slice. Created logs.
