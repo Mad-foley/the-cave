@@ -4,7 +4,7 @@ import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../../store/queries/modalSlice";
 import { useGetUserByIdQuery } from "../../store/queries/authApi"
-
+import {wineApi} from "../../store/queries/wineApi"
 
 export default function LogOutForm() {
     const {data:user, isSuccess} = useGetUserByIdQuery()
@@ -29,6 +29,7 @@ export default function LogOutForm() {
                                     logged: false,
                                     blur: false
                                 }))
+                                dispatch(wineApi.util.resetApiState())
                                 navigate('/')
                             }
                         }}

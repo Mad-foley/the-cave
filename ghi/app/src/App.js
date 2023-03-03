@@ -17,6 +17,7 @@ import UserUpdate from './components/accounts/UserUpdate';
 import UserLikes from './components/accounts/UserLikes';
 import CreateUserForm from './components/accounts/CreateUserModal';
 import RecSelect from './components/recommendations/RecSelect';
+import UserWines from './components/accounts/UserWines';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
               <Route path="create" element={<CreateUserForm/>}/>
               <Route path="update" element={<UserUpdate />} />
               <Route path="likes" element={<UserLikes />}/>
+              <Route path="wines" element={<UserWines/>}/>
             </Route>
           </Routes>
         </div>

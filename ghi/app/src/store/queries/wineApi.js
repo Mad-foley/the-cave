@@ -16,7 +16,7 @@ export const wineApi = createApi({
             return headers
         }
     }),
-    tagTypes: ['Wines', 'Wine', 'Favorites'],
+    tagTypes: ['Wines', 'Wine', 'Favorites', 'MyWines'],
     endpoints: (build) => ({
         getWines: build.query({
             query: () => ({
@@ -68,6 +68,13 @@ export const wineApi = createApi({
             }),
             providesTags: ['Favorites']
         }),
+        getWineByUser: build.query({
+            query: (user_id) => ({
+                url: `/api/users/${user_id}/wines/`,
+                method:'get'
+            }),
+            providesTags:['MyWines']
+        }),
     })
 })
 
@@ -77,5 +84,6 @@ export const {
     useCreateWineMutation,
     useDeleteWineMutation,
     useUpdateWineMutation,
-    useGetFavoriteQuery
+    useGetFavoriteQuery,
+    useGetWineByUserQuery
 } = wineApi
