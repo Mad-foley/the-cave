@@ -41,14 +41,14 @@ export default function UserDetail() {
     if(!isLoading && isSuccess && !isError){
         return(
             <div className="relative pl-20 pr-20 mt-10">
-                <div className="border grid grid-cols-2 rounded-xl shadow-xl pr-10">
+                <div className="border grid grid-cols-2 rounded-xl shadow-xl pr-10" id="user-card">
                     <div className="relative pt-10 pb-5 pl-20 pr-3">
                         <div className="border p-5 rounded-xl shadow-xl">
                             <div className="text-2xl text-center pt-3">
                                 <span className="pr-1">Welcome back</span>
                                 <span>{user.name}</span>
                             </div>
-                            <div className="text-sm text-end mr-10 pr-10">@{user.username}</div>
+                            <div className="text-sm text-end mr-10 pr-10" id="anchor">@{user.username}</div>
                             <div className="flex justify-center pb-3">
                                 <img
                                     src={user.image_url}
@@ -90,7 +90,7 @@ export default function UserDetail() {
                 </div>
                 <div className="m-10">
                     <div className="text-center text-2xl pb-3">Your most recently liked wine</div>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center" id="recent-like">
                         {wine && wineId !== 2 ? <WineCard wine={wine}/> : <div className="text-center">You have not liked anything yet</div>}
                     </div>
                 </div>

@@ -29,7 +29,8 @@ export const wineApi = createApi({
             query: (wine_id) => ({
                     url: `/api/wines/${wine_id || 1}`,
                     method: 'get'
-            })
+            }),
+            providesTags:['Wine']
         }),
         createWine: build.mutation({
             query: (data) => {
@@ -57,7 +58,7 @@ export const wineApi = createApi({
                 credentials:'include',
                 body: data.form
             }),
-            invalidatesTags: ['Wines']
+            invalidatesTags: ['Wines', 'Wine']
         }),
         getFavorite: build.query({
             query: () => ({

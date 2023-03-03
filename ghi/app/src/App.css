@@ -19,7 +19,7 @@ body {
     transition: 0.3s ease-out;
 }
 .wine-body:hover {
-    transform: scale(110%);
+    transform: scale(105%);
     transition: 0.5s ease-out;
 }
 .winepage {
@@ -278,4 +278,12 @@ body {
     transition: 2s;
     transform: rotate(360deg);
     filter: hue-rotate(360deg);
+}
+.log:hover {
+    background-color: white;
+    color: #73343A;
+    transition: 0.3s;
+}
+.log {
+    transition: 0.3s;
 }

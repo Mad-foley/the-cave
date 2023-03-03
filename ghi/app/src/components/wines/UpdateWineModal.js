@@ -4,18 +4,24 @@ import { useGetWineByIdQuery } from "../../store/queries/wineApi";
 import { useParams } from "react-router-dom";
 import WineCard from "./WineCard";
 import { quotes } from "../../utilities/constants";
+import { useNavigate } from "react-router-dom"
+
 
 export default function UpdateWineForm() {
+    const navigate = useNavigate()
     let randomNumber = Math.floor(Math.random()*quotes.length)
     const {id} = useParams()
     const {data: wine, isSuccess} = useGetWineByIdQuery(id)
     const [formData, setFormData] = useState({
-        name: '',
-        location: '',
-        varietal: '',
-        winery: '',
-        image_url: '',
-        vintage: ''
+        id: '',
+        form: {
+            name: '',
+            location: '',
+            varietal: '',
+            winery: '',
+            image_url: '',
+            vintage: ''
+        }
     })
     const [updateWine] = useUpdateWineMutation()
     const [previewData, setPreviewData] = useState({
@@ -32,8 +38,11 @@ export default function UpdateWineForm() {
     })
     const handleFormChange = (e) => {
         setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
+            id:id,
+            form: {
+                ...formData.form,
+                [e.target.name]: e.target.value
+            }
         })
         setPreviewData({
             ...previewData,
@@ -42,13 +51,15 @@ export default function UpdateWineForm() {
     }
     const handleSubmit = async(e) => {
         e.preventDefault()
-        for (const [k, v] of Object.entries(formData)){
+        for (const [k, v] of Object.entries(formData.form)){
             if (v === "") {
-                formData[k] = wine[k]
+                formData.form[k] = wine[k]
             }
         }
         const result = await updateWine(formData)
-        console.log(result)
+        if (result.data) {
+            navigate(`/wines/details/${result.data.id}`)
+        }
     }
 
     const inputClass = "rounded w-full my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

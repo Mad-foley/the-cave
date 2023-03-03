@@ -15,7 +15,7 @@ export default function LogsFeed () {
         <div>
             {logs.map(log => {
                 return(
-                    <div className="border rounded grid grid-cols-4 mb-3 shadow-xl p-1" key={log.id}>
+                    <div className="border rounded grid grid-cols-4 mb-3 shadow-xl p-1 log" key={log.id}>
                         <div className="col-span-3 text-sm">{log.note}</div>
                         <div className="col-span-1 text-sm">{formatDate(log.created_on)}</div>
                     </div>
