@@ -1,24 +1,34 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useGetTokenQuery } from "../../store/queries/authApi";
 import LogOutForm from "../accounts/LogOutModal";
 import LogInForm from "../accounts/LogInModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../../store/queries/modalSlice";
 
 
-export default function NavBar({setBlur}) {
-    const [logoutWindow, setLogoutWindow] = useState(false)
-    const [loginWindow, setLoginWindow] = useState(false)
-    const [logged, setLogged] = useState(false)
+export default function NavBar() {
+
     const {data:token} = useGetTokenQuery()
+    const dispatch = useDispatch()
+    const data = useSelector(state => state.modalWindow.modal)
 
     const handleLogoutWindow = () => {
-        setLogoutWindow(true)
-        setBlur(true)
+        dispatch(setModal({
+            ...data,
+            logoutWindow: true,
+            blur: true
+        }))
+
     }
+
     const handleLoginWindow = () => {
-        setLoginWindow(true)
-        setBlur(true)
+        dispatch(setModal({
+            ...data,
+            loginWindow: true,
+            blur: true
+        }))
     }
+
     const navlinkClass = 'navbutton block py-2 pl-3 pr-4 font-medium rounded-xl dark:color-white'
     return (
         <div className="">
@@ -47,17 +57,17 @@ export default function NavBar({setBlur}) {
                         </li>
                     </ul>
                     <ul className="flex justify-end">
+                        {token &&
                         <li className={navlinkClass}>
-                            {token && <NavLink to="/account">Account</NavLink>}
+                             <NavLink to="/account">Account</NavLink>
                         </li>
+                        }
                         <li className={navlinkClass}>
-                            {logged || token ? <button onClick={handleLogoutWindow}>Logout</button> : <button onClick={handleLoginWindow}>Login</button>}
+                            {data.logged || token ? <button onClick={handleLogoutWindow}>Logout</button> : <button onClick={handleLoginWindow}>Login</button>}
                         </li>
                     </ul>
                 </div>
             </nav>
-        {loginWindow && <LogInForm setLogged={setLogged} setLoginWindow={setLoginWindow} setBlur={setBlur}/>}
-        {logoutWindow && <LogOutForm setLogoutWindow={setLogoutWindow} setLogged={setLogged} setBlur={setBlur}/>}
         </div>
     )
 }

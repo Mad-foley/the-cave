@@ -8,6 +8,7 @@ import { logsApi } from './queries/logsApi'
 import { recApi } from './queries/recApi'
 
 import { wineRecSlice } from './queries/wineSlice'
+import { modalSlice } from './queries/modalSlice'
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
         [ commentsApi.reducerPath ] : commentsApi.reducer,
         [ logsApi.reducerPath ] : logsApi.reducer,
         [ recApi.reducerPath ] : recApi.reducer,
-        ['wineRec']:wineRecSlice.reducer
+        ['wineRec']:wineRecSlice.reducer,
+        ['modalWindow']: modalSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()

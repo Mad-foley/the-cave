@@ -1,7 +1,9 @@
 import { useCreateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
 import { useLogInMutation } from "../../store/queries/authApi"
-
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../../store/queries/modalSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateUserForm() {
     const profileOption1 = 'https://www.freedomspromise.org/wp-content/uploads/2020/01/male-silluette.jpg'
@@ -18,6 +20,11 @@ export default function CreateUserForm() {
         image_url: dog
     })
     const [createUser] = useCreateUserMutation()
+    const [login] = useLogInMutation()
+    const dispatch = useDispatch()
+    const modalData = useSelector(state => state.modalWindow.modal)
+    const navigation = useNavigate()
+
 
     const handleFormChange = (e) => {
         setFormData( {
@@ -26,9 +33,22 @@ export default function CreateUserForm() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        createUser(formData)
+        const result = await createUser(formData)
+        if (result.data){
+            const log = await login({
+                username: formData.username,
+                password: formData.password
+            })
+            if(log.data) {
+                dispatch(setModal({
+                    ...modalData,
+                    logged: true,
+                }))
+                navigation('/')
+            }
+        }
         setFormData(
             {
                 name: '',

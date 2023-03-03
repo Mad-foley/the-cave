@@ -7,13 +7,17 @@ import { bookmarkFilled } from "../../utilities/constants"
 import { bookmarkOutline } from "../../utilities/constants"
 import { heartFilled } from "../../utilities/constants"
 import { heartNotFilled } from "../../utilities/constants"
+import { wineApi } from "../../store/queries/wineApi"
+import { useDispatch } from "react-redux"
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
-    const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
+    const {data: likes, isLoading, refetch} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const handleLike = async (e) => {
         e.preventDefault()
         if (likes.length > 0) {
@@ -31,7 +35,6 @@ export default function WineCard({wine}) {
         }
         else {
             const result = await like(wine.id)
-
         }
     }
 

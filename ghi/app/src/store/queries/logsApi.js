@@ -24,7 +24,8 @@ export const logsApi = createApi({
                 method: 'get',
                 credentials: 'include'
             })
-        })
+        }),
+        providesTags: ['Logs']
     })
 })
 

@@ -28,7 +28,7 @@ def create_wine(
         # Save the WineOut object into results
         result = repo.create_wine(wine, account_data['id'])
         # Construct log message
-        message = (f"{account_data['name']} added"
+        message = (f"{account_data['name']} added "
                    f"{result.dict()['name']} to the database")
         # Querie the log table to create a new log
         log.create_log(account_data['id'], message)
