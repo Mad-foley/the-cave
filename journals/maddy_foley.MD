@@ -1,3 +1,8 @@
+## Mar 2, 2023:
+Created reccomendations list.
+Added login logic slice. Created logs.
+Worked on general CSS and reorganized some code.
+
 ## Mar 1, 2023:
 Worked on redux together to create comments on frontend and got the basic functionality.
 We worked on css and fixing some bugs.
