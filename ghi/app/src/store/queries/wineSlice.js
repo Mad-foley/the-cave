@@ -1,17 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-export const wineIdSlice = createSlice({
-    name: 'wineId',
-    initialState: {wineId: 1},
+export const wineRecSlice = createSlice({
+    name: 'wineRecommendation',
+    initialState: {wine: {
+        name: '',
+        location: '',
+        varietal: '',
+        winery: '',
+        vintage: '',
+        image_url: ''
+    }},
     reducers: {
-        setId: (state,action) => {
-            state.wineId = action.payload
+        setWine: (state,action) => {
+            state.wine = action.payload
         },
     },
 
 
 })
 
-export const {setId} = wineIdSlice.actions
-export default wineIdSlice.reducer
+export const {setWine} = wineRecSlice.actions
+export default wineRecSlice.reducer

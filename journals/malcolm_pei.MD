@@ -1,6 +1,14 @@
 ## Malcolm Pei - Journal
 
-
+##### March 1st, 2023
+```
+- Styled account page
+- Added most recently liked wine
+- Added profile picture choices to create user form
+- Added list of liked wines on user page
+- Navbar choices change if you are logged in
+- Tweaked so application can handle having no data
+```
 ##### February 28th, 2023
 ```
 - Added home page

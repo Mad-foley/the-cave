@@ -53,9 +53,8 @@ def create_like(
     if account_data:
         result = repo.create_like(wine_id, account_data['id'])
         wine = wine_repo.get_wine_by_id(wine_id)
-        message = f"{account_data['name']} liked{wine.name}"
+        message = f"{account_data['name']} liked {wine.name}"
         log.create_log(account_data['id'], message)
-        print("********************", result)
         return result
 
     else:

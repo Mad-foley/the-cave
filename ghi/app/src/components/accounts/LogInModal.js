@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import { useLogInMutation } from '../../store/queries/authApi'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../../store/queries/modalSlice";
+import { likesApi } from '../../store/queries/likesApi';
+import { logsApi } from '../../store/queries/logsApi';
 
-export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
+
+export default function LogInForm() {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -10,6 +15,10 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
     const [logIn] = useLogInMutation()
     const navigate = useNavigate()
     const [shake, setShake] = useState('')
+    const dispatch = useDispatch()
+    const data = useSelector(state => state.modalWindow.modal)
+
+
     const handleFormData = (e) => {
         setFormData(
             {
@@ -24,9 +33,14 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
         e.preventDefault()
         const result = await logIn(formData)
         if (!result.error) {
-            setLogged(true)
-            setLoginWindow(false)
-            setBlur(false)
+            dispatch(likesApi.util.resetApiState())
+            dispatch(logsApi.util.resetApiState())
+            dispatch(setModal({
+                ...data,
+                logged: true,
+                loginWindow: false,
+                blur: false
+            }))
         }
         else {
             setShake('wine-login')
@@ -35,18 +49,24 @@ export default function LogInForm({setLogged, setLoginWindow, setBlur}) {
     }
 
     const handleCreateUser = () => {
-        setLoginWindow(false)
-        setBlur(false)
+         dispatch(setModal({
+                ...data,
+                loginWindow: false,
+                blur: false
+            }))
         navigate('/account/create')
     }
-    const loginContainerClass = `${shake} container fixed flex justify-center m-10 p-10 z-10`
+    const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-20`
     return (
         <div className={loginContainerClass}>
             <div className='shadow bg-slate-200 rounded'>
                 <button
                 onClick={()=>{
-                    setLoginWindow(false)
-                    setBlur(false)
+                    dispatch(setModal({
+                        ...data,
+                        loginWindow: false,
+                        blur: false,
+                    }))
                 }}
                 className='text-black p-3'>X</button>
                 <h1 className='text-lg font-bold text-black pb-3 text-center'>Welcome</h1>

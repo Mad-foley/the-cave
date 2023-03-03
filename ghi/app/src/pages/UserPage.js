@@ -1,4 +1,4 @@
-import UserDetail from "../components/users/UserDetail"
+import UserDetail from "../components/accounts/UserDetail"
 
 export default function UserPage() {
 

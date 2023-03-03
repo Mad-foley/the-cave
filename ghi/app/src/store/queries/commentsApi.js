@@ -38,6 +38,7 @@ export const commentsApi = createApi({
                 method: 'get',
                 credentials: 'include'
             }),
+            providesTags: ["Comments"]
         }),
         getCommentByUser: build.query({
             query: (user_id) => ({
