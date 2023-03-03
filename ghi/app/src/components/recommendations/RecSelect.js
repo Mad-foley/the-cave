@@ -8,7 +8,9 @@ export default function RecSelect(){
     const [type, setType] = useState('reds')
     const {data: wines, isSuccess} = useGetRecsQuery(type)
     const [loading, setLoading] = useState(false)
+    const [selected, setSelected] = useState(false)
     const handleChange = (event) => {
+        setSelected(true)
         setLoading(false)
         setTimeout(() => {
             setLoading(true)
@@ -35,7 +37,7 @@ export default function RecSelect(){
                         </select>
                     </div>
                 </div>
-                <div className="flex justify-center">
+                {selected ? <div className="flex justify-center">
                 {!loading ?
                     <div className="mt-10 text-white"><LoadingAnimation/></div>
                     :
@@ -48,7 +50,8 @@ export default function RecSelect(){
                             )
                         })}
                     </div>}
-                </div>
+                </div> :
+                <div className="text-white" style={{fontSize:'50px'}}>Select a type to get started</div>}
             </div>
         )
     }

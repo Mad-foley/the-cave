@@ -12,6 +12,7 @@ export default function CreateUserForm() {
     const pizza2 = 'https://cdn.dribbble.com/users/1787323/screenshots/9712559/media/53dfba9191d318106b7714b74fb9e3eb.png?compress=1&resize=400x300'
     const grape = 'https://media.istockphoto.com/id/1300604627/vector/cute-grapes-logo-vector-illustration-design-with-eyes-and-mouth.jpg?s=170667a&w=0&k=20&c=lHaz067_5EHRcPsLJIn64fkOFvcbojOoZPNZb6zO_sg='
     const dog = 'https://i.pinimg.com/originals/98/e6/62/98e6629104c2f4a0cc27787998f4c4dc.jpg'
+    const frog = 'https://wallpapers-clan.com/wp-content/uploads/2022/05/cute-pfp-31.jpg'
     const [formData, setFormData] = useState({
         name: '',
         username: '',

@@ -95,7 +95,6 @@ export default function WineDetails() {
                             <button className="navbutton rounded p-1">Delete</button>
                         </div>}
                     </div>
-
                 </div>
             </div>
         )

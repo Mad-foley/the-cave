@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useGetUserByIdQuery } from "../../store/queries/authApi";
 import { useUpdateUserMutation } from "../../store/queries/authApi";
+import { useNavigate } from "react-router-dom"
+
 
 export default function UserUpdate() {
+    const navigate = useNavigate()
     const { data: user, isLoading} = useGetUserByIdQuery()
     const[formData, setFormData] = useState({
         name: '',
@@ -29,7 +32,9 @@ export default function UserUpdate() {
             }
         }
         const result = await updateUser(formData)
-        console.log(result)
+        if (result.data) {
+            navigate('/account')
+        }
     }
 
 

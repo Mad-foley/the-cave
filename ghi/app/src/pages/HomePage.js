@@ -8,7 +8,6 @@ import swirlIcon from "../utilities/png/swirlIcon.png"
 
 
 export default function HomePage() {
-    const gifPour = 'https://giphy.com/embed/pzGIuR1UeI2oFhyqP1'
     const bg_img = 'https://img.freepik.com/premium-vector/rustic-vineyard-rural-landscape-with-houses-solar-tuscany-background-fields-cypress-trees-harvesting-haystacks-engraved-hand-drawn-old-sketch-vintage-style-label_248627-3126.jpg?w=2000'
     const {data:likes, isSuccess} = useGetAllLikesQuery()
     const [wineId, setWineId] = useState(4)
@@ -36,6 +35,7 @@ export default function HomePage() {
     useEffect(()=>{
         if (isSuccess) {popular()}
     },[isSuccess])
+
     // document.addEventListener('scroll', event => {
     //     console.log(window.scrollY)
     // })

@@ -1,31 +1,26 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import NavBar from './components/common/NavBar';
 
 import WinePage from './pages/WinePage';
+import HomePage from './pages/HomePage';
+import UserPage from './pages/UserPage';
+
 import WineDetails from './components/wines/WineDetails';
 import CreateWineForm from './components/wines/CreateWineModal';
 import UpdateWineForm from './components/wines/UpdateWineModal';
 import LogInForm from './components/accounts/LogInModal';
 import LogOutForm from './components/accounts/LogOutModal';
-
-import HomePage from './pages/HomePage';
-
-import UserPage from './pages/UserPage';
 import UserUpdate from './components/accounts/UserUpdate';
 import UserLikes from './components/accounts/UserLikes';
 import CreateUserForm from './components/accounts/CreateUserModal';
-
-import LoadingAnimation from './components/common/LoadingAnimate';
-
 import RecSelect from './components/recommendations/RecSelect';
-import { useSelector } from 'react-redux';
+
 
 function App() {
   const modalData = useSelector(state => state.modalWindow.modal)
-
   return (
       <BrowserRouter>
         <NavBar />

@@ -34,10 +34,16 @@ export default function WineCard({wine}) {
                 }
             } else {
                 const result = await like(wine.id)
+                if (result.data) {
+                    dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+                }
             }
         }
         else {
             const result = await like(wine.id)
+            if (result.data) {
+                dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+            }
         }
     }
 
