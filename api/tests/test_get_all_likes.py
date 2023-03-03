@@ -26,3 +26,4 @@ def test_get_all_likes():
 
     assert res.status_code == 200
     assert isinstance(data,list)
+ 
