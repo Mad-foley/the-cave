@@ -4,7 +4,7 @@ import { useGetFavoriteQuery } from "../../store/queries/wineApi"
 
 export default function UserLikes () {
     const {data:favorites, isSuccess} = useGetFavoriteQuery()
-    if (isSuccess) {
+    if (isSuccess && favorites.length) {
         return (
             <div>
                 <div className="text-center">0 - {favorites.length}</div>
@@ -23,7 +23,7 @@ export default function UserLikes () {
     else {
         return (
             <div>
-                <div className="text-2xl text-center p-10">You are not logged in</div>
+                <div className="text-2xl text-center p-10">You do have any likes</div>
             </div>
         )
     }

@@ -84,16 +84,21 @@ export default function UserDetail() {
                     >Your likes</button>
                     <div className="pt-3">
                         <button
+                        onClick={()=>{
+                            navigate('/account/wines')
+                        }}
                         className="likebutton p-1 rounded border"
                         >Your Wines</button>
                     </div>
                 </div>
-                <div className="m-10">
+                <div className="pt-11"></div>
+                <div className="m-10 pt-20 pb-20">
                     <div className="text-center text-2xl pb-3">Your most recently liked wine</div>
                     <div className="flex justify-center" id="recent-like">
                         {wine && wineId !== 2 ? <WineCard wine={wine}/> : <div className="text-center">You have not liked anything yet</div>}
                     </div>
                 </div>
+                <div className="flex justify-center p-10 pt-20">Many grapes were harmed in the production</div>
             </div>
         )
     }
