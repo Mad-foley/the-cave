@@ -5,8 +5,8 @@ from queries.wines import WineQueries
 from authenticator import authenticator
 from queries.logs import LogQueries
 import json
-from models.wine_models import WineOut
-
+from models.wine_models import WineOut, WineIn
+from datetime import datetime
 
 client = TestClient(app)
 
@@ -36,7 +36,30 @@ class FalseWineQueries:
             created_by= account_id,
             id=1
         )
-
+    def update_wine(self, wine_id:int, wine:WineIn):
+        return WineOut(
+            name=wine.name,
+            location=wine.location,
+            varietal=wine.varietal,
+            winery=wine.winery,
+            image_url=wine.image_url,
+            created_on=datetime(1992,12,30,4,22,21),
+            modified_on='2000-12-30',
+            created_by=2,
+            id=wine_id
+            )
+    def get_all_wines(self):
+        return [WineOut(
+            name='',
+            location='',
+            varietal='',
+            winery='',
+            image_url='',
+            created_on=datetime(1992,12,30,4,22,21),
+            modified_on=datetime(1992,12,30,4,22,21),
+            created_by=2,
+            id=2
+        )]
 def test_create_wine():
 
     app.dependency_overrides[authenticator.try_get_current_account_data] = fake_get_account_data
