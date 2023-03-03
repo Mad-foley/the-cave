@@ -4,7 +4,7 @@ from queries.users import Error
 from queries.logs import LogQueries
 from authenticator import authenticator
 from typing import List, Union, Optional
-
+from queries.likes import LikeQueries
 
 router = APIRouter()
 
@@ -97,3 +97,17 @@ def filter_by(
     repo: WineQueries = Depends()
 ):
     return repo.filter_by(query)
+
+
+@router.get('/api/wines/favorites/',
+            response_model=Union[List[WineOut], Error])
+def wines_by_likes(
+    wine_repo: WineQueries = Depends(),
+    like_repo: LikeQueries = Depends(),
+    account_data: Optional[dict]
+    = Depends(authenticator.try_get_current_account_data),
+):
+    if account_data:
+        likes = like_repo.get_likes_by_user(account_data['id'])
+        return [wine_repo.get_wine_by_id(like.wine_id) for like in likes]
+    return {"message":"Failed to get favorite wines"}

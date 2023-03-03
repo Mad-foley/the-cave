@@ -18,13 +18,11 @@ export default function CommentModal({wine_id}) {
 
 
     const handleUserMatch = (comment_user_id) => {
-        let result = {name:''}
         for (let user of users) {
             if (user.id === comment_user_id) {
-                result = user
+                return user
             }
         }
-        return result
     }
     if(isSuccess && !isError) {
         return (
@@ -32,11 +30,22 @@ export default function CommentModal({wine_id}) {
                 {comments.map(comment=>{
                     return (
                         <div key={comment.id}>
-                            <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl">{comment.comment}</div>
+                            <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl">
+                                <img className="inline profile-img mr-2" src={handleUserMatch(comment.user_id).image_url} style={{width:'30px'}}/>
+                                <span>{comment.comment}</span>
+                            </div>
+
                             <div className="ml-20 pl-20 text-end">{handleUserMatch(comment.user_id).name} {formatDate(handleUserMatch(comment.user_id).created_on)}</div>
                         </div>
                     )
                 }).reverse()}
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <div>Log in for more details</div>
             </div>
         )
     }

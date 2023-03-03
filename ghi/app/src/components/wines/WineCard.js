@@ -29,6 +29,9 @@ export default function WineCard({wine}) {
             })
             if(liked) {
                 const result = await unlike(wine.id)
+                if (result.data) {
+                    dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+                }
             } else {
                 const result = await like(wine.id)
             }

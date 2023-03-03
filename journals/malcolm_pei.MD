@@ -1,5 +1,12 @@
 ## Malcolm Pei - Journal
 
+
+##### March 2nd, 2023
+```
+- Created a recommendation redux slice
+- Added a gif to homepage
+- Added spinning button on the recommendations
+```
 ##### March 1st, 2023
 ```
 - Styled account page

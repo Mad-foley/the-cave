@@ -16,7 +16,7 @@ export const wineApi = createApi({
             return headers
         }
     }),
-    tagTypes: ['Wines', 'Wine'],
+    tagTypes: ['Wines', 'Wine', 'Favorites'],
     endpoints: (build) => ({
         getWines: build.query({
             query: () => ({
@@ -57,7 +57,15 @@ export const wineApi = createApi({
                 credentials:'include',
                 body: data.form
             }),
-            providesTags: (result, error, arg) => [{ type : "Wine", "id" : arg }]
+            invalidatesTags: ['Wines']
+        }),
+        getFavorite: build.query({
+            query: () => ({
+                url: '/api/wines/favorites/',
+                method:'get',
+                credentials:'include'
+            }),
+            providesTags: ['Favorites']
         }),
     })
 })
@@ -67,5 +75,6 @@ export const {
     useGetWineByIdQuery,
     useCreateWineMutation,
     useDeleteWineMutation,
-    useUpdateWineMutation
+    useUpdateWineMutation,
+    useGetFavoriteQuery
 } = wineApi

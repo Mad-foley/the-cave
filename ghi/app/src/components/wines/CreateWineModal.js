@@ -4,14 +4,17 @@ import WineCard from "./WineCard";
 import { quotes } from "../../utilities/constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setWine } from "../../store/queries/wineSlice"
 
 
 export default function CreateWineForm() {
+    const dispatch = useDispatch()
     const wineIcon = 'https://cdn-icons-png.flaticon.com/512/763/763072.png'
     const data = useSelector(state => state.wineRec.wine)
-    console.log(data)
     const today = new Date()
     const navigate = useNavigate()
+    const [errorMsg, setErrorMsg] = useState(false)
     const [formData, setFormData] = useState({
         name:data.name || '',
         location:data.location || '',
@@ -48,11 +51,20 @@ export default function CreateWineForm() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-       const wine = await createWine(formData)
-       console.log(wine)
-       if (!wine.error) {
-        navigate(`/wines/details/${wine.data.id}`)
+        const wine = await createWine(formData)
+        if (!wine.data.message) {
+            const initialState = {
+                name: '',
+                location: '',
+                varietal: '',
+                winery: '',
+                image_url: '',
+                vintage: ''
+            }
+            dispatch(setWine(initialState))
+            navigate(`/wines/details/${wine.data.id}`)
        }
+       else {setErrorMsg(true)}
     }
 
     const inputClass = "wine-form mb-3 rounded w-full py-2 px-3 text-gray-700"
@@ -110,6 +122,7 @@ export default function CreateWineForm() {
                             <button
                             className="wine-form absolute right-5 bottom-1 font-bold text-sm p-3 rounded-xl navbutton"
                             >Submit</button>
+                            {errorMsg && <div className="text-center">Something went wrong, try again</div>}
                         </form>
                     </div>
                     <div className="preview container mx-auto p-5">
@@ -121,7 +134,6 @@ export default function CreateWineForm() {
                     <div className="flex justify-center" style={{fontSize:'50px'}}>{quotes[randomNumber].quote}</div>
                     <div className="flex justify-center">{quotes[randomNumber].author}</div>
                 </div>
-
             </div>
         )
     }

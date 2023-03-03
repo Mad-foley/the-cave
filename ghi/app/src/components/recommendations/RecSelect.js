@@ -1,7 +1,6 @@
 import { useGetRecsQuery } from "../../store/queries/recApi";
 import { useState } from "react";
 import RecCard from "./RecCard";
-import CreateWineForm from "../wines/CreateWineModal";
 import LoadingAnimation from "../common/LoadingAnimate";
 
 
@@ -17,13 +16,11 @@ export default function RecSelect(){
         setType(event.target.value)
     }
     if (isSuccess) {
-        // let randomIdx1 = Math.floor(Math.random()*wines.length)
         let recommendations = []
         for (let i=0; i < 3; i++) {
             let randomIdx = Math.floor(Math.random()*wines.length)
             recommendations.push(wines[randomIdx])
         }
-        // console.log(recommendations)
         return(
             <div className="mt-10 pt-10 text-black" style={{marginLeft:'400px', marginRight:'400px'}}>
                 <div className="relative mx-20 flex justify-end">
@@ -40,9 +37,7 @@ export default function RecSelect(){
                 </div>
                 <div className="flex justify-center">
                 {!loading ?
-                    <div className="mt-10 text-white">
-                        <LoadingAnimation/>
-                    </div>
+                    <div className="mt-10 text-white"><LoadingAnimation/></div>
                     :
                     <div className="recommendation-load">
                         {recommendations.map(wine =>{
