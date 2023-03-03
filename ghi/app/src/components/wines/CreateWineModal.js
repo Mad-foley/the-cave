@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setWine } from "../../store/queries/wineSlice"
-
+import {logsApi} from "../../store/queries/logsApi"
 
 export default function CreateWineForm() {
     const dispatch = useDispatch()
@@ -52,6 +52,7 @@ export default function CreateWineForm() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         const wine = await createWine(formData)
+        dispatch(logsApi.util.invalidateTags(['Logs']))
         if (!wine.data.message) {
             const initialState = {
                 name: '',
@@ -61,9 +62,11 @@ export default function CreateWineForm() {
                 image_url: '',
                 vintage: ''
             }
+
             dispatch(setWine(initialState))
             navigate(`/wines/details/${wine.data.id}`)
        }
+       
        else {setErrorMsg(true)}
     }
 

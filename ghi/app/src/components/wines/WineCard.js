@@ -9,6 +9,8 @@ import { heartFilled } from "../../utilities/constants"
 import { heartNotFilled } from "../../utilities/constants"
 import { wineApi } from "../../store/queries/wineApi"
 import { useDispatch } from "react-redux"
+import {logsApi} from "../../store/queries/logsApi"
+
 
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
@@ -31,11 +33,13 @@ export default function WineCard({wine}) {
                 const result = await unlike(wine.id)
                 if (result.data) {
                     dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+                    dispatch(logsApi.util.invalidateTags(['Logs']))
                 }
             } else {
                 const result = await like(wine.id)
                 if (result.data) {
                     dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+                    dispatch(logsApi.util.invalidateTags(['Logs']))
                 }
             }
         }
@@ -43,6 +47,7 @@ export default function WineCard({wine}) {
             const result = await like(wine.id)
             if (result.data) {
                 dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
+                dispatch(logsApi.util.invalidateTags(['Logs']))
             }
         }
     }

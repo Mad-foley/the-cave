@@ -56,7 +56,7 @@ export default function HomePage() {
                                 </div>
                             </div>
                             <div className="flex justify-center relative">
-                                <div style={{height:'500px', width:'500px'}} className="bg-tranparent absolute profile-img"></div>
+                                <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
                                 <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
                             </div>
                             <div className="home-page grid justify-center">
@@ -103,7 +103,7 @@ export default function HomePage() {
 
                     </div>
                 </div>
-                <img className="fixed top-0 img-multiply" src={bg_img}/>
+                <img className="fixed top-0 img-multiply main-img" src={bg_img}/>
             </div>
         )
     }

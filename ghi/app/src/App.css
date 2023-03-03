@@ -119,7 +119,9 @@ body {
     filter: blur(2px);
     transition: 0.5s;
 }
-
+.bg-blur .main-img {
+    mix-blend-mode: multiply;
+}
 .img-multiply {
     mix-blend-mode: multiply;
     opacity: 0.5;

@@ -12,7 +12,7 @@ with pool.connection() as conn:
             INSERT INTO users
                 (name, username, password)
             VALUES
-                ('user01', 'username01', 'password01')
+                ('Wine Goblin', 'username01', 'password01')
             RETURNING id;
             """
         )

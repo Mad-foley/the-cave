@@ -33,7 +33,7 @@ client = TestClient(app)
 def test_create_user():
     app.dependency_overrides[LogQueries] = FakeLogQueries
     app.dependency_overrides[LikeQueries] = FakeLikeQueries
-    
+
     input = {
             "wine_id": 1,
             "user_id": 1,
@@ -43,5 +43,7 @@ def test_create_user():
         '/api/wines/1/likes',
         json = input
     )
-
+    data = response.json()
+    print(data)
     assert response.status_code == 200, response.text
+    assert False
