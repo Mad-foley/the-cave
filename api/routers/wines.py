@@ -110,4 +110,4 @@ def wines_by_likes(
     if account_data:
         likes = like_repo.get_likes_by_user(account_data['id'])
         return [wine_repo.get_wine_by_id(like.wine_id) for like in likes]
-    return {"message":"Failed to get favorite wines"}
+    return {"message": "Failed to get favorite wines"}

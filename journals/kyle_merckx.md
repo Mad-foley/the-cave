@@ -1,3 +1,7 @@
+## 3/3/23
+
+
+
 ## 3/2/23
 
 Unfortunately, I was still sick today. Good news is I'm better now.
