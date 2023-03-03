@@ -92,7 +92,8 @@ def update_comment(
         # Get wine detail from comment result by matching comment wine id
         wine = wine_repo.get_wine_by_id(result.dict()['wine_id'])
         # Use wine to populate message
-        message = f"{account_data['name']} updated their comment on {wine.name}"
+        message = (f"{account_data['name']}"
+                   f"updated their comment on {wine.name}")
         # Create log
         log.create_log(account_data['id'], message)
         # Return comment
