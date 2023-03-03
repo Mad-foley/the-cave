@@ -3,7 +3,6 @@ import { useLogInMutation } from '../../store/queries/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../../store/queries/modalSlice";
-import { likesApi } from '../../store/queries/likesApi';
 import { logsApi } from '../../store/queries/logsApi';
 
 
@@ -33,7 +32,6 @@ export default function LogInForm() {
         e.preventDefault()
         const result = await logIn(formData)
         if (!result.error) {
-            dispatch(likesApi.util.resetApiState())
             dispatch(logsApi.util.resetApiState())
             dispatch(setModal({
                 ...data,

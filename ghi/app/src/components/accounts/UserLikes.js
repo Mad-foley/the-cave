@@ -1,36 +1,24 @@
-import { useGetTokenQuery } from "../../store/queries/authApi"
-import { useGetLikesByUserQuery } from "../../store/queries/likesApi"
-import { useGetWinesQuery } from "../../store/queries/wineApi"
 import WineCard from "../wines/WineCard"
+import { useGetFavoriteQuery } from "../../store/queries/wineApi"
 
 
 export default function UserLikes () {
-    const { data: likes, isLoading} = useGetLikesByUserQuery()
-    const { data: wines, isSuccess } = useGetWinesQuery()
-    const {data:token} = useGetTokenQuery()
-    if(!isLoading && isSuccess && token){
-        const likedWines = []
-        for (let like of likes) {
-            for(let wine of wines){
-                if(like.wine_id === wine.id){
-                    likedWines.push(wine)
-                    break
-                }
-            }
-        }
-    if (token) {
+    const {data:favorites, isSuccess} = useGetFavoriteQuery()
+    if (isSuccess) {
         return (
-            <div className="grid justify-center">
-                {likedWines.map(wine => {
-                    return (
-                    <div className="winecard m-5" key={wine.id}>
-                        <WineCard wine={wine} />
-                    </div>
-                    )
-                })}
+            <div>
+                <div className="text-center">0 - {favorites.length}</div>
+                <div className="grid justify-center winepage">
+                    {favorites.map(wine => {
+                        return (
+                        <div className="winecard m-5" key={wine.id}>
+                            <WineCard wine={wine} />
+                        </div>
+                        )
+                    })}
+                </div>
             </div>
         )
-        }
     }
     else {
         return (

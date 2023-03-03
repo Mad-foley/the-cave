@@ -35,7 +35,7 @@ export default function CreateComment({wine_id}) {
                 value={formData.comment}
                 onChange={handleFormChange}
                 />
-                <button className="likebutton rounded p-2">Submit</button>
+                <button className="likebutton rounded p-2 ml-2">Submit</button>
             </form>
         </div>
 

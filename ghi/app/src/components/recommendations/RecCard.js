@@ -1,11 +1,7 @@
-import { useState } from "react"
-import { bookmarkFilled, bookmarkOutline } from "../../utilities/constants"
-import plusSymbol from "../../utilities/png/plusSymbol.png"
 import plusSymbolWine from "../../utilities/png/plusSymbolWine.png"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setWine } from "../../store/queries/wineSlice"
 import { useNavigate } from "react-router-dom"
-import LoadingAnimation from '../../components/common/LoadingAnimate';
 
 
 export default function RecCard({wine}) {

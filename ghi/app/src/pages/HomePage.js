@@ -56,15 +56,12 @@ export default function HomePage() {
                                 </div>
                             </div>
                             <div className="flex justify-center relative">
-                                <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
+                                <div style={{height:'500px', width:'500px'}} className="bg-tranparent absolute profile-img"></div>
                                 <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
-                            </div>
-                            <div className="flex justify-center pt-10">
-                                <img src={swirlIcon} className="swirlIcon"/>
                             </div>
                             <div className="home-page grid justify-center">
                                 <div className="pt-10 mt-10" style={{height:'600px'}}>
-                                    <NavLink to='/account/create' className="likebutton p-3 rounded-xl">get started</NavLink>
+                                    <NavLink to='/account/create' className="navbutton p-3 rounded-xl">get started</NavLink>
                                 </div>
                             </div>
                             <div className="home-page grid justify-center">
@@ -99,7 +96,11 @@ export default function HomePage() {
                         </div>
                         <div className="bg-wine z-10 pb-10">
                             <div className="text-center">created with a lot of wine</div>
+                            <div className="flex justify-center pt-10">
+                                <img src={swirlIcon} className="swirlIcon"/>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <img className="fixed top-0 img-multiply" src={bg_img}/>
