@@ -43,68 +43,66 @@ export default function HomePage() {
     // if (quoteEl) {console.log(quoteEl.getBoundingClientRect())}
     let randomNumber = Math.floor(Math.random()*quotes.length)
     let randomNumber2 = Math.floor(Math.random()*quotes.length)
-    if (isSuccess && !isLoading) {
-        return (
-            <div className="relative">
-                <div className="pt-10">
-                    <div className="grid justify-center pt-10">
-                        <div className="z-10" >
-                            <div className="home-page grid justify-center">
-                                <div className=" p-5 rounded-xl">
-                                    <div className="" style={{fontSize:'40px'}}>Welcome to the CAVE</div>
-                                    <div className="grid justify-center">for wine lovers by wine lovers</div>
-                                </div>
-                            </div>
-                            <div className="flex justify-center relative">
-                                <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
-                                <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
-                            </div>
-                            <div className="home-page grid justify-center">
-                                <div className="pt-10 mt-10" style={{height:'600px'}}>
-                                    <NavLink to='/account/create' className="navbutton p-3 rounded-xl">get started</NavLink>
-                                </div>
-                            </div>
-                            <div className="home-page grid justify-center">
-                                <div className="bg-wine p-5 rounded-xl ">
-                                    <div style={{fontSize:'30px'}} className='text-center pb-10'>Most Popular Wine</div>
-                                    <WineCard wine={wine}/>
-                                </div>
+    return (
+        <div className="relative">
+            <div className="pt-10">
+                <div className="grid justify-center pt-10">
+                    <div className="z-10" >
+                        <div className="home-page grid justify-center">
+                            <div className=" p-5 rounded-xl">
+                                <div className="" style={{fontSize:'40px'}}>Welcome to the CAVE</div>
+                                <div className="grid justify-center">for wine lovers by wine lovers</div>
                             </div>
                         </div>
-                        <div className="bg-wine z-10 mt-10" style={{height:'800px', width:'100vw'}}>
-                            <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
-                            <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
-                            <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
-                                <div className="p-3 m-3 text-end" style={{fontSize:'50px'}}>Curate yourself a collection of wines and share them with your friends</div>
-                                <div className="pr-10">
-                                    <img
-                                    className="rounded-xl"
-                                    style={{width:'600px'}}
-                                    src='https://images.squarespace-cdn.com/content/v1/5c3cdd80c258b408c8f871c9/1637010787400-UYMKKSY0BO52T540YXK6/D1BDE42D-EAE9-4588-BC33-2C17E0CA8895_1_105_c.jpeg?format=2500w'/>
-                                </div>
+                        <div className="flex justify-center relative">
+                            <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
+                            <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
+                        </div>
+                        <div className="home-page grid justify-center">
+                            <div className="pt-10 mt-10" style={{height:'600px'}}>
+                                <NavLink to='/account/create' className="navbutton p-3 rounded-xl">get started</NavLink>
                             </div>
                         </div>
-                        <div className="bg-wine z-10 relative">
-                            <div className="absolute w-full" >
-                                <div className="text-center" style={{fontSize:'30px'}}>{quotes[randomNumber2].quote}</div>
-                                <div className="text-center">{quotes[randomNumber2].author}</div>
-                            </div>
-                            <img
-                            className="img-multiply"
-                            style={{width:'100vw'}}
-                            src='https://t3.ftcdn.net/jpg/03/15/93/00/360_F_315930038_dhziskNkOA8Dt24G6TCEPAV6r7bt5MEY.jpg'/>
+                        <div className="home-page grid justify-center">
+                            {isSuccess && !isLoading && <div className="bg-wine p-5 rounded-xl ">
+                                <div style={{fontSize:'30px'}} className='text-center pb-10'>Most Popular Wine</div>
+                                <WineCard wine={wine}/>
+                            </div>}
                         </div>
-                        <div className="bg-wine z-10 pb-10">
-                            <div className="text-center">created with a lot of wine</div>
-                            <div className="flex justify-center pt-10">
-                                <img src={swirlIcon} className="swirlIcon"/>
-                            </div>
-                        </div>
-
                     </div>
+                    <div className="bg-wine z-10 mt-10" style={{height:'800px', width:'100vw'}}>
+                        <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
+                        <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
+                        <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
+                            <div className="p-3 m-3 text-end" style={{fontSize:'50px'}}>Curate yourself a collection of wines and share them with your friends</div>
+                            <div className="pr-10">
+                                <img
+                                className="rounded-xl"
+                                style={{width:'600px'}}
+                                src='https://images.squarespace-cdn.com/content/v1/5c3cdd80c258b408c8f871c9/1637010787400-UYMKKSY0BO52T540YXK6/D1BDE42D-EAE9-4588-BC33-2C17E0CA8895_1_105_c.jpeg?format=2500w'/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-wine z-10 relative">
+                        <div className="absolute w-full" >
+                            <div className="text-center" style={{fontSize:'30px'}}>{quotes[randomNumber2].quote}</div>
+                            <div className="text-center">{quotes[randomNumber2].author}</div>
+                        </div>
+                        <img
+                        className="img-multiply"
+                        style={{width:'100vw'}}
+                        src='https://t3.ftcdn.net/jpg/03/15/93/00/360_F_315930038_dhziskNkOA8Dt24G6TCEPAV6r7bt5MEY.jpg'/>
+                    </div>
+                    <div className="bg-wine z-10 pb-10">
+                        <div className="text-center">created with a lot of wine</div>
+                        <div className="flex justify-center pt-10">
+                            <img src={swirlIcon} className="swirlIcon"/>
+                        </div>
+                    </div>
+
                 </div>
-                <img className="fixed top-0 img-multiply main-img" src={bg_img}/>
             </div>
-        )
-    }
+            <img className="fixed top-0 img-multiply main-img" src={bg_img}/>
+        </div>
+    )
 }
