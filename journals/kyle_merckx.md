@@ -1,6 +1,6 @@
 ## 3/3/23
 
-
+We worked on writing our unit tests today. I had a little trouble because I picked the create account endpoint to test. The login aspect of that endpoint was causing issues so I switched to coding a test for the create like endpoint. Afterwards we focused on styling the page.
 
 ## 3/2/23
 
