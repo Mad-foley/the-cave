@@ -3,30 +3,23 @@ import { useGetTokenQuery } from "../../store/queries/authApi";
 import LogOutForm from "../accounts/LogOutModal";
 import LogInForm from "../accounts/LogInModal";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../store/queries/modalSlice";
+import { setBlur, setLoginWindow, setLogoutWindow } from "../../store/queries/modalSlice";
 
 
 export default function NavBar() {
 
     const {data:token} = useGetTokenQuery()
     const dispatch = useDispatch()
-    const data = useSelector(state => state.modalWindow.modal)
+    const data = useSelector(state => state.modalWindow)
 
     const handleLogoutWindow = () => {
-        dispatch(setModal({
-            ...data,
-            logoutWindow: true,
-            blur: true
-        }))
-
+        dispatch(setLogoutWindow(true))
+        dispatch(setBlur(true))
     }
 
     const handleLoginWindow = () => {
-        dispatch(setModal({
-            ...data,
-            loginWindow: true,
-            blur: true
-        }))
+        dispatch(setLoginWindow(true))
+        dispatch(setBlur(true))
     }
 
     const navlinkClass = 'navbutton block py-2 pl-3 pr-4 font-medium rounded-xl dark:color-white'

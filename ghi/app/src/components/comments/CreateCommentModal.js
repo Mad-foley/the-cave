@@ -2,7 +2,7 @@ import { useCreateCommentMutation } from "../../store/queries/commentsApi";
 import { useState } from "react";
 
 
-export default function CreateComment({wine_id}) {
+export default function CreateComment({wine_id, socket}) {
     const [createComment] = useCreateCommentMutation()
     const [formData, setFormData] = useState ({
         wine_id: 2,
@@ -18,6 +18,7 @@ export default function CreateComment({wine_id}) {
         e.preventDefault()
         const comment = await createComment(formData)
         if (comment.data) {
+            socket.send("refetch comments")
             setFormData({
                 wine_id: 2,
                 comment:''

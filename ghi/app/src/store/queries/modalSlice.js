@@ -1,21 +1,45 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 export const modalSlice = createSlice({
-    name: 'modalSlice',
-    initialState: {
-        modal: {
-            logged: false,
-            blur: false,
-            loginWindow: false,
-            logoutWindow: false,
-        }
+  name: "modalSlice",
+  initialState: {
+    logged: false,
+    blur: false,
+    loginWindow: false,
+    logoutWindow: false,
+    deleteWindow: false,
+    deleteWine: {},
+    deleteUserWindow: false,
+  },
+  reducers: {
+    setModal: (state, action) => {
+      state.modal = action.payload;
     },
-    reducers: {
-        setModal: (state, action) => {
-            state.modal = action.payload
-        },
+    setLogged: (state, action) => {
+      state.logged = action.payload;
     },
-})
+    setBlur: (state, action) => {
+      state.blur = action.payload;
+    },
+    setLoginWindow: (state, action) => {
+      state.loginWindow = action.payload;
+    },
+    setLogoutWindow: (state, action) => {
+      state.logoutWindow = action.payload;
+    },
+    setDeleteWindow: (state, action) => {
+      state.deleteWindow = action.payload;
+    },
+    setDeleteWine: (state, action) => {
+      state.deleteWine = action.payload;
+    },
+    setDeleteUserWindow: (state, action) => {
+      state.deleteUserWindow = action.payload
+    }
+  },
+});
 
-export const {setModal} = modalSlice.actions
+export const {setModal, setBlur, setDeleteWindow, setDeleteWine,
+    setLogged, setLoginWindow, setLogoutWindow, 
+  setDeleteUserWindow} = modalSlice.actions
 export default modalSlice.reducer

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLogInMutation } from '../../store/queries/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../store/queries/modalSlice";
+import { setBlur, setLoginWindow, setLogged } from "../../store/queries/modalSlice";
 import { logsApi } from '../../store/queries/logsApi';
 
 
@@ -33,38 +33,29 @@ export default function LogInForm() {
         const result = await logIn(formData)
         if (!result.error) {
             dispatch(logsApi.util.resetApiState())
-            dispatch(setModal({
-                ...data,
-                logged: true,
-                loginWindow: false,
-                blur: false
-            }))
+            dispatch(setBlur(false))
+            dispatch(setLogged(true))
+            dispatch(setLoginWindow(false))
         }
         else {
             setShake('wine-login')
         }
-
     }
 
     const handleCreateUser = () => {
-         dispatch(setModal({
-                ...data,
-                loginWindow: false,
-                blur: false
-            }))
+        dispatch(setBlur(false))
+        dispatch(setLoginWindow(false))
         navigate('/account/create')
     }
-    const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-20`
+
+    const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-30`
     return (
         <div className={loginContainerClass}>
             <div className='shadow bg-slate-200 rounded'>
                 <button
                 onClick={()=>{
-                    dispatch(setModal({
-                        ...data,
-                        loginWindow: false,
-                        blur: false,
-                    }))
+                    dispatch(setLoginWindow(false))
+                    dispatch(setBlur(false))
                 }}
                 className='text-black p-3'>X</button>
                 <h1 className='text-lg font-bold text-black pb-3 text-center'>Welcome</h1>

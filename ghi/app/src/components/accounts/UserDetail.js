@@ -5,6 +5,8 @@ import {useGetWineByIdQuery} from "../../store/queries/wineApi"
 import { useEffect, useState } from "react"
 import WineCard from "../wines/WineCard"
 import LogsFeed from "./LogsFeedModal"
+import { setBlur, setDeleteUserWindow } from "../../store/queries/modalSlice"
+import { useDispatch } from "react-redux"
 
 
 export default function UserDetail() {
@@ -13,6 +15,7 @@ export default function UserDetail() {
     const [wineId, setWineId] = useState()
     const { data: user, isLoading} = useGetUserByIdQuery()
     const {data:wine, isError} = useGetWineByIdQuery(wineId)
+    const dispatch = useDispatch()
     const handleRecentWine = () => {
         if (isSuccess && likes.length) {
             setWineId(likes[likes.length - 1].wine_id)
@@ -36,6 +39,11 @@ export default function UserDetail() {
             month:'long',
             day:'numeric'
         })
+    }
+
+    const handleDelete = () => {
+        dispatch(setBlur(true))
+        dispatch(setDeleteUserWindow(true))
     }
 
     if(!isLoading && isSuccess && !isError){
@@ -64,6 +72,10 @@ export default function UserDetail() {
                                 className='likebutton p-1 rounded'
                                 >edit
                             </button>
+                            <button
+                                onClick={handleDelete}
+                                className='likebutton p-1 rounded'
+                            >delete</button>
                         </div>
                     </div>
                     <div className="pr-5">

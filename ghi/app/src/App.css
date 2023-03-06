@@ -116,7 +116,7 @@ body {
 }
 /* background blur  */
 .bg-blur {
-    filter: blur(2px);
+    backdrop-filter: blur(2px);
     transition: 0.5s;
 }
 .bg-blur .main-img {

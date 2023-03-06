@@ -90,16 +90,16 @@ export const authApi = createApi({
             providesTags: ["User"],
             invalidatesTags: ["Token", "User"],
 
-            }),
+        }),
         deleteUser: build.mutation({
             query: () => {
                 return{
                 url: '/api/users/me',
                 method: 'delete',
                 credentials: 'include'
-            }
-        },
-        invalidatesTags: ["Token", "User"],
+                }
+            },
+            invalidatesTags: ["Token", "User"],
         })
     })
 })

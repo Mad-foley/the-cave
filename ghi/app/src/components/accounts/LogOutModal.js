@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useLogOutMutation } from "../../store/queries/authApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../store/queries/modalSlice";
+import { setLogoutWindow, setBlur, setLogged } from "../../store/queries/modalSlice";
 import { useGetUserByIdQuery } from "../../store/queries/authApi"
 import {wineApi} from "../../store/queries/wineApi"
 
@@ -15,7 +15,7 @@ export default function LogOutForm() {
     const data = useSelector(state => state.modalWindow.modal)
     if (isSuccess) {
         return (
-            <div className="w-full fixed z-10 pt-10 mt-20">
+            <div className="w-full fixed z-30 pt-10 mt-20">
                 <div className="flex justify-center">
                     <div className="bg-slate-200 text-black p-5 rounded shadow">
                         <div className="flex justify-center pb-3">Logging out {token.user.name}?</div>
@@ -23,12 +23,9 @@ export default function LogOutForm() {
                         onClick={async () => {
                             const result = await logOut()
                             if(result.data) {
-                                dispatch(setModal({
-                                    ...data,
-                                    logoutWindow: false,
-                                    logged: false,
-                                    blur: false
-                                }))
+                                dispatch(setBlur(false))
+                                dispatch(setLogged(false))
+                                dispatch(setLogoutWindow(false))
                                 dispatch(wineApi.util.resetApiState())
                                 navigate('/')
                             }
@@ -37,11 +34,8 @@ export default function LogOutForm() {
                         >Confirm</button>
                         <button
                         onClick={() => {
-                            dispatch(setModal({
-                                ...data,
-                                logoutWindow: false,
-                                blur: false,
-                            }))
+                            dispatch(setBlur(false))
+                            dispatch(setLogoutWindow(false))
                         }}
                         className="bg-red-500 py-2 px-4 text-white hover:bg-red-400 rounded-xl"
                         >Cancel</button>

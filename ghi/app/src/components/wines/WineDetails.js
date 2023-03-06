@@ -5,11 +5,16 @@ import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import CreateComment from "../comments/CreateCommentModal"
 import CommentModal from "../comments/Comments"
+import DeleteWineById from "./DeleteWineModal"
+import { useState } from 'react'
+import { useDispatch } from "react-redux"
+import { setBlur, setDeleteWindow, setDeleteWine } from "../../store/queries/modalSlice"
 
 
-export default function WineDetails() {
+export default function WineDetails({socket}) {
     let {id} = useParams()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {data: wine, isSuccess} = useGetWineByIdQuery(id)
     const {data: users, isLoading} = useGetUsersQuery()
     const {data: likes, isError} = useGetLikesByWinesQuery(id)
@@ -21,6 +26,7 @@ export default function WineDetails() {
             }
         }
     }
+
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-us', {
             weekday:'long',
@@ -29,6 +35,7 @@ export default function WineDetails() {
             day:'numeric'
         })
     }
+
     if (isSuccess && !isLoading && likes && token) {
         return (
             <div className="pl-10 ml-10 pt-5">
@@ -75,7 +82,7 @@ export default function WineDetails() {
                             <div>
                                 <div className="flex justify-between">
                                     <div className="text-xl font-bold">Comments</div>
-                                    <CreateComment wine_id={wine.id}/>
+                                    <CreateComment socket={socket} wine_id={wine.id}/>
                                 </div>
                                 <div className="relative pl-5 winepage rounded border p-2 m-2 shadow-xl" style={{height:'25vh'}}>
                                     <div className="absolute w-full pr-10">
@@ -92,7 +99,9 @@ export default function WineDetails() {
                         {token.user.id === wine.created_by &&
                         <div className="absolute top-0 right-0">
                             <button onClick={()=>{navigate(`/wines/update/${wine.id}`)}} className="navbutton rounded p-1">Edit</button>
-                            <button className="navbutton rounded p-1">Delete</button>
+                            <button onClick={()=>{dispatch(setBlur(true));
+                                dispatch(setDeleteWindow(true));
+                                dispatch(setDeleteWine(wine))}} className="navbutton rounded p-1">Delete</button>
                         </div>}
                     </div>
                 </div>
