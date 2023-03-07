@@ -1,3 +1,7 @@
+## 3/7/23
+
+Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page.
+
 ## 3/6/23
 
 Today we added the delete funtion to the user account. We created a modal to ask the user to confirm the deletion and updated the modal slice to allow the modal to work. We then set up a websocket to work with the comment sections. We then set up a search bar to filter through the wines. We did some styling to finish off the day.
