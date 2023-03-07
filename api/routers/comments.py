@@ -130,7 +130,7 @@ def delete_comment(
         # Get wine detail by matching the result which is the wine id
         wine = wine_repo.get_wine_by_id(result)
         # Use wine to populate message
-        message = f"{account_data['name']} deleted their comment on{wine.name}"
+        message = f"{account_data['name']} deleted their comment on {wine.name}"
         # Create log
         log.create_log(account_data['id'], message)
         return {"message": "Successfully deleted comment"}

@@ -1,6 +1,12 @@
 ## Malcolm Pei - Journal
 
 
+##### March 6th, 2023
+```
+- Added websocket to application
+- Added delete features
+- Styled dark mode a bit
+```
 ##### March 2nd, 2023
 ```
 - Created a recommendation redux slice

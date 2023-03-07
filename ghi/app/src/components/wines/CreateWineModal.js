@@ -7,28 +7,29 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setWine } from "../../store/queries/wineSlice"
 import {logsApi} from "../../store/queries/logsApi"
+import { winePreview } from "../../utilities/constants";
+
 
 export default function CreateWineForm() {
     const dispatch = useDispatch()
-    const wineIcon = 'https://cdn-icons-png.flaticon.com/512/763/763072.png'
     const data = useSelector(state => state.wineRec.wine)
     const today = new Date()
     const navigate = useNavigate()
     const [errorMsg, setErrorMsg] = useState(false)
     const [formData, setFormData] = useState({
-        name:data.name || '',
-        location:data.location || '',
-        varietal:data.varietal || '',
-        winery:data.winery || '',
-        image_url:data.image_url || '',
-        vintage:data.vintage || ''
+        name:data.name,
+        location:data.location,
+        varietal:data.varietal,
+        winery:data.winery,
+        image_url:data.image_url,
+        vintage:data.vintage
     })
     const [previewData, setPreviewData] = useState({
         name:data.name || 'Untitled',
         location:data.location || 'Somewhere',
         varietal:data.varietal || 'Grape Juice',
         winery:data.winery || 'Grape Vineyards',
-        image_url:data.image_url || wineIcon,
+        image_url:data.image_url || winePreview,
         vintage:data.vintage || '2000',
         created_on:'12-30-1999',
         modified_on:'12-25-2000',
@@ -66,7 +67,7 @@ export default function CreateWineForm() {
             dispatch(setWine(initialState))
             navigate(`/wines/details/${wine.data.id}`)
        }
-       
+
        else {setErrorMsg(true)}
     }
 

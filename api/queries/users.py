@@ -135,7 +135,7 @@ class UserQueries:
                         """,
                         [user_id]
                     )
-                    return True if result is not None else False
+                return True if result is not None else False
 
         except Exception as e:
             print(e)

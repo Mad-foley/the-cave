@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 export default function UserDetail() {
     const {data:likes, isSuccess} = useGetLikesByUserQuery()
     const navigate = useNavigate()
-    const [wineId, setWineId] = useState()
+    const [wineId, setWineId] = useState(4)
     const { data: user, isLoading} = useGetUserByIdQuery()
     const {data:wine, isError} = useGetWineByIdQuery(wineId)
     const dispatch = useDispatch()
@@ -45,7 +45,9 @@ export default function UserDetail() {
         dispatch(setBlur(true))
         dispatch(setDeleteUserWindow(true))
     }
-
+    const handleLikesButton = () => {
+        navigate('/account/wines')
+    }
     if(!isLoading && isSuccess && !isError){
         return(
             <div className="relative pl-20 pr-20 mt-10">
@@ -92,14 +94,12 @@ export default function UserDetail() {
                 <div className="absolute top-10 left-7 text-end">
                     <button
                     onClick={handleList}
-                    className='likebutton p-1 rounded border'
+                    className='navbutton p-1 rounded border'
                     >Your likes</button>
                     <div className="pt-3">
                         <button
-                        onClick={()=>{
-                            navigate('/account/wines')
-                        }}
-                        className="likebutton p-1 rounded border"
+                        onClick={handleLikesButton}
+                        className="navbutton p-1 rounded border"
                         >Your Wines</button>
                     </div>
                 </div>

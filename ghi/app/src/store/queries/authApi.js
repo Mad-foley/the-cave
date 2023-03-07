@@ -112,6 +112,5 @@ export const {
     useCreateUserMutation,
     useUpdateUserMutation,
     useGetUserByIdQuery,
-    useDeleteUserMutation,
-
+    useDeleteUserMutation
 } = authApi

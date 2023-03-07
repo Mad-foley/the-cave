@@ -1,10 +1,6 @@
 import { useCreateLikeMutation, useDeleteLikeMutation, useGetLikesByUserQuery, useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useNavigate } from "react-router-dom"
-import filledHeart from "../../utilities/png/filledHeart.png"
-import heartOutline from "../../utilities/png/heartOutline.png"
-import { bookmarkFilled } from "../../utilities/constants"
-import { bookmarkOutline } from "../../utilities/constants"
 import { heartFilled } from "../../utilities/constants"
 import { heartNotFilled } from "../../utilities/constants"
 import { wineApi } from "../../store/queries/wineApi"
@@ -15,7 +11,7 @@ import {logsApi} from "../../store/queries/logsApi"
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
-    const {data: likes, isLoading, refetch} = useGetLikesByWinesQuery(wine.id)
+    const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
     const dispatch = useDispatch()

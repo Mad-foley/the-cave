@@ -50,17 +50,22 @@ function WinePage() {
         let unique = [...new Set(result)]
         return unique
     }
-
+    const handleFirstButton = () => {
+        setIndexes({start:-1,end:10})
+    }
+    const handleLastButton = () => {
+        setIndexes({start:filteredList().length-10,end:filteredList().length})
+    }
     if (!isLoading) {
         return (
             <div>
                 <div className='pt-5 p-2 relative'>
                     <div className='flex justify-center'>
-                        <button className="scroll_button pr-3" onClick={()=>{setIndexes({start:-1,end:10})}}>first</button>
+                        <button className="scroll_button pr-3" onClick={handleFirstButton}>first</button>
                         <button className="scroll_button" onClick={handlePreviousPage}>{leftArrow}</button>
                         <div className="px-5">{indexes.start+1} - {indexes.end}</div>
                         <button className="scroll_button" onClick={handleNextPage}>{rightArrow}</button>
-                        <button className='scroll_button pl-3' onClick={()=>{setIndexes({start:filteredList().length-10,end:filteredList().length})}}>last</button>
+                        <button className='scroll_button pl-3' onClick={handleLastButton}>last</button>
                     </div>
                     <div className='flex justify-center mt-4 text-black'>
                         <input onChange={handleSearch} placeholder=' Search'/>

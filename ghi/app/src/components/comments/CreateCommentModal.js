@@ -4,10 +4,11 @@ import { useState } from "react";
 
 export default function CreateComment({wine_id, socket}) {
     const [createComment] = useCreateCommentMutation()
-    const [formData, setFormData] = useState ({
+    const initialForm = {
         wine_id: 2,
         comment: ''
-    })
+    }
+    const [formData, setFormData] = useState (initialForm)
     const handleFormChange = (e) => {
         setFormData({
             "wine_id": wine_id,
@@ -19,10 +20,7 @@ export default function CreateComment({wine_id, socket}) {
         const comment = await createComment(formData)
         if (comment.data) {
             socket.send("refetch comments")
-            setFormData({
-                wine_id: 2,
-                comment:''
-            })
+            setFormData(initialForm)
         }
     }
 

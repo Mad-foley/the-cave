@@ -7,6 +7,7 @@ export default function UserLikes () {
     if (isSuccess && favorites.length) {
         return (
             <div>
+                <div className="text-center text-2xl pt-10">Your favorite wines</div>
                 <div className="text-center">0 - {favorites.length}</div>
                 <div className="grid justify-center winepage">
                     {favorites.map(wine => {

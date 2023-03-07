@@ -19,8 +19,13 @@ export default function RecSelect(){
     }
     if (isSuccess) {
         let recommendations = []
+        let indices = []
         for (let i=0; i < 3; i++) {
             let randomIdx = Math.floor(Math.random()*wines.length)
+            while (indices.includes(randomIdx)) {
+                randomIdx = Math.floor(Math.random()*wines.length)
+            }
+            indices.push(randomIdx)
             recommendations.push(wines[randomIdx])
         }
         return(

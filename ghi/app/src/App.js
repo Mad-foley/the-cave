@@ -28,18 +28,14 @@ function App() {
   const dispatch = useDispatch()
 
   const client_id = Number.parseInt(Math.random() * 1000)
-  const url = `ws://127.0.0.1:8000/ws/${client_id}`
+  const url = `${process.env.REACT_APP_WS_HOST}/ws/${client_id}`
   const socket = new WebSocket(url)
-  socket.addEventListener('open', () => {console.log('web socket connected')})
-  socket.addEventListener('close', () => {console.log('web socket disconnected')})
-  socket.addEventListener('error', () => {console.log('error')})
-  socket.addEventListener('message', (mes) => {
-    let message = JSON.parse(mes.data)
+  socket.addEventListener('message', (text) => {
+    let message = JSON.parse(text.data)
     if (message.message === 'refetch comments'){
       dispatch(commentsApi.util.invalidateTags(["Comments"]))
     }
   })
-
   const modalData = useSelector(state => state.modalWindow)
   return (
       <BrowserRouter>

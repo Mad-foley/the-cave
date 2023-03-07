@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom"
 export default function UserUpdate() {
     const navigate = useNavigate()
     const { data: user, isLoading} = useGetUserByIdQuery()
-    const[formData, setFormData] = useState({
+    const initialForm = {
         name: '',
         birthday: '',
         image_url: '',
         username: '',
         password: '',
-
-    })
+    }
+    const[formData, setFormData] = useState(initialForm)
     const [updateUser] = useUpdateUserMutation()
 
     const handleFormChange = (e) => {
@@ -33,6 +33,7 @@ export default function UserUpdate() {
         }
         const result = await updateUser(formData)
         if (result.data) {
+            setFormData(initialForm)
             navigate('/account')
         }
     }

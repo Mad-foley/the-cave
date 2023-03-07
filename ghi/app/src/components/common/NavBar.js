@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useGetTokenQuery } from "../../store/queries/authApi";
-import LogOutForm from "../accounts/LogOutModal";
-import LogInForm from "../accounts/LogInModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setBlur, setLoginWindow, setLogoutWindow } from "../../store/queries/modalSlice";
 
@@ -44,7 +42,10 @@ export default function NavBar() {
                         <li className={navlinkClass}>
                             <NavLink to='/wines'  aria-current="page">Collection</NavLink>
                         </li>
-                            {token &&     <li className={navlinkClass}><NavLink to='/wines/create'  aria-current="page">Create</NavLink></li>}
+                        {token &&
+                        <li className={navlinkClass}>
+                            <NavLink to='/wines/create'  aria-current="page">Create</NavLink>
+                        </li>}
                     </ul>
                     <ul className="flex justify-end">
                         {token &&

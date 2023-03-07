@@ -2,7 +2,6 @@ import { useDeleteUserMutation } from "../../store/queries/authApi"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setBlur, setLogged, setDeleteUserWindow } from "../../store/queries/modalSlice"
-import { authApi } from "../../store/queries/authApi"
 import { useLogOutMutation } from "../../store/queries/authApi"
 
 export default function DeleteUserForm() {
@@ -11,13 +10,15 @@ export default function DeleteUserForm() {
     const navigate = useNavigate()
     const [logout] = useLogOutMutation()
 
-    const handleDelete = () => {
-        deleteUser();
-        dispatch(setBlur(false))
-        dispatch(setDeleteUserWindow(false))
-        dispatch(setLogged(false))
-        logout()
-        navigate('/')
+    const handleDelete = async () => {
+        const result = await deleteUser();
+        if (result.data === true) {
+          dispatch(setBlur(false))
+          dispatch(setDeleteUserWindow(false))
+          dispatch(setLogged(false))
+          logout()
+          navigate('/')
+      }
     }
 
     const handleCancel = () => {
