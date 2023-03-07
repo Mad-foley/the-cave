@@ -20,13 +20,14 @@ export default function CreateUserForm() {
         'https://static.vecteezy.com/system/resources/previews/005/294/068/original/cute-red-panda-cartoon-icon-illustration-animal-flat-cartoon-style-free-vector.jpg',
         'https://thumbs.dreamstime.com/z/red-crowned-crane-icon-vector-illustration-cartoon-style-red-crowned-crane-icon-vector-illustration-cartoon-style-bird-isolated-148215539.jpg'
     ]
-    const [formData, setFormData] = useState({
+    const initialForm = {
         name: '',
         username: '',
         password: '',
         birthday: '',
         image_url: profilePics[Number.parseInt(Math.random() * profilePics.length)]
-    })
+    }
+    const [formData, setFormData] = useState(initialForm)
     const [createUser] = useCreateUserMutation()
     const [login] = useLogInMutation()
     const dispatch = useDispatch()
@@ -53,15 +54,7 @@ export default function CreateUserForm() {
                 navigation('/')
             }
         }
-        setFormData(
-            {
-                name: '',
-                username: '',
-                password: '',
-                birthday: '',
-                image_url: ''
-            }
-        )
+        setFormData(initialForm)
     }
     const handleProfileButton = event => {
         setFormData({
@@ -109,9 +102,9 @@ export default function CreateUserForm() {
                 value={formData.image_url}
                 className={inputClass}/>
                 {
-                    profilePics.map(pic => {
+                    profilePics.map((pic, idx) => {
                         return(
-                        <button className={pic === formData.image_url ? 'bg-blue-700 shadow-xl profile-img p-2' : 'p-2'} onClick={handleProfileButton} name='image_url' type='button' value={pic}>
+                        <button key={idx} className={pic === formData.image_url ? 'bg-blue-700 shadow-xl profile-img p-2' : 'p-2'} onClick={handleProfileButton} name='image_url' type='button' value={pic}>
                             <img src={pic} value={pic} style={{width:'50px', height:'50px'}} className="profile-img"/>
                         </button>
                     )

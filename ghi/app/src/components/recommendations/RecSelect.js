@@ -19,8 +19,17 @@ export default function RecSelect(){
     }
     if (isSuccess) {
         let recommendations = []
-        for (let i=0; i < 3; i++) {
+        let tmp = null
+        for (let i=0; i < 20; i++) {
             let randomIdx = Math.floor(Math.random()*wines.length)
+            if (randomIdx === tmp) {
+                console.log('i had to change')
+                if (randomIdx === wines.length) {
+                    randomIdx--
+                }
+                else {randomIdx++}
+            }
+            tmp = randomIdx
             recommendations.push(wines[randomIdx])
         }
         return(

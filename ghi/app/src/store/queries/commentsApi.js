@@ -86,5 +86,4 @@ export const {
     useGetCommentByWineIdQuery,
     useGetCommentByIdQuery,
     useGetCommentsQuery
-
 } = commentsApi

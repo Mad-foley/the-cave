@@ -11,7 +11,7 @@ import {logsApi} from "../../store/queries/logsApi"
 export default function WineCard({wine}) {
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
-    const {data: likes, isLoading, refetch} = useGetLikesByWinesQuery(wine.id)
+    const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
     const {data: token} = useGetTokenQuery()
     const navigate = useNavigate()
     const dispatch = useDispatch()

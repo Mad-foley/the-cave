@@ -35,12 +35,6 @@ export default function HomePage() {
     useEffect(()=>{
         if (isSuccess) {popular()}
     },[isSuccess])
-
-    // document.addEventListener('scroll', event => {
-    //     console.log(window.scrollY)
-    // })
-    // const quoteEl = document.querySelector('.quote-1')
-    // if (quoteEl) {console.log(quoteEl.getBoundingClientRect())}
     let randomNumber = Math.floor(Math.random()*quotes.length)
     let randomNumber2 = Math.floor(Math.random()*quotes.length)
     return (

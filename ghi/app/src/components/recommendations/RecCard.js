@@ -2,6 +2,7 @@ import plusSymbolWine from "../../utilities/png/plusSymbolWine.png"
 import { useDispatch } from "react-redux"
 import { setWine } from "../../store/queries/wineSlice"
 import { useNavigate } from "react-router-dom"
+import { winePreview } from "../../utilities/constants"
 
 
 export default function RecCard({wine}) {
@@ -19,6 +20,7 @@ export default function RecCard({wine}) {
         dispatch(setWine(formData))
         navigate('/wines/create')
     }
+
     return (
         <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
             <div className="border p-3 m-3 relative" style={{width:'500px'}}>
@@ -36,6 +38,7 @@ export default function RecCard({wine}) {
             <div className = "relative" style={{width:'200px'}}>
                 <img
                 src={wine.image}
+                onError={(e)=>{e.currentTarget.src = winePreview}}
                 className='absolute bottom-0 p-1'
                 style={{maxHeight:'300px', minHeight:'250px'}}
                 />

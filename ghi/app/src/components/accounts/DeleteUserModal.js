@@ -10,13 +10,15 @@ export default function DeleteUserForm() {
     const navigate = useNavigate()
     const [logout] = useLogOutMutation()
 
-    const handleDelete = () => {
-        deleteUser();
-        dispatch(setBlur(false))
-        dispatch(setDeleteUserWindow(false))
-        dispatch(setLogged(false))
-        logout()
-        navigate('/')
+    const handleDelete = async () => {
+        const result = await deleteUser();
+        if (result.data === true) {
+          dispatch(setBlur(false))
+          dispatch(setDeleteUserWindow(false))
+          dispatch(setLogged(false))
+          logout()
+          navigate('/')
+      }
     }
 
     const handleCancel = () => {

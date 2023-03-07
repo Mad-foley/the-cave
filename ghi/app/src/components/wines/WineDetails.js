@@ -5,8 +5,6 @@ import { useGetLikesByWinesQuery } from "../../store/queries/likesApi"
 import { useGetTokenQuery } from "../../store/queries/authApi"
 import CreateComment from "../comments/CreateCommentModal"
 import CommentModal from "../comments/Comments"
-import DeleteWineById from "./DeleteWineModal"
-import { useState } from 'react'
 import { useDispatch } from "react-redux"
 import { setBlur, setDeleteWindow, setDeleteWine } from "../../store/queries/modalSlice"
 
@@ -17,7 +15,7 @@ export default function WineDetails({socket}) {
     const dispatch = useDispatch()
     const {data: wine, isSuccess} = useGetWineByIdQuery(id)
     const {data: users, isLoading} = useGetUsersQuery()
-    const {data: likes, isError} = useGetLikesByWinesQuery(id)
+    const {data: likes} = useGetLikesByWinesQuery(id)
     const {data: token} = useGetTokenQuery()
     const creator = (id) => {
         for (let user of users) {

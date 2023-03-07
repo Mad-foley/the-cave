@@ -15,9 +15,7 @@ export const wineRecSlice = createSlice({
         setWine: (state,action) => {
             state.wine = action.payload
         },
-    },
-
-
+    }
 })
 
 export const {setWine} = wineRecSlice.actions

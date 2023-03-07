@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useLogInMutation } from '../../store/queries/authApi'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setBlur, setLoginWindow, setLogged } from "../../store/queries/modalSlice";
 import { logsApi } from '../../store/queries/logsApi';
 
@@ -15,8 +15,6 @@ export default function LogInForm() {
     const navigate = useNavigate()
     const [shake, setShake] = useState('')
     const dispatch = useDispatch()
-    const data = useSelector(state => state.modalWindow.modal)
-
 
     const handleFormData = (e) => {
         setFormData(
@@ -47,17 +45,15 @@ export default function LogInForm() {
         dispatch(setLoginWindow(false))
         navigate('/account/create')
     }
-
+    const handleExitButton = () => {
+        dispatch(setLoginWindow(false))
+        dispatch(setBlur(false))
+    }
     const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-30`
     return (
         <div className={loginContainerClass}>
             <div className='shadow bg-slate-200 rounded'>
-                <button
-                onClick={()=>{
-                    dispatch(setLoginWindow(false))
-                    dispatch(setBlur(false))
-                }}
-                className='text-black p-3'>X</button>
+                <button onClick={handleExitButton} className='text-black p-3'>X</button>
                 <h1 className='text-lg font-bold text-black pb-3 text-center'>Welcome</h1>
                 <form className='max-w-xs pl-10 pr-10 text-center' onSubmit={handleSubmit}>
                     <div className='mb-4 field'>

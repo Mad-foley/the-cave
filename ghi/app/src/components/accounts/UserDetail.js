@@ -45,7 +45,9 @@ export default function UserDetail() {
         dispatch(setBlur(true))
         dispatch(setDeleteUserWindow(true))
     }
-
+    const handleLikesButton = () => {
+        navigate('/account/wines')
+    }
     if(!isLoading && isSuccess && !isError){
         return(
             <div className="relative pl-20 pr-20 mt-10">
@@ -96,9 +98,7 @@ export default function UserDetail() {
                     >Your likes</button>
                     <div className="pt-3">
                         <button
-                        onClick={()=>{
-                            navigate('/account/wines')
-                        }}
+                        onClick={handleLikesButton}
                         className="likebutton p-1 rounded border"
                         >Your Wines</button>
                     </div>

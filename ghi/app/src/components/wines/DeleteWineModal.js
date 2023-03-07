@@ -1,9 +1,9 @@
 import { useDeleteWineMutation } from "../../store/queries/wineApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setDeleteWindow, setBlur, setDeleteWine } from "../../store/queries/modalSlice";
+import { setDeleteWindow, setBlur } from "../../store/queries/modalSlice";
 
-export default function DeleteWineById({ wineId }) {
+export default function DeleteWineById() {
     const [deleteWineData] = useDeleteWineMutation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -13,7 +13,6 @@ export default function DeleteWineById({ wineId }) {
         e.preventDefault()
         const response = await deleteWineData(modalData.deleteWine.id);
         if (response.data) {
-            console.log(response)
             dispatch(setBlur(false))
             dispatch(setDeleteWindow(false))
             navigate("/account")
