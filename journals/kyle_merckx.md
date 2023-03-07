@@ -1,6 +1,6 @@
 ## 3/7/23
 
-Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page.
+Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page. Got a dark mode version of the page setup. 
 
 ## 3/6/23
 
