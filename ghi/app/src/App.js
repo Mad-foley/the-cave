@@ -49,7 +49,7 @@ function App() {
         {modalData.logoutWindow && <LogOutForm />}
         {modalData.deleteWindow && <DeleteWineById />}
         {modalData.blur && <div style={{height: '100vh', width: '100vw'}} className='fixed bg-transparent z-20 bg-blur'></div>}
-        <div>
+        <div className='dark:bg-[#0E0604]'>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<RecSelect/>}/>

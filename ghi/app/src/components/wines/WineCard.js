@@ -78,7 +78,7 @@ export default function WineCard({wine}) {
     }
     if (!isLoading) {
         return (
-            <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
+            <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-[#0E0604] dark:text-white' style={{height:'300px', width:'600px'}}>
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
                     <button onClick={handleWineId} className='w-full'>
                         <div className = "text-center">
@@ -103,7 +103,7 @@ export default function WineCard({wine}) {
                 </div>
                 <div className="absolute right-3 top-1">
                     <div className="flex relative" style={{height:'35px'}}>
-                        <div className="color-wine absolute right-8 bottom-0" style={{fontSize:'25px'}}>{likes ? likes.length : 0}</div>
+                        <div className="text-[#73343A] dark:text-[#f9f2e8] absolute right-8 bottom-0" style={{fontSize:'25px'}}>{likes ? likes.length : 0}</div>
                         <button
                         style={{height:'20px', width:'30px'}}
                         onClick={handleLike}

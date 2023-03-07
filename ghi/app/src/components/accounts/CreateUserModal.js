@@ -2,28 +2,36 @@ import { useCreateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
 import { useLogInMutation } from "../../store/queries/authApi"
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../store/queries/modalSlice";
+import { setModal, setLogged } from "../../store/queries/modalSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateUserForm() {
-    const profileOption1 = 'https://www.freedomspromise.org/wp-content/uploads/2020/01/male-silluette.jpg'
-    const profileOption2 = 'https://simg.nicepng.com/png/small/356-3568165_blank-profile-picture-female.png'
-    const pizza = 'https://img.freepik.com/free-vector/cute-cool-pizza-slice-wearing-glasses-cartoon-vector-icon-illustration-food-holiday-icon-isolated_138676-4808.jpg?w=2000'
-    const pizza2 = 'https://cdn.dribbble.com/users/1787323/screenshots/9712559/media/53dfba9191d318106b7714b74fb9e3eb.png?compress=1&resize=400x300'
-    const grape = 'https://media.istockphoto.com/id/1300604627/vector/cute-grapes-logo-vector-illustration-design-with-eyes-and-mouth.jpg?s=170667a&w=0&k=20&c=lHaz067_5EHRcPsLJIn64fkOFvcbojOoZPNZb6zO_sg='
-    const dog = 'https://i.pinimg.com/originals/98/e6/62/98e6629104c2f4a0cc27787998f4c4dc.jpg'
-    const frog = 'https://wallpapers-clan.com/wp-content/uploads/2022/05/cute-pfp-31.jpg'
+    const profilePics = [
+        'https://img.freepik.com/free-vector/cute-cool-pizza-slice-wearing-glasses-cartoon-vector-icon-illustration-food-holiday-icon-isolated_138676-4808.jpg?w=2000',
+        'https://cdn.dribbble.com/users/1787323/screenshots/9712559/media/53dfba9191d318106b7714b74fb9e3eb.png?compress=1&resize=400x300',
+        'https://media.istockphoto.com/id/1300604627/vector/cute-grapes-logo-vector-illustration-design-with-eyes-and-mouth.jpg?s=170667a&w=0&k=20&c=lHaz067_5EHRcPsLJIn64fkOFvcbojOoZPNZb6zO_sg=',
+        'https://i.pinimg.com/originals/98/e6/62/98e6629104c2f4a0cc27787998f4c4dc.jpg',
+        'https://wallpapers-clan.com/wp-content/uploads/2022/05/cute-pfp-31.jpg',
+        'https://static.vecteezy.com/system/resources/previews/000/618/739/original/cute-little-kitten-vector.jpg',
+        'https://image.chewy.com/is/image/catalog/265891_PT8._AC_SL1200_V1624337078_.jpg',
+        'https://www.goodfreephotos.com/albums/vector-images/blue-robot-vector-art.png',
+        'https://illustoon.com/photo/4797.png',
+        'https://preview.redd.it/rbmmfzpa9pz71.png?auto=webp&s=df0d7627d81586f6ceb9d63aa971cb4359d8534c',
+        'https://static.vecteezy.com/system/resources/previews/005/294/068/original/cute-red-panda-cartoon-icon-illustration-animal-flat-cartoon-style-free-vector.jpg',
+        'https://thumbs.dreamstime.com/z/red-crowned-crane-icon-vector-illustration-cartoon-style-red-crowned-crane-icon-vector-illustration-cartoon-style-bird-isolated-148215539.jpg'
+
+
+    ]
     const [formData, setFormData] = useState({
         name: '',
         username: '',
         password: '',
         birthday: '',
-        image_url: dog
+        image_url: profilePics[Number.parseInt(Math.random() * profilePics.length)]
     })
     const [createUser] = useCreateUserMutation()
     const [login] = useLogInMutation()
     const dispatch = useDispatch()
-    const modalData = useSelector(state => state.modalWindow.modal)
     const navigation = useNavigate()
 
 
@@ -43,10 +51,7 @@ export default function CreateUserForm() {
                 password: formData.password
             })
             if(log.data) {
-                dispatch(setModal({
-                    ...modalData,
-                    logged: true,
-                }))
+                dispatch(setLogged(true))
                 navigation('/')
             }
         }
@@ -105,24 +110,15 @@ export default function CreateUserForm() {
                 placeholder="Profile picture URL"
                 value={formData.image_url}
                 className={inputClass}/>
-                <button className="p-2" onClick={handleProfileButton} name='image_url' type='button' value={profileOption1}>
-                    <img src={profileOption1} value={profileOption1} style={{width:'50px', height:'50px'}} className="profile-img"/>
-                </button>
-                <button className='p-2' onClick={handleProfileButton} name='image_url' type='button' value={profileOption2}>
-                    <img src={profileOption2} value={profileOption2} style={{width:'50px', height:'50px'}} className='profile-img'/>
-                </button>
-                <button className="p-2" onClick={handleProfileButton} name="image_url" type="button" value={pizza}>
-                    <img src={pizza} className="profile-img" style={{width:'50px', height:'50px'}}/>
-                </button>
-                <button className="p-2" onClick={handleProfileButton} name="image_url" type="button" value={pizza2}>
-                    <img src={pizza2} className="profile-img" style={{width:'50px', height:'50px'}}/>
-                </button>
-                <button className="p-2" onClick={handleProfileButton} name="image_url" type="button" value={grape}>
-                    <img src={grape} className="profile-img" style={{width:'50px', height:'50px'}}/>
-                </button>
-                <button className="p-2" onClick={handleProfileButton} name="image_url" type="button" value={dog}>
-                    <img src={dog} className="profile-img" style={{width:'50px', height:'50px'}}/>
-                </button>
+                {
+                    profilePics.map(pic => {
+                        return(
+                        <button className={pic === formData.image_url ? 'bg-blue-700 shadow-xl profile-img p-2' : 'p-2'} onClick={handleProfileButton} name='image_url' type='button' value={pic}>
+                            <img src={pic} value={pic} style={{width:'50px', height:'50px'}} className="profile-img"/>
+                        </button>
+                    )
+                })
+                }
                 <br></br>
                 <button
                 className="navbutton mt-2 font-bold text-sm py-2 px-4 rounded"
