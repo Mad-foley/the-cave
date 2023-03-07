@@ -70,6 +70,7 @@ body {
 .navbutton:hover {
     background-color: white;
     color:#73343A;
+    transform: scale(105%);
     transition: 0.7s;
 }
 /* Loading animation */
@@ -283,6 +284,7 @@ body {
 }
 .log:hover {
     background-color: white;
+    transform: scale(105%);
     color: #73343A;
     transition: 0.3s;
 }

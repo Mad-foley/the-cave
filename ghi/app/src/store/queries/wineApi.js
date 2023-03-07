@@ -41,7 +41,7 @@ export const wineApi = createApi({
                     body: data
                 }
             },
-            invalidatesTags: ['Wines']
+            invalidatesTags: ['Wines', 'MyWines']
         }),
         deleteWine: build.mutation ({
             query: (wine_id) => ({

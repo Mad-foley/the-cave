@@ -44,7 +44,7 @@ export default function HomePage() {
                     <div className="z-10" >
                         <div className="home-page grid justify-center">
                             <div className=" p-5 rounded-xl">
-                                <div className="" style={{fontSize:'40px'}}>Welcome to the CAVE</div>
+                                <div className="text-6xl">Welcome to the CAVE</div>
                                 <div className="grid justify-center">for wine lovers by wine lovers</div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ export default function HomePage() {
                         </div>
                         <div className="home-page grid justify-center">
                             <div className="pt-10 mt-10" style={{height:'600px'}}>
-                                <NavLink to='/account/create' className="navbutton p-3 rounded-xl">get started</NavLink>
+                                <NavLink to='/account/create' className="navbutton p-3 rounded-xl border">get started</NavLink>
                             </div>
                         </div>
                         <div className="home-page grid justify-center">
@@ -68,7 +68,7 @@ export default function HomePage() {
                         <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
                         <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
                         <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
-                            <div className="p-3 m-3 text-end" style={{fontSize:'50px'}}>Curate yourself a collection of wines and share them with your friends</div>
+                            <div className="p-3 m-3 text-end lg:text-6xl md:text-4xl sm:text-xl">Curate yourself a collection of wines and share them with your friends</div>
                             <div className="pr-10">
                                 <img
                                 className="rounded-xl"
@@ -83,7 +83,7 @@ export default function HomePage() {
                             <div className="text-center">{quotes[randomNumber2].author}</div>
                         </div>
                         <img
-                        className="img-multiply"
+                        className="img-multiply pt-20"
                         style={{width:'100vw'}}
                         src='https://t3.ftcdn.net/jpg/03/15/93/00/360_F_315930038_dhziskNkOA8Dt24G6TCEPAV6r7bt5MEY.jpg'/>
                     </div>

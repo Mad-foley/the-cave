@@ -94,12 +94,12 @@ export default function UserDetail() {
                 <div className="absolute top-10 left-7 text-end">
                     <button
                     onClick={handleList}
-                    className='likebutton p-1 rounded border'
+                    className='navbutton p-1 rounded border'
                     >Your likes</button>
                     <div className="pt-3">
                         <button
                         onClick={handleLikesButton}
-                        className="likebutton p-1 rounded border"
+                        className="navbutton p-1 rounded border"
                         >Your Wines</button>
                     </div>
                 </div>

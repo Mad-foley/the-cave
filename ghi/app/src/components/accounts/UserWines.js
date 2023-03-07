@@ -8,8 +8,11 @@ export default function UserWines() {
     if (isSuccess && !isLoading) {
         return (
                 <div>
-                    <div className="flex justify-center text-2xl">Your wines</div>
+                    <div className="flex justify-center text-2xl pt-5">Your wines</div>
                     <div className="flex justify-center">0 - {wines.length}</div>
+                    {wines.length === 0 &&
+                    <div className="text-xl text-center">Add wines to the database to get started</div>
+                        }
                     <div className="winepage grid justify-center">
                         {wines.map(wine => {
                             return (
