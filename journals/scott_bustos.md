@@ -25,5 +25,25 @@ We started working with redux and created forms and our store. Today we were mos
 ## 02/22/2023
 We worked on finshing our endpoints for the user authentication. We then moved on to creating wine end points.
 
-## 02/22/2023
+## 02/23/2023
 We finshed the wine api endpoints and started working with the like endpoints. We created a card for our wines so we could test the likes on it.
+
+## 02/24/2023
+We tested out redux and how their slices work. We also added more styling to the homepage.
+
+## 02/27/2023
+Styled create the wine page using react. We also worked on making a blur for the wine-page.
+
+## 02/28/2023
+Worked on CRUD in redux. We also worked on fixing some of the bugs we had discovered.
+
+## 03/01/2023
+We worked on creating comments on the frontend. We had to fix some functionality of it to work. We also worked on react-tailwind
+
+## 03/02/2023
+We made a recommadation redux list. We created logs. Continued to make changes to our css.
+
+## 03/06/2023
+Styled dark mode theme. We also deleted some features that were not in used. We added a websocket to our application as well.
+
+## 03/07/2023
