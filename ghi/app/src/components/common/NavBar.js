@@ -44,9 +44,7 @@ export default function NavBar() {
                         <li className={navlinkClass}>
                             <NavLink to='/wines'  aria-current="page">Collection</NavLink>
                         </li>
-                        <li className={navlinkClass}>
-                            {token && <NavLink to='/wines/create'  aria-current="page">Create</NavLink>}
-                        </li>
+                            {token &&     <li className={navlinkClass}><NavLink to='/wines/create'  aria-current="page">Create</NavLink></li>}
                     </ul>
                     <ul className="flex justify-end">
                         {token &&
