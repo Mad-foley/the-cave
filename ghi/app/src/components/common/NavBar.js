@@ -31,16 +31,17 @@ export default function NavBar() {
                                 <span className="font-bold text-xl">CAVE</span>
                             </NavLink>
                         </li>
-                        <li className={navlinkClass}>
-                            <NavLink to='/recommendations'>Recommendations</NavLink>
-                        </li>
+
                     </ul>
                     <ul className="flex justify-center">
-                        <li className={navlinkClass}>
+                        {/* <li className={navlinkClass}>
                             <NavLink to='/'  aria-current="page">Home</NavLink>
-                        </li>
+                        </li> */}
                         <li className={navlinkClass}>
                             <NavLink to='/wines'  aria-current="page">Collection</NavLink>
+                        </li>
+                        <li className={navlinkClass}>
+                            <NavLink to='/recommendations'>Recommendations</NavLink>
                         </li>
                         {token &&
                         <li className={navlinkClass}>
