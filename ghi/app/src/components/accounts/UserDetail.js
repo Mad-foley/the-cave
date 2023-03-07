@@ -81,7 +81,7 @@ export default function UserDetail() {
                     <div className="pr-5">
                         <div className="text-center text-2xl pb-1 pt-5">Your Logs</div>
                         <div>
-                            <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-black dark:text-white" style={{height:'51vh', width:'30vw'}}>
+                            <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-[#0E0604] dark:text-white" style={{height:'51vh', width:'30vw'}}>
                                 <div className="absolute w-full pr-10">
                                     <LogsFeed />
                                 </div>

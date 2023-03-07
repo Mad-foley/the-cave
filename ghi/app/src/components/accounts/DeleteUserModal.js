@@ -2,7 +2,6 @@ import { useDeleteUserMutation } from "../../store/queries/authApi"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setBlur, setLogged, setDeleteUserWindow } from "../../store/queries/modalSlice"
-import { authApi } from "../../store/queries/authApi"
 import { useLogOutMutation } from "../../store/queries/authApi"
 
 export default function DeleteUserForm() {
