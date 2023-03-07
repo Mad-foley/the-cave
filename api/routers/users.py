@@ -28,12 +28,9 @@ router = APIRouter()
 @router.get('/api/users', response_model=Union[List[UserOut], Error])
 def get_all_users(
     repo: UserQueries = Depends(),
-    account_data: Optional[dict]
-    = Depends(authenticator.try_get_current_account_data),
 ):
-    if account_data:
-        return repo.get_all_users()
-    return {"message": "You are not logged in"}
+    return repo.get_all_users()
+
 
 
 @router.post('/api/users', response_model=Union[TokenResponse, Error])

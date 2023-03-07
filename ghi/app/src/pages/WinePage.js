@@ -32,6 +32,7 @@ function WinePage() {
 
     const handleSearch = (e) => {
         setQuery(e.target.value)
+        setIndexes({start:-1, end:10})
     }
 
     const filteredList = () => {
