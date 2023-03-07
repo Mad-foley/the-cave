@@ -17,7 +17,7 @@ export default function LogsFeed () {
                 return(
                     <div className="border rounded grid grid-cols-4 mb-3 shadow-xl p-1 log" key={log.id}>
                         <div className="col-span-3 text-sm">{log.note}</div>
-                        <div className="col-span-1 text-sm">{formatDate(log.created_on)}</div>
+                        <div className="col-span-1 text-sm text-end">{formatDate(log.created_on)}</div>
                     </div>
                 )
             }).reverse()

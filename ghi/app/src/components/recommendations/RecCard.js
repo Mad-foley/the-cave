@@ -22,7 +22,7 @@ export default function RecCard({wine}) {
     }
 
     return (
-        <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-black dark:text-white' style={{height:'300px', width:'600px'}}>
+        <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-[#453f3f] dark:text-white' style={{height:'300px', width:'600px'}}>
             <div className="border p-3 m-3 relative" style={{width:'500px'}}>
                 <div className = "text-center">
                     <div className='text-xl font-bold border-b'>{wine.name}</div>
@@ -45,7 +45,7 @@ export default function RecCard({wine}) {
             </div>
             <div className="p-2">
                 <button className="plusButton" onClick={handleAddButton}>
-                    <img src={plusSymbolWine} style={{width:'50px'}}/>
+                    <img className="plusButton" src={plusSymbolWine} style={{width:'50px'}}/>
                 </button>
             </div>
         </div>

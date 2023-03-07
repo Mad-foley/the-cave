@@ -1,15 +1,143 @@
-body {
-    background-color: #73343A;
-    color: #f9f2e8;
-    font-family: 'Playfair Display', serif;
-}
-.bg-wine {
-    background-color: #73343A;
-}
 /* To make default scrollbar hidden*/
 ::-webkit-scrollbar {
     display: none;
 }
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #0E0604;
+    }
+    .navbutton {
+        background-color: #0E0604;
+    }
+    .navbutton:hover {
+        background-color: white;
+        color:#0E0604;
+    }
+    .likebutton:hover {
+        background-color: white;
+        color: #0E0604;
+    }
+    .likebutton {
+        background-color: #595454;
+        color: white;
+    }
+    .log:hover {
+        color: #0E0604;
+        background-color: white;
+    }
+    .plusButton {
+        filter: grayscale() brightness(1.5);
+    }
+    .swirlIcon {
+        filter: grayscale();
+    }
+    .img-multiply {
+        filter: invert() brightness(0.3);
+    }
+    .gif-img {
+        filter: grayscale()
+    }
+    .plusButton {
+        filter: grayscale() brightness(1.6);
+    }
+    .plusButton:hover {
+        filter: grayscale() brightness(2);
+    }
+    .userbutton {
+        background-color: #595454;
+        color: white;
+    }
+    .userbutton:hover {
+        background-color: white;
+        color:#0E0604;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #73343A;
+    }
+    .navbutton {
+        background-color: #73343A;
+    }
+    .navbutton:hover {
+        background-color: white;
+        color:#73343A;
+    }
+    .likebutton:hover {
+        background-color: white;
+        color: #73343A;
+    }
+    .likebutton {
+        background-color: #73343A;
+        color: white;
+    }
+    .log:hover {
+        color: #73343A;
+        background-color: white;
+    }
+    .swirlIcon:hover {
+        filter: hue-rotate(360deg);
+    }
+    .img-multiply {
+        mix-blend-mode: multiply;
+    }
+    .plusButton:hover {
+        filter: hue-rotate(360deg);
+    }
+    .userbutton {
+        background-color: #73343A;
+        color: white;
+    }
+    .userbutton:hover {
+        background-color: white;
+        color: #73343A;
+    }
+}
+body {
+    color: white;
+    font-family: 'Playfair Display', serif;
+}
+.img-multiply {
+    opacity: 0.5;
+}
+.navbutton {
+    transition: 0.7s
+}
+.navbutton:hover {
+    transform: scale(105%);
+    transition: 0.7s;
+}
+.userbutton {
+    transition: 0.3s;
+}
+.userbutton:hover {
+    transform: scale(105%);
+    transition: 0.4s;
+}
+.log:hover {
+    transform: scale(105%);
+    transition: 0.3s;
+}
+.plusButton {
+    transition: 1s;
+}
+.plusButton:hover {
+    transform: rotate(180deg) scale(110%);
+
+    transition: 1s;
+}
+.log {
+    transition: 0.3s;
+}
+.swirlIcon {
+    transition: 2s;
+}
+.swirlIcon:hover {
+    transition: 2s;
+    transform: rotate(360deg);
+}
+
 /* Wine page collection loading in animation */
 .winecard {
     animation: wineload 0.5s ease-out 0.3s 1 normal forwards;
@@ -63,18 +191,6 @@ body {
         transform: translateX(0%)
     }
 }
-/* Navbar custom colors */
-.navbutton {
-    background-color: #73343A;
-}
-.navbutton:hover {
-    background-color: white;
-    color:#73343A;
-    transform: scale(105%);
-    transition: 0.7s;
-}
-/* Loading animation */
-
 .load-container {
     width: 500px;
     height: 500px;
@@ -119,13 +235,6 @@ body {
 .bg-blur {
     backdrop-filter: blur(2px);
     transition: 0.5s;
-}
-.bg-blur .main-img {
-    mix-blend-mode: multiply;
-}
-.img-multiply {
-    mix-blend-mode: multiply;
-    opacity: 0.5;
 }
 
 /* Create wine form animation */
@@ -179,18 +288,17 @@ body {
     }
 }
 /* Logo */
+.main-logo {
+    transition: 0.4s;
+}
+.main-logo:hover {
+    transform:scale(105%);
+    transition: 0.4s;
+}
 .custom-type {
     font-family: 'Monsieur La Doulaise', cursive;
     position: absolute;
     opacity: 0.2;
-}
-.likebutton:hover {
-    background-color: white;
-    color: #73343A;
-}
-.likebutton {
-    background-color: #73343A;
-    color: white;
 }
 
 .scroll_button:hover {
@@ -247,14 +355,7 @@ body {
 .color-wine {
     color: #73343A;
 }
-.plusButton {
-    transition: 1s;
-}
-.plusButton:hover {
-    transform: rotate(180deg) scale(120%);
-    filter: hue-rotate(360deg);
-    transition: 1s;
-}
+
 .recommendation-load {
     animation: recLoad 1s ease-out 0.3s 1 normal forwards;
     opacity: 0;
@@ -273,21 +374,4 @@ body {
 }
 .recommendation-load div:nth-child(3) {
     animation-delay: 1.5s;
-}
-.swirlIcon {
-    transition: 2s;
-}
-.swirlIcon:hover {
-    transition: 2s;
-    transform: rotate(360deg);
-    filter: hue-rotate(360deg);
-}
-.log:hover {
-    background-color: white;
-    transform: scale(105%);
-    color: #73343A;
-    transition: 0.3s;
-}
-.log {
-    transition: 0.3s;
 }

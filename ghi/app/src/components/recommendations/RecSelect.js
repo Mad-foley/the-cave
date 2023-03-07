@@ -33,7 +33,7 @@ export default function RecSelect(){
                 <div className="relative mx-20 flex justify-end">
                     <div className="">
                         <div className="text-white">Select a type</div>
-                        <select className=" p-1 rounded bg-wine text-white" onChange={handleChange} name="type" style={{filter:'brightness(70%)'}}>
+                        <select className=" p-1 rounded bg-wine light:text-white dark:text-black" onChange={handleChange} name="type" style={{filter:'brightness(70%)'}}>
                             <option defaultValue>{type === 'reds' ? 'Choose a type' : type.charAt(0).toUpperCase() + type.slice(1)}</option>
                             <option value="reds">Reds</option>
                             <option value="whites">Whites</option>
