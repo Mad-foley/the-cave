@@ -73,7 +73,7 @@ def delete_like(
     if account_data:
         result = repo.delete_like(wine_id, account_data['id'])
         wine = wine_repo.get_wine_by_id(wine_id)
-        message = f"{account_data['name']} unliked{wine.name}"
+        message = f"{account_data['name']} unliked {wine.name}"
         log.create_log(account_data['id'], message)
         return result
     else:

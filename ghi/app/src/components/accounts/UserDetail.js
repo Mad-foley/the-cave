@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 export default function UserDetail() {
     const {data:likes, isSuccess} = useGetLikesByUserQuery()
     const navigate = useNavigate()
-    const [wineId, setWineId] = useState()
+    const [wineId, setWineId] = useState(4)
     const { data: user, isLoading} = useGetUserByIdQuery()
     const {data:wine, isError} = useGetWineByIdQuery(wineId)
     const dispatch = useDispatch()

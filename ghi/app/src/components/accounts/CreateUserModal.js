@@ -2,7 +2,7 @@ import { useCreateUserMutation } from "../../store/queries/authApi"
 import { useState } from "react"
 import { useLogInMutation } from "../../store/queries/authApi"
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../store/queries/modalSlice";
+import { setModal, setLogged } from "../../store/queries/modalSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateUserForm() {
@@ -47,6 +47,7 @@ export default function CreateUserForm() {
                     ...modalData,
                     logged: true,
                 }))
+                dispatch(setLogged(true))
                 navigation('/')
             }
         }

@@ -135,7 +135,7 @@ class UserQueries:
                         """,
                         [user_id]
                     )
-                    return True if result is not None else False
+                return {"deleted":True} if result is not None else {"error": "user not deleted"}
 
         except Exception as e:
             print(e)
