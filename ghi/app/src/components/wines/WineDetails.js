@@ -41,7 +41,7 @@ export default function WineDetails({socket}) {
                     <div className="pl-10">
                         <div className="flex justify-between shadow-xl border-b-2 text-2xl pl-6 pr-5 pb-2 mb-5 ml-10">
                             <div style={{fontSize:'30px'}}>{wine.name}</div>
-                            <div>{wine.vintage}</div>
+                            <div className="ml-3">{wine.vintage}</div>
                         </div>
                         <div className="flex border p-4 ml-10 rounded-xl shadow-xl">
                             <div className="pr-10">

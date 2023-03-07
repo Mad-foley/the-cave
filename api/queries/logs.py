@@ -60,7 +60,8 @@ class LogQueries:
                         """
                         SELECT user_id, note, created_on, id
                         FROM logs
-                        WHERE user_id = %s;
+                        WHERE user_id = %s
+                        ORDER BY created_on;
                         """,
                         [user_id]
                     )

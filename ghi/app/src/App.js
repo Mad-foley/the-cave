@@ -22,7 +22,7 @@ import DeleteWineById from './components/wines/DeleteWineModal';
 import DeleteUserForm from './components/accounts/DeleteUserModal';
 import { commentsApi } from './store/queries/commentsApi';
 import { useDispatch } from 'react-redux';
-
+import {setBlur, setDeleteUserWindow, setDeleteWindow, setLoginWindow, setLogoutWindow} from './store/queries/modalSlice'
 
 function App() {
   const dispatch = useDispatch()
@@ -37,6 +37,13 @@ function App() {
     }
   })
   const modalData = useSelector(state => state.modalWindow)
+  const handleBackgroundClick = () => {
+    dispatch(setBlur(false))
+    dispatch(setDeleteUserWindow(false))
+    dispatch(setDeleteWindow(false))
+    dispatch(setLoginWindow(false))
+    dispatch(setLogoutWindow(false))
+  }
   return (
       <BrowserRouter>
         <NavBar />
@@ -44,7 +51,7 @@ function App() {
         {modalData.loginWindow && <LogInForm />}
         {modalData.logoutWindow && <LogOutForm />}
         {modalData.deleteWindow && <DeleteWineById />}
-        {modalData.blur && <div style={{height: '100vh', width: '100vw'}} className='fixed bg-transparent z-20 bg-blur'></div>}
+        {modalData.blur && <div onClick={handleBackgroundClick} style={{height: '100vh', width: '100vw'}} className='fixed bg-transparent z-20 bg-blur'></div>}
         <div className='dark:bg-[#0E0604]'>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
