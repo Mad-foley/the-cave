@@ -49,8 +49,8 @@ export default function HomePage() {
                             </div>
                         </div>
                         <div className="flex justify-center relative">
-                            <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img"></div>
-                            <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img"></iframe>
+                            <div style={{height:'500px', width:'500px'}} className="bg-transparent absolute profile-img z-20"></div>
+                            <iframe src="https://giphy.com/embed/pzGIuR1UeI2oFhyqP1" width="480" height="480" className="profile-img gif-img"></iframe>
                         </div>
                         <div className="home-page grid justify-center">
                             <div className="pt-10 mt-10" style={{height:'600px'}}>
@@ -64,7 +64,7 @@ export default function HomePage() {
                             </div>}
                         </div>
                     </div>
-                    <div className="bg-wine z-10 mt-10" style={{height:'800px', width:'100vw'}}>
+                    <div className="bg-[#73343A] dark:bg-[#0E0604] z-10 mt-10" style={{height:'800px', width:'100vw'}}>
                         <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
                         <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
                         <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
@@ -77,7 +77,7 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-wine z-10 relative">
+                    <div className="bg-[#73343A] dark:bg-[#0E0604] z-10 relative">
                         <div className="absolute w-full" >
                             <div className="text-center" style={{fontSize:'30px'}}>{quotes[randomNumber2].quote}</div>
                             <div className="text-center">{quotes[randomNumber2].author}</div>
@@ -87,7 +87,7 @@ export default function HomePage() {
                         style={{width:'100vw'}}
                         src='https://t3.ftcdn.net/jpg/03/15/93/00/360_F_315930038_dhziskNkOA8Dt24G6TCEPAV6r7bt5MEY.jpg'/>
                     </div>
-                    <div className="bg-wine z-10 pb-10">
+                    <div className="bg-[#73343A] dark:bg-[#0E0604] z-10 pb-10">
                         <div className="text-center">created with a lot of wine</div>
                         <div className="flex justify-center pt-10">
                             <img src={swirlIcon} className="swirlIcon"/>

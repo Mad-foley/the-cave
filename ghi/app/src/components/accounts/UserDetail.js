@@ -51,9 +51,9 @@ export default function UserDetail() {
     if(!isLoading && isSuccess && !isError){
         return(
             <div className="relative pl-20 pr-20 mt-10">
-                <div className="border grid grid-cols-2 rounded-xl shadow-xl pr-10" id="user-card">
+                <div className="border dark:bg-[#453f3f] grid grid-cols-2 rounded-xl shadow-xl pr-10" id="user-card">
                     <div className="relative pt-10 pb-5 pl-20 pr-3">
-                        <div className="border p-5 rounded-xl shadow-xl">
+                        <div className="border p-5 rounded-xl shadow-xl dark:bg-[#595454]">
                             <div className="text-2xl text-center pt-3">
                                 <span className="pr-1">Welcome back</span>
                                 <span>{user.name}</span>
@@ -82,8 +82,8 @@ export default function UserDetail() {
                     </div>
                     <div className="pr-5">
                         <div className="text-center text-2xl pb-1 pt-5">Your Logs</div>
-                        <div>
-                            <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-[#0E0604] dark:text-white" style={{height:'51vh', width:'30vw'}}>
+                        <div >
+                            <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-[#595454]" style={{height:'51vh', width:'30vw'}}>
                                 <div className="absolute w-full pr-10">
                                     <LogsFeed />
                                 </div>
@@ -94,12 +94,12 @@ export default function UserDetail() {
                 <div className="absolute top-10 left-7 text-end">
                     <button
                     onClick={handleList}
-                    className='navbutton p-1 rounded border'
+                    className='userbutton p-1 rounded border'
                     >Your likes</button>
                     <div className="pt-3">
                         <button
                         onClick={handleLikesButton}
-                        className="navbutton p-1 rounded border"
+                        className="userbutton p-1 rounded border"
                         >Your Wines</button>
                     </div>
                 </div>
