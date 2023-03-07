@@ -129,8 +129,9 @@ export default function CreateWineForm() {
                             {errorMsg && <div className="text-center">Something went wrong, try again</div>}
                         </form>
                     </div>
-                    <div className="preview container mx-auto p-5">
+                    <div className="relative preview container mx-auto p-5">
                         <div className="pb-5 pt-5 font-bold text-xl">PREVIEW</div>
+                        <div className="absolute z-10 bg-transparent w-full h-full"></div>
                         <WineCard wine={previewData}/>
                     </div>
                 </div>

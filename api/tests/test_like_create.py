@@ -6,10 +6,12 @@ from models.like_models import LikeOut
 from authenticator import authenticator
 
 
+### Written by Kyle
+
 
 def fake_account_data():
     return {
-        "name": "1",
+        "name": "test",
         "username": "1",
         "password": "1",
         "id": 1
@@ -39,8 +41,7 @@ def test_create_like():
     app.dependency_overrides[authenticator.try_get_current_account_data] = fake_account_data
 
     input = {
-            "wine_id": 1,
-            "user_id": 1
+            "wine_id": 1
             }
 
     response = client.post(

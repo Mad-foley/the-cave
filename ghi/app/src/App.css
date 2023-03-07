@@ -124,7 +124,6 @@ body {
 }
 .plusButton:hover {
     transform: rotate(180deg) scale(110%);
-
     transition: 1s;
 }
 .log {

@@ -2,6 +2,10 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.likes import LikeQueries
 
+
+### Written by Scott
+
+
 client = TestClient(app)
 
 class FakeLikeQueries:
@@ -26,4 +30,3 @@ def test_get_all_likes():
 
     assert res.status_code == 200
     assert isinstance(data,list)
- 
