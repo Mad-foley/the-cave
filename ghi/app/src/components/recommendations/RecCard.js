@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { setWine } from "../../store/queries/wineSlice"
 import { useNavigate } from "react-router-dom"
 import { winePreview } from "../../utilities/constants"
+import { useEffect, useState } from "react"
 
 
 export default function RecCard({wine}) {
@@ -36,8 +37,9 @@ export default function RecCard({wine}) {
                 </div>
             </div>
             <div className = "relative" style={{width:'200px'}}>
-                <img
+            <img
                 src={wine.image}
+                alt="wine image"
                 onError={(e)=>{e.currentTarget.src = winePreview}}
                 className='absolute bottom-0 p-1'
                 style={{maxHeight:'300px', minHeight:'250px'}}

@@ -374,3 +374,6 @@ body {
 .recommendation-load div:nth-child(3) {
     animation-delay: 1.5s;
 }
+.check {
+    cursor: pointer;
+}

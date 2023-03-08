@@ -10,6 +10,7 @@ export const modalSlice = createSlice({
     deleteWindow: false,
     deleteWine: {},
     deleteUserWindow: false,
+    expandWine: []
   },
   reducers: {
     setModal: (state, action) => {
@@ -35,11 +36,14 @@ export const modalSlice = createSlice({
     },
     setDeleteUserWindow: (state, action) => {
       state.deleteUserWindow = action.payload
+    },
+    setExpandWine: (state, action) => {
+      state.expandWine = action.payload
     }
   },
 });
 
 export const {setModal, setBlur, setDeleteWindow, setDeleteWine,
-    setLogged, setLoginWindow, setLogoutWindow, 
-  setDeleteUserWindow} = modalSlice.actions
+    setLogged, setLoginWindow, setLogoutWindow,
+  setDeleteUserWindow, setExpandWine} = modalSlice.actions
 export default modalSlice.reducer

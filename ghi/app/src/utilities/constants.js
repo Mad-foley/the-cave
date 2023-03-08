@@ -75,3 +75,4 @@ export const quotes = [
         author: 'Michael Broadbent'
       }
   ]
+

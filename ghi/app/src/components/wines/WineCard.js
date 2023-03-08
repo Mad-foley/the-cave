@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom"
 import { heartFilled } from "../../utilities/constants"
 import { heartNotFilled } from "../../utilities/constants"
 import { wineApi } from "../../store/queries/wineApi"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {logsApi} from "../../store/queries/logsApi"
+import { setExpandWine } from "../../store/queries/modalSlice"
 
 
 export default function WineCard({wine}) {
+    const expandedWines = useSelector(state => state.modalWindow.expandWine)
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
     const {data: likes, isLoading} = useGetLikesByWinesQuery(wine.id)
@@ -72,9 +74,12 @@ export default function WineCard({wine}) {
         }
         return liked
     }
+    const handleCollapseButton = () =>{
+        dispatch(setExpandWine([...expandedWines, wine.id]))
+    }
     if (!isLoading) {
         return (
-            <div className='wine-body flex justify-between bg-white text-black rounded relative dark:bg-[#453f3f] dark:text-white' style={{height:'300px', width:'600px'}}>
+            <div className='wine-body shadow-xl flex justify-between bg-white text-black rounded relative dark:bg-[#453f3f] dark:text-white' style={{height:'300px', width:'600px'}}>
                 <div className="border p-3 m-3 relative" style={{width:'500px'}}>
                     <button onClick={handleWineId} className='w-full'>
                         <div className = "text-center">
@@ -96,6 +101,11 @@ export default function WineCard({wine}) {
                     className='absolute bottom-0 p-1'
                     style={{maxHeight:'300px', minHeight:'250px'}}
                     />
+                    <div className="absolute bottom-2 left-10 w-full">
+                        <div className="flex justify-end mr-2">
+                            <button onClick={handleCollapseButton} className="rounded navbutton text-white p-1">collapse</button>
+                        </div>
+                    </div>
                 </div>
                 <div className="absolute right-3 top-1">
                     <div className="flex relative" style={{height:'35px'}}>
@@ -106,7 +116,6 @@ export default function WineCard({wine}) {
                         className='heartButton'
                         >{handleHeart() ? heartFilled : heartNotFilled}</button>
                     </div>
-
                 </div>
             </div>
         )
