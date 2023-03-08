@@ -32,7 +32,6 @@ def get_all_users(
     return repo.get_all_users()
 
 
-
 @router.post('/api/users', response_model=Union[TokenResponse, Error])
 async def create_user(
     user: UserIn,

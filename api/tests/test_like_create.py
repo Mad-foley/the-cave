@@ -6,7 +6,7 @@ from models.like_models import LikeOut
 from authenticator import authenticator
 
 
-### Written by Kyle
+# Written by Kyle
 
 
 def fake_account_data():
@@ -17,13 +17,14 @@ def fake_account_data():
         "id": 1
     }
 
+
 class FakeLikeQueries():
     def create_like(self, wine_id, user_id):
         return LikeOut(
-            wine_id = wine_id,
-            user_id = user_id,
-            created_on = 2000-1-1,
-            id = 1
+            wine_id=wine_id,
+            user_id=user_id,
+            created_on=2000-1-1,
+            id=1
         )
 
 
@@ -38,7 +39,8 @@ client = TestClient(app)
 def test_create_like():
     app.dependency_overrides[LogQueries] = FakeLogQueries
     app.dependency_overrides[LikeQueries] = FakeLikeQueries
-    app.dependency_overrides[authenticator.try_get_current_account_data] = fake_account_data
+    app.dependency_overrides[authenticator
+                             .try_get_current_account_data] = fake_account_data
 
     input = {
             "wine_id": 1
@@ -46,7 +48,7 @@ def test_create_like():
 
     response = client.post(
         '/api/wines/1/likes',
-        json = input
+        json=input
     )
     data = response.json()
     print(data)
