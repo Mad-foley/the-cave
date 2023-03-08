@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import { setWine } from "../../store/queries/wineSlice"
 import { useNavigate } from "react-router-dom"
 import { winePreview } from "../../utilities/constants"
-import { useEffect, useState } from "react"
 
 
 export default function RecCard({wine}) {
