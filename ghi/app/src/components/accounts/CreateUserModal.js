@@ -81,62 +81,92 @@ export default function CreateUserForm() {
     const usernameError = "wine-login shadow rounded w-full leading-tight py-2 px-3 bg-red-200 text-red-700 mb-3"
     if (isSuccess) {
         return (
-            <div className="container mx-auto grid grid-cols-5 p-5"
-                style={{width: "800px"}}>
-                <form
-                onSubmit={handleSubmit}
-                className="px-3 pt-6 pb-8 mb-4 col-span-3">
-                    <div className="pb-10 font-bold text-2xl">Create a new account</div>
-                    <input
-                    onChange={handleFormChange}
-                    name="name"
-                    placeholder='Full name'
-                    value={formData.name}
-                    className={inputClass}/>
-                    <input
-                    onChange={handleFormChange}
-                    name="username"
-                    placeholder='Username'
-                    value={formData.username}
-                    className={inputError ? usernameError : inputClass}/>
-                    <input
-                    onChange={handleFormChange}
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    className={inputClass}/>
-                    <input
-                    onChange={handleFormChange}
-                    type="date"
-                    name="birthday"
-                    value={formData.birthday}
-                    className={inputClass}/>
-                    <input
-                    onChange={handleFormChange}
-                    name="image_url"
-                    placeholder="Profile picture URL"
-                    value={formData.image_url}
-                    className={inputClass}/>
-                    {
-                        profilePics.map((pic, idx) => {
-                            return(
-                            <button key={idx} className={pic === formData.image_url ? 'bg-blue-700 shadow-xl profile-img p-2' : 'p-2'} onClick={handleProfileButton} name='image_url' type='button' value={pic}>
-                                <img src={pic} value={pic} style={{width:'50px', height:'50px'}} className="profile-img"/>
-                            </button>
-                        )
-                    })
+          <div
+            className="container mx-auto grid grid-cols-5 p-5"
+            style={{ width: "800px" }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="px-3 pt-6 pb-8 mb-4 col-span-3"
+            >
+              <div className="pb-10 font-bold text-2xl">
+                Create a new account
+              </div>
+              <input
+                onChange={handleFormChange}
+                name="name"
+                placeholder="Full name"
+                value={formData.name}
+                className={inputClass}
+              />
+              <input
+                onChange={handleFormChange}
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                className={inputError ? usernameError : inputClass}
+              />
+              <input
+                onChange={handleFormChange}
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={formData.password}
+                className={inputClass}
+              />
+              <input
+                onChange={handleFormChange}
+                type="date"
+                name="birthday"
+                value={formData.birthday}
+                className={inputClass}
+              />
+              <input
+                onChange={handleFormChange}
+                name="image_url"
+                placeholder="Profile picture URL"
+                value={formData.image_url}
+                className={inputClass}
+              />
+              {profilePics.map((pic, idx) => {
+                return (
+                  <button
+                    key={idx}
+                    className={
+                      pic === formData.image_url
+                        ? "bg-blue-700 shadow-xl profile-img p-2"
+                        : "p-2"
                     }
-                    <br></br>
-                    <button
-                    className="navbutton mt-2 font-bold text-sm py-2 px-4 rounded"
-                    >Submit</button>
-                </form>
-                <div className='pt-10 mt-10 pl-10 ml-10 col-span-2'>
-                    <img src={formData.image_url} style={{height:'200px', width:'200px'}} className='profile-img mt-5'/>
-                </div>
+                    onClick={handleProfileButton}
+                    name="image_url"
+                    type="button"
+                    value={pic}
+                  >
+                    <img
+                      src={pic}
+                      value={pic}
+                      style={{ width: "50px", height: "50px" }}
+                      alt=""
+                      className="profile-img"
+                    />
+                  </button>
+                );
+              })}
+              <br></br>
+              <button className="navbutton mt-2 font-bold text-sm py-2 px-4 rounded">
+                Submit
+              </button>
+            </form>
+            <div className="pt-10 mt-10 pl-10 ml-10 col-span-2">
+              <img
+                src={formData.image_url}
+                style={{ height: "200px", width: "200px" }}
+                alt=""
+                className="profile-img mt-5"
+              />
             </div>
-        )
+          </div>
+        );
     }
     else {
         <div>

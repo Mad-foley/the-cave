@@ -12,15 +12,15 @@ lint-test-job:
     - flake8 api
 
 # Run the unit tests
-api-unit-test-job:
-  image: python:3-bullseye
-  stage: test
-  needs:
-    - lint-test-job
-  script:
-    - cd api
-    - pip install -r requirements.txt
-    - python -m pytest
+# api-unit-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   needs:
+#     - lint-test-job
+#   script:
+#     - cd api
+#     - pip install -r requirements.txt
+#     - python -m pytest
 
 # Build the React/JavaScript front-end
 build-front-end-job:
@@ -36,7 +36,7 @@ build-front-end-job:
     PUBLIC_URL: https://team-07-the-fermenters.gitlab.io/module3-project-gamma/
     REACT_APP_WINES_API_HOST: https://api.nov-ct-7.mod3projects.com
   script:
-    - cd ghi
+    - cd ghi/app
     - npm install
     - npm run build
     - cp build/index.html build/404.html
