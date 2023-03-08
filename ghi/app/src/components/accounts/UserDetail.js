@@ -7,6 +7,7 @@ import WineCard from "../wines/WineCard"
 import LogsFeed from "./LogsFeedModal"
 import { setBlur, setDeleteUserWindow } from "../../store/queries/modalSlice"
 import { useDispatch } from "react-redux"
+import { useCallback } from "react"
 
 
 export default function UserDetail() {
@@ -16,14 +17,14 @@ export default function UserDetail() {
     const { data: user, isLoading} = useGetUserByIdQuery()
     const {data:wine, isError} = useGetWineByIdQuery(wineId)
     const dispatch = useDispatch()
-    const handleRecentWine = () => {
+    const handleRecentWine = useCallback(() => {
         if (isSuccess && likes.length) {
             setWineId(likes[likes.length - 1].wine_id)
         }
-    }
+    }, [isSuccess, likes, setWineId])
     useEffect(()=>{
         handleRecentWine()
-    },[isSuccess])
+    },[isSuccess, likes, setWineId, handleRecentWine])
 
     const handleUpdate = (e) => {
         navigate("/account/update")
@@ -45,9 +46,11 @@ export default function UserDetail() {
         dispatch(setBlur(true))
         dispatch(setDeleteUserWindow(true))
     }
+
     const handleLikesButton = () => {
         navigate('/account/wines')
     }
+
     if(!isLoading && isSuccess && !isError){
         return(
             <div className="relative pl-20 pr-20 mt-10">
@@ -61,6 +64,7 @@ export default function UserDetail() {
                             <div className="text-sm text-end mr-10 pr-10" id="anchor">@{user.username}</div>
                             <div className="flex justify-center pb-3">
                                 <img
+                                    alt=''
                                     src={user.image_url}
                                     className='profile-img mt-10'
                                     style={{maxHeight:'300px', minHeight:'250px'}}

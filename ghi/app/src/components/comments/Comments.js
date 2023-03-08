@@ -29,15 +29,25 @@ export default function CommentModal({wine_id}) {
             <div>
                 {comments.map(comment=>{
                     return (
-                        <div key={comment.id}>
-                            <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl">
-                                <img className="inline profile-img mr-2" src={handleUserMatch(comment.user_id).image_url} style={{width:'30px'}}/>
-                                <span>{comment.comment}</span>
-                            </div>
-
-                            <div className="ml-20 pl-20 text-end">{handleUserMatch(comment.user_id).name} {formatDate(handleUserMatch(comment.user_id).created_on)}</div>
+                      <div key={comment.id}>
+                        <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl">
+                          <img
+                            className="inline profile-img mr-2"
+                            alt=""
+                            src={handleUserMatch(comment.user_id).image_url}
+                            style={{ width: "30px" }}
+                          />
+                          <span>{comment.comment}</span>
                         </div>
-                    )
+
+                        <div className="ml-20 pl-20 text-end">
+                          {handleUserMatch(comment.user_id).name}{" "}
+                          {formatDate(
+                            handleUserMatch(comment.user_id).created_on
+                          )}
+                        </div>
+                      </div>
+                    );
                 }).reverse()}
             </div>
         )

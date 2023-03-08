@@ -45,7 +45,7 @@ export default function CreateWineForm() {
         })
         setPreviewData({
             ...previewData,
-            ['created_on']:today,
+            'created_on':today,
             [e.target.name]:e.target.value
         })
     }
