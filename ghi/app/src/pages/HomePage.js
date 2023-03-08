@@ -68,7 +68,7 @@ export default function HomePage() {
                         <div style={{fontSize:'30px'}} className='home-page quote-1 pt-10 grid justify-center'>{quotes[randomNumber].quote}</div>
                         <div className="grid justify-center pb-10 mb-10">{quotes[randomNumber].author}</div>
                         <div style={{fontSize:'20px'}} className='grid grid-cols-2 justify-between px-10 mx-10'>
-                            <div className="p-3 m-3 text-end lg:text-6xl md:text-4xl sm:text-xl">Curate yourself a collection of wines and share them with your friends</div>
+                            <div className="p-3 m-3 text-end lg:text-6xl md:text-4xl sm:text-xl">Curate yourself a collection of wines</div>
                             <div className="pr-10">
                                 <img
                                 className="rounded-xl"
