@@ -1,6 +1,10 @@
+## 3/8/23
+
+We further cleaned up the code today. Made sure our backend is conforming to PEP8 standards. Added a collapse function to the wine cards and allowed for the collections page to be sorted via checkboxes. 
+
 ## 3/7/23
 
-Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page. Got a dark mode version of the page setup. 
+Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page. Got a dark mode version of the page setup.
 
 ## 3/6/23
 
