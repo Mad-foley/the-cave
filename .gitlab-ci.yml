@@ -18,7 +18,7 @@ api-unit-test-job:
   needs:
     - lint-test-job
   script:
-    - cd sample_service
+    - cd api
     - pip install -r requirements.txt
     - python -m pytest
 
@@ -59,7 +59,7 @@ pages:
     paths:
       - public
 
-build-docker-master: 
+build-docker-master:
   image: docker:19.03.1
   stage: build
   services:

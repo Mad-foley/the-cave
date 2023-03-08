@@ -19,6 +19,7 @@ COPY queries queries
 COPY routers routers
 COPY data data
 COPY migrations migrations
+COPY tests tests
 
 
 # If you're using a relational database with migrations,
