@@ -1,8 +1,12 @@
 import WineCard from "../wines/WineCard"
 import { useGetWineByUserQuery } from "../../store/queries/wineApi";
 import { useGetUserByIdQuery } from "../../store/queries/authApi";
+import WineCollapse from '../wines/WineCollapse'
+import { useSelector } from "react-redux";
+
 
 export default function UserWines() {
+    const modalData = useSelector(state => state.modalWindow)
     const {data:user, isSuccess} = useGetUserByIdQuery()
     const {data:wines, isLoading} = useGetWineByUserQuery(user ? user.id : 1)
     if (isSuccess && !isLoading) {
@@ -16,8 +20,11 @@ export default function UserWines() {
                     <div className="winepage grid justify-center">
                         {wines.map(wine => {
                             return (
-                                <div className="m-5 winecard" key={wine.id}>
-                                    <WineCard wine={wine}/>
+                                <div className={modalData.expandWine.includes(wine.id) ? "winecard m-1" : "m-5 winecard"} key={wine.id}>
+                                    {modalData.expandWine.includes(wine.id)
+                                    ? <WineCollapse wine={wine}/>
+                                    : <WineCard wine={wine}/>
+                                }
                                 </div>
                             )
                         })}

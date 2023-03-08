@@ -1,8 +1,12 @@
 import WineCard from "../wines/WineCard"
 import { useGetFavoriteQuery } from "../../store/queries/wineApi"
+import WineCollapse from "../wines/WineCollapse"
+import {useSelector} from 'react-redux'
+
 
 
 export default function UserLikes () {
+    const modalData = useSelector(state => state.modalWindow)
     const {data:favorites, isSuccess} = useGetFavoriteQuery()
     if (isSuccess && favorites.length) {
         return (
@@ -12,8 +16,11 @@ export default function UserLikes () {
                 <div className="grid justify-center winepage">
                     {favorites.map(wine => {
                         return (
-                        <div className="winecard m-5" key={wine.id}>
-                            <WineCard wine={wine} />
+                        <div className={modalData.expandWine.includes(wine.id) ? "winecard m-1" : "winecard m-5"} key={wine.id}>
+                            {modalData.expandWine.includes(wine.id)
+                            ? <WineCollapse wine={wine}/>
+                            : <WineCard wine={wine} />
+                        }
                         </div>
                         )
                     })}
