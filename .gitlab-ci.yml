@@ -64,9 +64,9 @@ pages:
 load-data:
   image: python:3-bullseye
   stage: build
-  dependecies:
+  dependencies:
     - build-docker-master
-  need:
+  needs:
     - build-docker-master
   script:
     - cd api
