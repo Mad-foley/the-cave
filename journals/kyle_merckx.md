@@ -1,6 +1,6 @@
 ## 3/8/23
 
-We further cleaned up the code today. Made sure our backend is conforming to PEP8 standards. Added a collapse function to the wine cards and allowed for the collections page to be sorted via checkboxes. 
+We further cleaned up the code today. Made sure our backend is conforming to PEP8 standards. Added a collapse function to the wine cards and allowed for the collections page to be sorted via checkboxes. Tested out our CI/CD.
 
 ## 3/7/23
 
