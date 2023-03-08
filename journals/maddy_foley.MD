@@ -1,4 +1,18 @@
+## Mar 8. 2023:
+Today we worked on finishing up CSS and CICD.
+We did some last minute debugging and played around with SQL.
+We also looked at webvitals.
+
+
+## Mar 7, 2023:
+Today we worked on CSS and debugging issues in wine-recs and making sure images populate.
+Worked on fixing errors in console.
+
+
 ## Mar 6, 2023:
+Today we worked on dark-mode and other css features to make application smoother.
+We worked as a team to get the search bar in the wines list working.
+We also did small debugging issues.
 
 
 ## Mar 3, 2023:

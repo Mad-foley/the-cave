@@ -35,6 +35,8 @@ build-front-end-job:
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: https://team-07-the-fermenters.gitlab.io/module3-project-gamma/
     REACT_APP_WINES_API_HOST: https://api.nov-ct-7.mod3projects.com
+    REACT_APP_WS_HOST: wss://api.nov-ct-7.mod3projects.com
+
   script:
     - cd ghi/app
     - npm install
@@ -42,7 +44,7 @@ build-front-end-job:
     - cp build/index.html build/404.html
   artifacts:
     paths:
-      - ghi/build/
+      - ghi/app/build
 
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
@@ -54,7 +56,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/build/ public
+    - mv ghi/app/build/ public
   artifacts:
     paths:
       - public
@@ -74,6 +76,7 @@ build-docker-master:
 
   script:
     - cd api
+    - python load-data.py
     - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
     - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/api:$COMMIT_HASH
     - docker build -f ./Dockerfile --pull -t api .

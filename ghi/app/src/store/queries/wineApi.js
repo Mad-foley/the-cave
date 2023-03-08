@@ -62,7 +62,7 @@ export const wineApi = createApi({
         }),
         getFavorite: build.query({
             query: () => ({
-                url: '/api/wines/favorites/',
+                url: '/api/wines/favorites',
                 method:'get',
                 credentials:'include'
             }),
@@ -70,7 +70,7 @@ export const wineApi = createApi({
         }),
         getWineByUser: build.query({
             query: (user_id) => ({
-                url: `/api/users/${user_id}/wines/`,
+                url: `/api/users/${user_id}/wines`,
                 method:'get'
             }),
             providesTags:['MyWines']

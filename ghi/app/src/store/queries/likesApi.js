@@ -46,7 +46,9 @@ export const likesApi = createApi({
                         formData.append("wine_id", wine_id)
                     }
                 }
-                catch(e){ console.log(e)}
+                catch(e){
+                    return
+                }
                 return (
                     {
                         url: `/api/wines/${wine_id}/likes`,
