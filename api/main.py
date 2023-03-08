@@ -29,6 +29,7 @@ app.include_router(comments.router, tags=['Comments'])
 app.include_router(logs.router, tags=['Logs'])
 app.include_router(socket.router)
 
+
 # Public API routes
 @app.get('/api/sampleapi/wines', response_model=List[SampleWineOut]
          | Error, tags=['Sample API Wines'])

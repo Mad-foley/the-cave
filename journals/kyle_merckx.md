@@ -1,3 +1,11 @@
+## 3/7/23
+
+Today we focused on cleaning up the front-end code. Ran into a 403 error from our external api that we might need to try to fix. Afterwards, we continued to style the pages. We also worked on fixing the red wine selection on the recommendations page. Got a dark mode version of the page setup. 
+
+## 3/6/23
+
+Today we added the delete funtion to the user account. We created a modal to ask the user to confirm the deletion and updated the modal slice to allow the modal to work. We then set up a websocket to work with the comment sections. We then set up a search bar to filter through the wines. We did some styling to finish off the day.
+
 ## 3/3/23
 
 We worked on writing our unit tests today. I had a little trouble because I picked the create account endpoint to test. The login aspect of that endpoint was causing issues so I switched to coding a test for the create like endpoint. Afterwards we focused on styling the page.
