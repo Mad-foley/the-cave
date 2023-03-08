@@ -18,8 +18,8 @@ export const store = configureStore({
         [ commentsApi.reducerPath ] : commentsApi.reducer,
         [ logsApi.reducerPath ] : logsApi.reducer,
         [ recApi.reducerPath ] : recApi.reducer,
-        ['wineRec']:wineRecSlice.reducer,
-        ['modalWindow']: modalSlice.reducer,
+        [wineRecSlice.reducerPath] : wineRecSlice.reducer,
+        [modalSlice.reducerPath] : modalSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware()
