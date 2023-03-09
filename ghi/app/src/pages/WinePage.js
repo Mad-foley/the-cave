@@ -93,17 +93,18 @@ function WinePage() {
                         <button className="scroll_button" onClick={handleNextPage}>{rightArrow}</button>
                         <button className='scroll_button pl-3' onClick={handleLastButton}>last</button>
                     </div>
-                    <div className='flex justify-center mt-4 text-black'>
-                        <input className='px-1' onChange={handleSearch} placeholder=' Search'/>
-                    </div>
-                    <div className='pl-2 text-white text-sm flex justify-center pt-2'>
-                        <div className='mr-2'>
-                            <label>Vintage</label>
-                            <input onChange={handleSortBy} type="checkbox" name="vintage" className='check ml-1 appearance-none w-4 h-4 bg-white rounded checked:bg-orange-400'/>
-                        </div>
-                        <div>
-                            <label>Name</label>
-                            <input onChange={handleSortBy} type="checkbox" name="name" className='check ml-1 appearance-none w-4 h-4 bg-white rounded checked:bg-orange-400'/>
+                    <div className='flex justify-center items-center mt-4 text-black'>
+                        <input className='px-1 text-end' onChange={handleSearch} placeholder='Search...'/>
+                        <div className='pl-2 text-white text-sm flex justify-center pt-2'>
+                            <div className='pr-3'>Order by:</div>
+                            <div className='mr-2'>
+                                <label>year</label>
+                                <input onChange={handleSortBy} type="checkbox" name="vintage" className='check ml-1 appearance-none w-4 h-4 bg-white rounded checked:bg-orange-400'/>
+                            </div>
+                            <div>
+                                <label>name</label>
+                                <input onChange={handleSortBy} type="checkbox" name="name" className='check ml-1 appearance-none w-4 h-4 bg-white rounded checked:bg-orange-400'/>
+                            </div>
                         </div>
                     </div>
                 </div>

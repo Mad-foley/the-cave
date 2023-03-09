@@ -6,5 +6,5 @@ WORKDIR /deps
 COPY requirements.txt requirements.txt
 RUN python -m pip install -r requirements.txt
 WORKDIR /app
-CMD /wait && python -m migrations up && uvicorn main:app --reload --host 0.0.0.0
+CMD /wait && python -m migrations up && python load-data.py && uvicorn main:app --reload --host 0.0.0.0
 
