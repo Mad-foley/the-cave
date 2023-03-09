@@ -93,6 +93,7 @@ export default function UpdateWineForm() {
                         <input
                         onChange={handleFormChange}
                         name="image_url"
+                        placeholder="Picture URL"
                         defaultValue={wine.image_url}
                         className={inputClass}/>
                         <input
