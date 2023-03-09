@@ -91,7 +91,7 @@ function WinePage() {
     if (!isLoading) {
         return (
             <div>
-                <div className='pt-5 p-2 relative'>
+                <div className='pt-2 pb-1 relative'>
                     <div className='flex justify-center'>
                         <button className="scroll_button pr-3" onClick={handleFirstButton}>first</button>
                         <button className="scroll_button" onClick={handlePreviousPage}>{leftArrow}</button>
