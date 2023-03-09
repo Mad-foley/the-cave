@@ -53,6 +53,7 @@ function App() {
         {modalData.deleteWindow && <DeleteWineById />}
         {modalData.blur && <div onClick={handleBackgroundClick} style={{height: '100vh', width: '100vw'}} className='fixed light:bg-transparent dark:bg-transparent z-20 bg-blur'></div>}
         <div>
+
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<RecSelect/>}/>
