@@ -62,7 +62,7 @@ export const wineApi = createApi({
         }),
         getFavorite: build.query({
             query: () => ({
-                url: '/api/wines/favorites',
+                url: '/api/wines/favorites/likes',
                 method:'get',
                 credentials:'include'
             }),

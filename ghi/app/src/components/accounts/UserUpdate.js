@@ -58,11 +58,13 @@ export default function UserUpdate() {
                 defaultValue={user.birthday}
                 className={inputClass}/>
                 <input
+                required
                 onChange={handleFormChange}
                 name="username"
                 defaultValue={user.username}
                 className={inputClass}/>
                 <input
+                required
                 onChange={handleFormChange}
                 name="password"
                 type="password"
