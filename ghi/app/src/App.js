@@ -46,7 +46,7 @@ function App() {
     dispatch(setLogoutWindow(false))
   }
   return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={'/module3-project-gamma'}>
         <NavBar />
         {modalData.deleteUserWindow && <DeleteUserForm />}
         {modalData.loginWindow && <LogInForm />}
