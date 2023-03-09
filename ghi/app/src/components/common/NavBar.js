@@ -20,7 +20,7 @@ export default function NavBar() {
         dispatch(setBlur(true))
     }
 
-    const navlinkClass = 'navbutton block py-2 pl-3 pr-4 font-medium rounded-xl'
+    const navlinkClass = 'navbutton py-2 px-2 mx-2 rounded-xl'
     return (
             <nav className="px-2 pt-3 sticky top-0 z-40 bg-[#73343A] dark:bg-[#0E0604]">
                 <div className="grid grid-cols-3 ml-5 mr-5 p-3">

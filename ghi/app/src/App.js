@@ -24,6 +24,7 @@ import { commentsApi } from './store/queries/commentsApi';
 import { useDispatch } from 'react-redux';
 import {setBlur, setDeleteUserWindow, setDeleteWindow, setLoginWindow, setLogoutWindow} from './store/queries/modalSlice'
 
+
 function App() {
   const dispatch = useDispatch()
 
@@ -45,7 +46,7 @@ function App() {
     dispatch(setLogoutWindow(false))
   }
   return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <NavBar />
         {modalData.deleteUserWindow && <DeleteUserForm />}
         {modalData.loginWindow && <LogInForm />}
