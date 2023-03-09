@@ -60,12 +60,15 @@ export default function UserUpdate() {
                 <input
                 onChange={handleFormChange}
                 name="username"
+                required
                 defaultValue={user.username}
                 className={inputClass}/>
                 <input
                 onChange={handleFormChange}
                 name="password"
                 type="password"
+                placeholder="password"
+                required
                 defaultValue={user.password}
                 className={inputClass}/>
                 <input
