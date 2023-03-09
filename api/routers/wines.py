@@ -99,7 +99,7 @@ def filter_by(
     return repo.filter_by(query)
 
 
-@router.get('/api/wines/favorites/',
+@router.get('/api/wines/favorites/likes',
             response_model=Union[List[WineOut], Error])
 def wines_by_likes(
     wine_repo: WineQueries = Depends(),
