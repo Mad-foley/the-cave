@@ -75,7 +75,8 @@ export default function HomePage() {
               </div>
               <div className="home-page grid justify-center">
                 {isSuccess && !isLoading && (
-                  <div className="bg-wine p-5 rounded-xl ">
+                  <div className="bg-[#73343A] dark:bg-[#0E0604] shadow-xl p-5 rounded-xl relative">
+                    <div className="absolute z-10 bg-transparent" style={{height:'100%',width:'100%'}}></div>
                     <div
                       style={{ fontSize: "30px" }}
                       className="text-center pb-10"
@@ -110,7 +111,7 @@ export default function HomePage() {
                 <div className="pr-10">
                   <img
                     alt=""
-                    className="rounded-xl"
+                    className="rounded-xl shadow-xl"
                     style={{ width: "600px" }}
                     src="https://images.squarespace-cdn.com/content/v1/5c3cdd80c258b408c8f871c9/1637010787400-UYMKKSY0BO52T540YXK6/D1BDE42D-EAE9-4588-BC33-2C17E0CA8895_1_105_c.jpeg?format=2500w"
                   />

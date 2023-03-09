@@ -18,9 +18,10 @@ export default function UserWines() {
                     <div className="text-xl text-center">Add wines to the database to get started</div>
                         }
                     <div className="winepage grid justify-center">
+                        <div>
                         {wines.map(wine => {
                             return (
-                                <div className={modalData.expandWine.includes(wine.id) ? "winecard m-1" : "m-5 winecard"} key={wine.id}>
+                                <div className={modalData.expandWine.includes(wine.id) ? "winecard m-2" : "m-2 mb-5 winecard"} key={wine.id}>
                                     {modalData.expandWine.includes(wine.id)
                                     ? <WineCollapse wine={wine}/>
                                     : <WineCard wine={wine}/>
@@ -28,6 +29,7 @@ export default function UserWines() {
                                 </div>
                             )
                         })}
+                        </div>
                     </div>
                 </div>
         )

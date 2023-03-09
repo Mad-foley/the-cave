@@ -32,7 +32,8 @@
         filter: grayscale();
     }
     .img-multiply {
-        filter: invert() brightness(0.3);
+        filter: invert() brightness(0.5);
+        mix-blend-mode: difference;
     }
     .gif-img {
         filter: grayscale()
@@ -102,11 +103,11 @@ body {
     opacity: 0.5;
 }
 .navbutton {
-    transition: 0.7s
+    transition: 0.4s
 }
 .navbutton:hover {
     transform: scale(105%);
-    transition: 0.7s;
+    transition: 0.4s;
 }
 .userbutton {
     transition: 0.3s;

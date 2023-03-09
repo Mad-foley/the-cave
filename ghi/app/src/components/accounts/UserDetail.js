@@ -110,7 +110,8 @@ export default function UserDetail() {
                 <div className="pt-11"></div>
                 <div className="m-10 pt-20 pb-20">
                     <div className="text-center text-2xl pb-3">Your most recently liked wine</div>
-                    <div className="flex justify-center" id="recent-like">
+                    <div className="flex justify-center relative" id="recent-like">
+                        <div className="absolute bg-transparent z-10" style={{width:'100%',height:'100%'}}></div>
                         {wine && wineId !== 2 ? <WineCard wine={wine}/> : <div className="text-center">You have not liked anything yet</div>}
                     </div>
                 </div>

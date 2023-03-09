@@ -43,27 +43,27 @@ export default function WineDetails({socket}) {
                   <div style={{ fontSize: "30px" }}>{wine.name}</div>
                   <div className="ml-3">{wine.vintage}</div>
                 </div>
-                <div className="flex border p-4 ml-10 rounded-xl shadow-xl">
+                <div className="flex border dark:bg-[#595454] p-4 ml-10 rounded-xl shadow-xl">
                   <div className="pr-10">
-                    <div className="border p-2 rounded pr-10">
+                    <div className="border p-2 rounded pr-10 dark:bg-[#453f3f]">
                       <div>Varietal</div>
                       <div className="ml-5 text-xl pb-1">{wine.varietal}</div>
                     </div>
-                    <div className="border p-2 mt-2">
+                    <div className="border p-2 mt-2 dark:bg-[#453f3f]">
                       <div>Winery</div>
                       <div className="ml-5 text-xl pb-1">{wine.winery}</div>
                     </div>
-                    <div className="border mt-2 rounded p-2">
+                    <div className="border mt-2 rounded p-2 dark:bg-[#453f3f]">
                       <div>Appellation</div>
                       <div className="ml-5 text-xl">{wine.location}</div>
                     </div>
                   </div>
                   <div>
-                    <div className="border p-2 rounded">
+                    <div className="border p-2 rounded dark:bg-[#453f3f]">
                       <div className="text-sm">created on</div>
                       <div className="pl-3">{formatDate(wine.created_on)}</div>
                     </div>
-                    <div className="border p-2 rounded mt-2">
+                    <div className="border p-2 rounded mt-2 dark:bg-[#453f3f]">
                       <div className="text-sm">modified on</div>
                       <div className="pl-3">{formatDate(wine.modified_on)}</div>
                     </div>
@@ -78,14 +78,14 @@ export default function WineDetails({socket}) {
                   <span>liked by</span>
                   <span className="pl-1 text-xl font-bold">{likes.length}</span>
                 </div>
-                <div className="mt-3 ml-10 border bottom-10 p-3 rounded-xl shadow-xl">
+                <div className="mt-3 dark:bg-[#453f3f] ml-10 border bottom-10 p-3 rounded-xl shadow-xl">
                   <div>
                     <div className="flex justify-between">
                       <div className="text-xl font-bold">Comments</div>
                       <CreateComment socket={socket} wine_id={wine.id} />
                     </div>
                     <div
-                      className="relative pl-5 winepage rounded border p-2 m-2 shadow-xl"
+                      className="relative pl-5 winepage rounded border p-2 m-2 shadow-xl dark:bg-[#595454]"
                       style={{ height: "25vh" }}
                     >
                       <div className="absolute w-full pr-10">
