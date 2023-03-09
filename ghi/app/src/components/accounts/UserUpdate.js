@@ -68,6 +68,7 @@ export default function UserUpdate() {
                 onChange={handleFormChange}
                 name="password"
                 type="password"
+                placeholder="password"
                 defaultValue={user.password}
                 className={inputClass}/>
                 <input
