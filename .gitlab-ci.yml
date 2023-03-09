@@ -61,6 +61,17 @@ pages:
     paths:
       - public
 
+load-data:
+  image: python:3-bullseye
+  stage: build
+  dependencies:
+    - build-docker-master
+  needs:
+    - build-docker-master
+  script:
+    - cd api
+    - python load.data.py
+
 build-docker-master:
   image: docker:19.03.1
   stage: build
@@ -76,7 +87,6 @@ build-docker-master:
 
   script:
     - cd api
-    - python load-data.py
     - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
     - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/api:$COMMIT_HASH
     - docker build -f ./Dockerfile --pull -t api .
