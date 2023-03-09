@@ -29,7 +29,7 @@ build-front-end-job:
   needs:
     - lint-test-job
   variables:
-    PUBLIC_URL: https://team-07-the-fermenters.gitlab.io/module3-project-gamma/
+    PUBLIC_URL: https://team-07-the-fermenters.gitlab.io/module3-project-gamma
     REACT_APP_WINES_API_HOST: https://api.nov-ct-7.mod3projects.com
     REACT_APP_WS_HOST: wss://api.nov-ct-7.mod3projects.com
 
