@@ -1,3 +1,9 @@
+## Mar 8, 2023:
+Since deployement we have made small changes, malcolm added additional websocketing.
+
+## Mar 9, 2023:
+Today we deployed and added some small features.
+
 ## Mar 8. 2023:
 Today we worked on finishing up CSS and CICD.
 We did some last minute debugging and played around with SQL.
