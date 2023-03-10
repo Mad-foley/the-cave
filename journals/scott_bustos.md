@@ -1,7 +1,7 @@
 ## 02/09/2023
 We worked on finising the wireframing. We also fixed some api-design issues.
 
-## 02/09/2023
+## 02/10/2023
 We reviewed the documentation for FASTapi. We also went through the learn and watched curtis's video
 
 ## 02/13/2023
@@ -47,3 +47,11 @@ We made a recommadation redux list. We created logs. Continued to make changes t
 Styled dark mode theme. We also deleted some features that were not in used. We added a websocket to our application as well.
 
 ## 03/07/2023
+Worked on fixing the console errors. We also did somemore css styling and looked our sql.
+
+## 3/08/2023
+Worked on CICD do get our website deployed. We also worked on the flake8 errors.
+
+
+## 3/09/2023
+Successfully deployed our application and finshed the project. We also did some debugging for our errors.
