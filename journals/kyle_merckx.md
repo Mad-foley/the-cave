@@ -1,3 +1,7 @@
+## 3/10/23
+
+Added some finishing touches.
+
 ## 3/9/23
 
 Got the site successfully deployed. Made some minor tweaks to fix various little bugs with the router paths.
