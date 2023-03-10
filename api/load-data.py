@@ -66,7 +66,8 @@ if id:
                     id = result.fetchone()[0]
                     # Print a message for each insert for visual feedback
                     print(
-                        "[load-data-log: successfully added wine data] wine ID = ", id
+                        "[load-data-log: successfully"
+                        "added wine data] wine ID = ", id
                     )
     except Exception as e:
         print(e)
