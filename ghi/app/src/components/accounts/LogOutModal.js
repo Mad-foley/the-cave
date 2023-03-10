@@ -30,7 +30,7 @@ export default function LogOutForm() {
         return (
           <div className="w-full fixed z-30 pt-10 mt-20">
             <div className="flex justify-center">
-              <div className="bg-slate-200 text-black p-5 rounded shadow">
+              <div className="bg-slate-200 text-black p-5 rounded shadow-xl">
                 <div className="flex justify-center pb-3">
                   Logging out {token.user.name}?
                 </div>

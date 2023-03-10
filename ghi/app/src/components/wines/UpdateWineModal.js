@@ -93,6 +93,7 @@ export default function UpdateWineForm() {
                         <input
                         onChange={handleFormChange}
                         name="image_url"
+                        placeholder="Picture URL"
                         defaultValue={wine.image_url}
                         className={inputClass}/>
                         <input
@@ -104,7 +105,8 @@ export default function UpdateWineForm() {
                         className="navbutton rounded-xl m-3 p-1"
                         >Update</button>
                     </form>
-                    <div className="container p-8">
+                    <div className="container p-8 relative">
+                        <div className="absolute bg-transparent z-10" style={{height:'100%', width:"100%"}}></div>
                         <WineCard wine={previewData}/>
                     </div>
                 </div>

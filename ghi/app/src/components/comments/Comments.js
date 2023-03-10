@@ -30,7 +30,7 @@ export default function CommentModal({wine_id}) {
                 {comments.map(comment=>{
                     return (
                       <div key={comment.id}>
-                        <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl">
+                        <div className="border p-2 w-full rounded mr-20 pr-4 shadow-xl dark:bg-[#453f3f]">
                           <img
                             className="inline profile-img mr-2"
                             alt=""
@@ -39,8 +39,7 @@ export default function CommentModal({wine_id}) {
                           />
                           <span>{comment.comment}</span>
                         </div>
-
-                        <div className="ml-20 pl-20 text-end">
+                        <div className="text-end">
                           {handleUserMatch(comment.user_id).name}{" "}
                           {formatDate(
                             handleUserMatch(comment.user_id).created_on

@@ -29,18 +29,19 @@ export default function RecSelect(){
             recommendations.push(wines[randomIdx])
         }
         return(
-            <div className="mt-10 pt-10 text-black" style={{marginLeft:'400px', marginRight:'400px'}}>
-                <div className="relative mx-20 flex justify-end">
-                    <div className="">
-                        <div className="text-white">Select a type</div>
-                        <select className=" p-1 rounded bg-wine light:text-white dark:text-black" onChange={handleChange} name="type" style={{filter:'brightness(70%)'}}>
-                            <option defaultValue>{type === 'reds' ? 'Choose a type' : type.charAt(0).toUpperCase() + type.slice(1)}</option>
-                            <option value="reds">Reds</option>
-                            <option value="whites">Whites</option>
-                            <option value="sparkling">Sparkling</option>
-                            <option value="dessert">Dessert</option>
-                            <option value="port">Port</option>
-                        </select>
+            <div className="text-black pt-10 w-full">
+                <div className="px-20 mx-20">
+                    <div className="relative flex justify-end px-20 mx-20">
+                        <div>
+                            <select className=" p-1 rounded bg-wine light:text-white dark:text-black" onChange={handleChange} name="type" style={{filter:'brightness(70%)'}}>
+                                <option defaultValue>{type === 'reds' ? 'Choose a type' : type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                                <option value="reds">Reds</option>
+                                <option value="whites">Whites</option>
+                                <option value="sparkling">Sparkling</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="port">Port</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 {selected ? <div className="flex justify-center">
@@ -57,7 +58,7 @@ export default function RecSelect(){
                         })}
                     </div>}
                 </div> :
-                <div className="text-white" style={{fontSize:'50px'}}>Select a type to get started</div>}
+                <div className="px-20 mx-20 text-white flex lg:text-8xl md:text-5xl sm:text-xl">Select a type to get started</div>}
             </div>
         )
     }

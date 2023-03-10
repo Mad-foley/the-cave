@@ -77,7 +77,7 @@ export default function CreateUserForm() {
             [event.currentTarget.name]:event.currentTarget.value
         })
     }
-    const inputClass = "shadow rounded w-full leading-tight py-2 px-3 text-gray-700 mb-3"
+    const inputClass = "shadow-xl rounded w-full leading-tight py-2 px-3 text-gray-700 mb-3"
     const usernameError = "wine-login shadow rounded w-full leading-tight py-2 px-3 bg-red-200 text-red-700 mb-3"
     if (isSuccess) {
         return (
@@ -134,7 +134,7 @@ export default function CreateUserForm() {
                     key={idx}
                     className={
                       pic === formData.image_url
-                        ? "bg-blue-700 shadow-xl profile-img p-2"
+                        ? "bg-blue-700 border-2 profile-img p-2"
                         : "p-2"
                     }
                     onClick={handleProfileButton}

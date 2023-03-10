@@ -27,14 +27,15 @@ export default function CreateComment({wine_id, socket}) {
 
     return(
         <div className="text-black text-end">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex">
                 <input
-                className="p-2 rounded-xl text-end"
+                className="rounded text-end px-1"
+                placeholder="..."
                 name = "comment"
                 value={formData.comment}
                 onChange={handleFormChange}
                 />
-                <button className="likebutton rounded p-2 ml-2">Submit</button>
+                <button className="likebutton rounded p-1 ml-2">Submit</button>
             </form>
         </div>
 

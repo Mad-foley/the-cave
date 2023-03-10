@@ -1,3 +1,11 @@
+## 3/10/23
+
+Added some finishing touches.
+
+## 3/9/23
+
+Got the site successfully deployed. Made some minor tweaks to fix various little bugs with the router paths.
+
 ## 3/8/23
 
 We further cleaned up the code today. Made sure our backend is conforming to PEP8 standards. Added a collapse function to the wine cards and allowed for the collections page to be sorted via checkboxes. Tested out our CI/CD. Almost got the deployment working.

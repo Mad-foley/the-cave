@@ -3,13 +3,11 @@ import { useGetTokenQuery } from "../../store/queries/authApi"
 import { useNavigate } from "react-router-dom"
 import { heartFilled } from "../../utilities/constants"
 import { heartNotFilled } from "../../utilities/constants"
-import { wineApi } from "../../store/queries/wineApi"
 import { useDispatch, useSelector } from "react-redux"
-import {logsApi} from "../../store/queries/logsApi"
 import { setExpandWine } from "../../store/queries/modalSlice"
 
 
-export default function WineCard({wine}) {
+export default function WineCard({wine, socket}) {
     const expandedWines = useSelector(state => state.modalWindow.expandWine)
     const [like] = useCreateLikeMutation()
     const [unlike] = useDeleteLikeMutation()
@@ -30,22 +28,19 @@ export default function WineCard({wine}) {
             if(liked) {
                 const result = await unlike(wine.id)
                 if (result.data) {
-                    dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
-                    dispatch(logsApi.util.invalidateTags(['Logs']))
+                  socket.send('refetch likes')
                 }
             } else {
                 const result = await like(wine.id)
                 if (result.data) {
-                    dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
-                    dispatch(logsApi.util.invalidateTags(['Logs']))
+                  socket.send('refetch likes')
                 }
             }
         }
         else {
             const result = await like(wine.id)
             if (result.data) {
-                dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites']))
-                dispatch(logsApi.util.invalidateTags(['Logs']))
+              socket.send('refetch likes')
             }
         }
     }

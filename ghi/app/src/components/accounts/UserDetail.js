@@ -13,7 +13,7 @@ import { useCallback } from "react"
 export default function UserDetail() {
     const {data:likes, isSuccess} = useGetLikesByUserQuery()
     const navigate = useNavigate()
-    const [wineId, setWineId] = useState(4)
+    const [wineId, setWineId] = useState(2)
     const { data: user, isLoading} = useGetUserByIdQuery()
     const {data:wine, isError} = useGetWineByIdQuery(wineId)
     const dispatch = useDispatch()
@@ -25,7 +25,6 @@ export default function UserDetail() {
     useEffect(()=>{
         handleRecentWine()
     },[isSuccess, likes, setWineId, handleRecentWine])
-
     const handleUpdate = (e) => {
         navigate("/account/update")
     }
@@ -84,13 +83,11 @@ export default function UserDetail() {
                             >delete</button>
                         </div>
                     </div>
-                    <div className="pr-5">
+                    <div className="pr-5 pb-3">
                         <div className="text-center text-2xl pb-1 pt-5">Your Logs</div>
-                        <div >
-                            <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-[#595454]" style={{height:'51vh', width:'30vw'}}>
-                                <div className="absolute w-full pr-10">
-                                    <LogsFeed />
-                                </div>
+                        <div className="relative pl-5 winepage shadow-xl rounded-xl border p-5 m-2 shadow-xl dark:bg-[#595454]" style={{height:'80%', width:'105%'}}>
+                            <div className="absolute w-full pr-10">
+                                <LogsFeed />
                             </div>
                         </div>
                     </div>
@@ -110,8 +107,9 @@ export default function UserDetail() {
                 <div className="pt-11"></div>
                 <div className="m-10 pt-20 pb-20">
                     <div className="text-center text-2xl pb-3">Your most recently liked wine</div>
-                    <div className="flex justify-center" id="recent-like">
-                        {wine && wineId !== 2 ? <WineCard wine={wine}/> : <div className="text-center">You have not liked anything yet</div>}
+                    <div className="flex justify-center relative" id="recent-like">
+                        <div className="absolute bg-transparent z-10" style={{width:'100%',height:'100%'}}></div>
+                        {wine ? <WineCard wine={wine}/> : <div className="text-center">You have not liked anything yet</div>}
                     </div>
                 </div>
                 <div className="flex justify-center p-10 pt-20">Many grapes were harmed in the production</div>

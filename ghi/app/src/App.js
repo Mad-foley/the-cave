@@ -23,6 +23,8 @@ import DeleteUserForm from './components/accounts/DeleteUserModal';
 import { commentsApi } from './store/queries/commentsApi';
 import { useDispatch } from 'react-redux';
 import {setBlur, setDeleteUserWindow, setDeleteWindow, setLoginWindow, setLogoutWindow} from './store/queries/modalSlice'
+import { likesApi } from './store/queries/likesApi'
+import { wineApi } from './store/queries/wineApi'
 
 
 function App() {
@@ -35,6 +37,13 @@ function App() {
     let message = JSON.parse(text.data)
     if (message.message === 'refetch comments'){
       dispatch(commentsApi.util.invalidateTags(["Comments"]))
+    }
+    if (message.message === 'refetch likes'){
+      dispatch(likesApi.util.invalidateTags(['Likes', 'LikesByWine']))
+      dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites', 'MyWines']))
+    }
+    if (message.message === 'refetch wines'){
+      dispatch(wineApi.util.invalidateTags(['Wines', 'Wine', 'Favorites', 'MyWines']))
     }
   })
   const modalData = useSelector(state => state.modalWindow)
@@ -58,8 +67,8 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
             <Route path='recommendations' element={<RecSelect/>}/>
             <Route path="wines">
-              <Route path="" element={<WinePage />}/>
-              <Route path="create" element={<CreateWineForm/>}/>
+              <Route path="" element={<WinePage socket={socket}/>}/>
+              <Route path="create" element={<CreateWineForm socket={socket}/>}/>
               <Route path="details/:id" element={<WineDetails socket={socket}/>}/>
               <Route path="update/:id" element={<UpdateWineForm/>}/>
             </Route>
@@ -67,7 +76,7 @@ function App() {
               <Route path="" element={<UserPage/>}/>
               <Route path="create" element={<CreateUserForm/>}/>
               <Route path="update" element={<UserUpdate />} />
-              <Route path="likes" element={<UserLikes />}/>
+              <Route path="likes" element={<UserLikes socket={socket}/>}/>
               <Route path="wines" element={<UserWines/>}/>
             </Route>
           </Routes>

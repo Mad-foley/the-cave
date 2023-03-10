@@ -4,8 +4,7 @@ import WineCollapse from "../wines/WineCollapse"
 import {useSelector} from 'react-redux'
 
 
-
-export default function UserLikes () {
+export default function UserLikes ({socket}) {
     const modalData = useSelector(state => state.modalWindow)
     const {data:favorites, isSuccess} = useGetFavoriteQuery()
     if (isSuccess && favorites.length) {
@@ -14,16 +13,18 @@ export default function UserLikes () {
                 <div className="text-center text-2xl pt-10">Your favorite wines</div>
                 <div className="text-center">0 - {favorites.length}</div>
                 <div className="grid justify-center winepage">
+                    <div>
                     {favorites.map(wine => {
                         return (
-                        <div className={modalData.expandWine.includes(wine.id) ? "winecard m-1" : "winecard m-5"} key={wine.id}>
+                        <div className={modalData.expandWine.includes(wine.id) ? "winecard m-2" : "winecard m-2 mb-5"} key={wine.id}>
                             {modalData.expandWine.includes(wine.id)
                             ? <WineCollapse wine={wine}/>
-                            : <WineCard wine={wine} />
+                            : <WineCard wine={wine} socket={socket}/>
                         }
                         </div>
                         )
                     })}
+                    </div>
                 </div>
             </div>
         )

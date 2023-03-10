@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { setBlur, setLoginWindow, setLogged } from "../../store/queries/modalSlice";
 import { logsApi } from '../../store/queries/logsApi';
-
+import xIcon from '../../utilities/png/xIcon.png'
 
 export default function LogInForm() {
     const [formData, setFormData] = useState({
@@ -52,8 +52,12 @@ export default function LogInForm() {
     const loginContainerClass = `${shake} w-full fixed pt-20 mt-20 flex justify-center z-30`
     return (
         <div className={loginContainerClass}>
-            <div className='shadow bg-slate-200 rounded'>
-                <button onClick={handleExitButton} className='text-black p-3'>X</button>
+            <div className='shadow-xl bg-slate-200 rounded'>
+                <div className='flex w-full justify-end'>
+                    <button onClick={handleExitButton} className='p-2 swirlIcon'>
+                        <img src={xIcon} alt="" style={{width:'20px'}}/>
+                    </button>
+                </div>
                 <h1 className='text-lg font-bold text-black pb-3 text-center'>Welcome</h1>
                 <form className='max-w-xs pl-10 pr-10 text-center' onSubmit={handleSubmit}>
                     <div className='mb-4 field'>

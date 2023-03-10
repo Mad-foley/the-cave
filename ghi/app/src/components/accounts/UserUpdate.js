@@ -37,10 +37,8 @@ export default function UserUpdate() {
             navigate('/account')
         }
     }
-
-
-
     const inputClass = "w-full rounded my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+
     if(!isLoading) {
         return (
             <div className="container mx-auto flex justify-center p-5 text-center">
@@ -58,17 +56,17 @@ export default function UserUpdate() {
                 defaultValue={user.birthday}
                 className={inputClass}/>
                 <input
+                required
                 onChange={handleFormChange}
                 name="username"
-                required
                 defaultValue={user.username}
                 className={inputClass}/>
                 <input
+                required
                 onChange={handleFormChange}
                 name="password"
                 type="password"
                 placeholder="password"
-                required
                 defaultValue={user.password}
                 className={inputClass}/>
                 <input
