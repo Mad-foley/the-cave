@@ -10,7 +10,7 @@ import {logsApi} from "../../store/queries/logsApi"
 import { winePreview } from "../../utilities/constants";
 
 
-export default function CreateWineForm() {
+export default function CreateWineForm({socket}) {
     const dispatch = useDispatch()
     const data = useSelector(state => state.wineRec.wine)
     const today = new Date()
@@ -63,7 +63,7 @@ export default function CreateWineForm() {
                 image_url: '',
                 vintage: ''
             }
-
+            socket.send('refetch wines')
             dispatch(setWine(initialState))
             navigate(`/wines/details/${wine.data.id}`)
        }

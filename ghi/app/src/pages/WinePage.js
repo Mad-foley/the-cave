@@ -8,7 +8,7 @@ import WineCollapsed from '../components/wines/WineCollapse'
 import { setExpandWine } from "../store/queries/modalSlice"
 
 
-function WinePage() {
+function WinePage({socket}) {
     const dispatch = useDispatch()
     const {data: wines, isLoading} = useGetWinesQuery()
     const modalData = useSelector(state => state.modalWindow)
@@ -119,7 +119,7 @@ function WinePage() {
                                 <div className={modalData.expandWine.includes(wine.id) ? "winecard m-1" : "winecard m-1 mb-5"} key={wine.id}>
                                     {modalData.expandWine.includes(wine.id)
                                     ? <WineCollapsed wine={wine}/>
-                                    : <WineCard wine={wine}/>
+                                    : <WineCard wine={wine} socket={socket}/>
                                 }
                                 </div>
                             )

@@ -3,7 +3,7 @@ import { useGetLogsQuery } from "../../store/queries/logsApi";
 export default function LogsFeed () {
     const {data: logs, isLoading} = useGetLogsQuery()
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('en-us', {
+        return new Date(date).toLocaleDateString('en-US', {
             month:'short',
             day:'numeric',
             hour:'numeric',
